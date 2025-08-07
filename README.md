@@ -25,7 +25,12 @@ NiceEasyAI 是一个专为 AI 项目开发，提供快捷操作支持的开源�
 在您的 AI 项目根目录下执行：
 
 ```bash
-git submodule add https://github.com/candlesmeet/NiceEasyAI.git NiceEasyAI
+# 使用GitHub源
+git submodule add https://github.com/ruhua2024/NiceEasyAI.git NiceEasyAI
+
+# 或使用Gitee源（国内访问更快）
+git submodule add https://gitee.com/candlesmeet_0/nice-easy-ai.git NiceEasyAI
+
 git submodule update --init --recursive
 ```
 
