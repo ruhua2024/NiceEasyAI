@@ -39,6 +39,7 @@ git submodule update --init --recursive
 ### 2. 开始使用
 
 <span style="color: orange"><strong>引入成功后，您可以直接在 AI 对话中发给AI：</strong></span>
+
 ```bash
 查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作
 ```
@@ -47,6 +48,7 @@ git submodule update --init --recursive
 ```
 
 <span style="color: orange"><strong>如果需要新增自定义的快捷操作，直接发给AI：</strong></span>
+
 ```bash
 查看NiceEasyAI/.QuickAction.json，执行里面的add快捷操作
 ```
