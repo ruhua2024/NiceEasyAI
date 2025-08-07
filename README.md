@@ -1,4 +1,4 @@
-# NiceEasyAI 让AI更好更容易
+# NiceEasyAI（集成spec开发模式，开箱即用）
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub issues](https://img.shields.io/github/issues/candlesmeet/NiceEasyAI)](https://github.com/candlesmeet/NiceEasyAI/issues)
@@ -10,13 +10,13 @@ NiceEasyAI 是一个专为 AI 项目开发，提供快捷操作支持的开源�
 
 ## ✨ 特性
 
-- **🎯 专为 AI 项目优化**：针对 AI 开发场景设计的快捷操作
-- **🔧 一键工作流**：自动化 Git 提交、推送、文档生成等常见任务
-- **🤖 AI 深度集成**：智能需求分析和解决方案生成
-- **⚙️ 高度可配置**：通过 JSON 配置文件灵活扩展功能
-- **🇨🇳 中文优先**：完全支持中文交互和文档生成
-- **📦 子模块友好**：专为 Git 子模块集成设计
+- **🎯 专为 AI 项目优化**：集成亚马逊Kiro同款的spec开发模式、智能需求分析和解决方案生成
 - **🚀 零依赖**：无需安装额外依赖包，开箱即用
+- **🔧 一键工作流**：自动化 Git 提交、推送、文档生成等常见任务
+- **⚙️ 高度可配置**：通过 JSON 配置文件灵活扩展功能
+- **🇨🇳 中文优先**：完全让AI支持中文交互和文档生成
+- **📦 子模块友好**：专为 Git 子模块集成设计
+- **🚀 新手小白友好**：专为新手小白设计
 
 ## 🚀 快速开始
 
@@ -38,12 +38,17 @@ git submodule update --init --recursive
 
 ### 2. 开始使用
 
-引入成功后，您可以直接在 AI 对话中说明要执行的操作：
+引入成功后，您可以直接在 AI 对话中发给AI：
 ```bash
 查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作
 ```
 ```bash
 查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作
+```
+
+如果需要新增自定义的快捷操作，直接发给AI
+```bash
+查看NiceEasyAI/.QuickAction.json，执行里面的add快捷操作
 ```
 
 ## 🛠️ 快捷操作详解
