@@ -133,6 +133,39 @@
         "must_support_network_queries": true,
         "must_prefer_domestic_mirrors_in_china": true
       }
+    },
+    "add": {
+      "description": "添加新的快捷操作到.QuickAction.json文件中",
+      "commands": [
+        "【强制要求】全程必须使用中文对话，禁止使用英文回复",
+        "【第一阶段：信息收集】",
+        "1. 询问用户新快捷操作的短语（触发关键词）",
+        "2. 询问用户希望的功能，然后自动总结成中文描述",
+        "3. 询问用户新快捷操作的具体功能和执行步骤",
+        "4. 询问是否需要用户输入，如需要则询问输入提示语",
+        "5. 询问是否有特殊的约束条件或配置要求",
+        "【第二阶段：验证检查】",
+        "6. 检查新短语是否与现有快捷操作冲突",
+        "7. 验证配置格式的正确性和完整性",
+        "8. 向用户展示完整的新快捷操作配置",
+        "【第三阶段：确认与更新】",
+        "9. 等待用户确认配置无误并发出'审核通过'指令",
+        "10. 自动读取当前.QuickAction.json文件，并参考已有的快捷操作，除add外",
+        "11. 将新的快捷操作添加到配置中",
+        "12. 保存更新后的.QuickAction.json文件",
+        "13. 向用户确认添加成功并显示更新后的配置"
+      ],
+      "requiresInput": true,
+      "inputPrompt": "请提供要添加的快捷操作信息（我将逐步询问详细配置）：",
+      "workflow": "add_quick_action",
+      "constraints": {
+        "language": "中文强制要求",
+        "conflict_check": "必须检查短语冲突",
+        "format_validation": "必须验证配置格式",
+        "user_confirmation": "必须等待用户'审核通过'确认",
+        "auto_update": "自动更新.QuickAction.json文件",
+        "success_feedback": "必须提供添加成功的确认反馈"
+      }
     }
   }
 }
