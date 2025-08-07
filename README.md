@@ -27,19 +27,24 @@ NiceEasyAI 是一个专为 AI 项目开发，提供快捷操作支持的开源�
 ```bash
 # 使用GitHub源
 git submodule add https://github.com/ruhua2024/NiceEasyAI.git NiceEasyAI
+git submodule update --init --recursive
+```
 
+```bash
 # 或使用Gitee源（国内访问更快）
 git submodule add https://gitee.com/candlesmeet_0/nice-easy-ai.git NiceEasyAI
-
 git submodule update --init --recursive
 ```
 
 ### 2. 开始使用
 
 引入成功后，您可以直接在 AI 对话中说明要执行的操作：
-
-- 查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作
-- 查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作
+```bash
+查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作
+```
+```bash
+查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作
+```
 
 ## 🛠️ 快捷操作详解
 
