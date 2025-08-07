@@ -1,4 +1,4 @@
-# NiceEasyAI
+# NiceEasyAI 让AI更好更容易
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub issues](https://img.shields.io/github/issues/candlesmeet/NiceEasyAI)](https://github.com/candlesmeet/NiceEasyAI/issues)
@@ -6,9 +6,7 @@
 
 ## 简介
 
-NiceEasyAI 是一个专为 AI 项目开发提供便捷快捷操作支持的开源工具库。通过将本仓库作为子模块引入您的 AI 项目，您可以获得一系列预配置的快捷操作，显著提升开发效率和协作体验。
-
-本项目采用配置驱动的架构设计，通过 `.QuickAction.json` 文件定义和管理所有快捷操作，支持智能中文交互，深度集成 Claude AI 能力，为 AI 项目开发提供标准化的工作流程。
+NiceEasyAI 是一个专为 AI 项目开发，提供快捷操作支持的开源工具库。通过将本仓库作为子模块引入您的 AI 项目，您可以获得一系列预配置的快捷操作，显著提升开发效率和协作体验。
 
 ## ✨ 特性
 
@@ -35,8 +33,8 @@ git submodule update --init --recursive
 
 引入成功后，您可以直接在 AI 对话中说明要执行的操作：
 
-- "帮我执行 yd 操作" - 自动完成 Git 提交和推送
-- "使用 spec 分析一下这个需求" - 生成需求分析文档
+- 查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作
+- 查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作
 
 ## 🛠️ 快捷操作详解
 
@@ -55,16 +53,8 @@ git submodule update --init --recursive
 3. 执行暂存、提交、推送操作
 4. 提供操作结果反馈
 
-**使用示例**：
-```
-用户：执行 yd 操作
-AI：检测到 3 个文件修改，已自动提交并推送：
-✅ 添加新功能：用户认证模块
-📁 修改文件：src/auth.js, src/config.js, README.md
-🚀 已成功推送到远程仓库
-```
 
-### spec - 需求分析文档生成
+### spec - 标准需求+技术文档生成
 
 **功能描述**：智能需求分析和解决方案文档生成，包含完整的技术方案设计流程
 
@@ -75,25 +65,11 @@ AI：检测到 3 个文件修改，已自动提交并推送：
 - 代码审查准备
 
 **生成内容**：
-1. 需求概述和用户故事
+1. 需求概述
 2. 技术方案设计
 3. 实现步骤分解
-4. 风险评估和应对措施
-5. 测试策略建议
-6. 部署和运维考虑
+4. 自动导入任务系统开始实施
 
-**使用示例**：
-```
-用户：使用 spec 分析用户权限管理需求
-AI：正在生成需求分析文档...
-📋 已生成完整的需求分析文档，包含：
-- 用户角色和权限矩阵
-- RBAC 实现方案
-- 数据库设计建议
-- API 接口规范
-- 前端权限控制策略
-文档已保存至 docs/specs/用户权限管理.md
-```
 
 ## ⚠️ 注意事项
 
@@ -107,28 +83,9 @@ AI：正在生成需求分析文档...
 2. **配置文件位置**：
    - `.QuickAction.json` 必须位于项目根目录
    - 不要重命名或移动此文件
-   - 确保文件格式为有效的 JSON
 
-3. **中文交互要求**：
-   - 所有快捷操作都强制要求中文交互
-   - 提交信息、文档内容都使用中文
-   - 确保您的 AI 工具支持中文处理
-
-4. **Git 版本要求**：
-   - 需要 Git 2.20 以上版本支持子模块功能
-   - 确保已配置 Git 用户信息
-
-## 📄 许可证
-
-本项目采用 **MIT 许可证** 开源，允许：
-- ✅ 商业使用
-- ✅ 修改和分发
-- ✅ 私人使用
-- ✅ 专利使用
 
 ## 📧 联系我们
-
-**官方邮箱**：ruhua@candlesmeet.com
 
 **技术支持**：
 - 📧 技术问题：发送邮件至 ruhua@candlesmeet.com
