@@ -1,0 +1,8 @@
+<div class="nav-bar">
+    {{#navItems}}
+    <div class="nav-item {{#isActive}}active{{/isActive}}" data-page="{{pageId}}">
+        <i class="{{#isActive}}{{iconActive}}{{/isActive}}{{^isActive}}{{icon}}{{/isActive}} nav-icon"></i>
+        <span>{{label}}</span>
+    </div>
+    {{/navItems}}
+</div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动APP原型设计</title>
+    
+    <!-- 外部依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 样式文件 -->
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+    <!-- 模式切换按钮 -->
+    <button class="mode-toggle" id="modeToggle">展开模式</button>
+    
+    <!-- 主标题 -->
+    <h1 class="main-title">移动APP原型设计</h1>
+    
+    <!-- 页面容器 -->
+    <div class="prototype-container" id="prototypeContainer">
+        <!-- 页面将通过JavaScript动态加载到这里 -->
+        <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>正在加载页面...</span>
+        </div>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="config/pages.js"></script>
+    <script src="assets/js/component-manager.js"></script>
+    <script src="assets/js/page-loader.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
