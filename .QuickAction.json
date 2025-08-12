@@ -256,6 +256,117 @@
         "must_inquire_about_cloudbase_usage": true
       }
     },
+    "copyui": {
+      "description": "微信小程序UI设计支持，分析截图还原页面视觉与布局结构，理解页面核心功能与用户使用场景",
+      "commands": [
+        "【强制要求】全程必须使用中文对话，禁止使用英文回复",
+        "【强制要求】首先阅读并严格遵守.QuickAction.json中global_settings的所有配置要求",
+        "【第一阶段：截图接收与预处理】",
+        "1. 接收用户上传的微信小程序截图（支持多张截图）",
+        "2. 自动识别并过滤系统状态栏（时间、电量、WiFi等设备级信息）",
+        "3. 自动识别并过滤微信小程序标题栏（小程序名称、右上角胶囊按钮等微信原生系统组件）",
+        "4. 聚焦页面主体交互与展示元素，确定分析范围",
+        "5. 【复杂任务思考】如果任务复杂度较高，使用MCP Sequential thinking工具进行深度思考分析",
+        "6. 【联网查询】如果需要最新信息或解决方案，进行联网查询获取最新资料",
+        "【第二阶段：页面功能理解】",
+        "7. 通过元素组合判断页面类型（如商品详情页、订单管理页、个人中心页等）",
+        "8. 分析页面核心用途和业务逻辑",
+        "9. 梳理页面内的交互闭环和用户操作路径",
+        "10. 标注关键操作节点的功能指向",
+        "【第三阶段：视觉还原分析】",
+        "11. 按页面层级梳理元素结构（从顶部导航到底部按钮）",
+        "12. 描述各组件的位置、尺寸（以rpx为单位）及排列逻辑",
+        "13. 提取元素色彩代码、字体属性、装饰效果",
+        "14. 说明色彩在功能场景中的作用",
+        "【第四阶段：交互逻辑标注】",
+        "15. 标注可点击元素的交互状态（默认/点击/悬停样式）",
+        "16. 说明动态效果的业务意义",
+        "17. 分析交互背后的业务逻辑",
+        "【第五阶段：技术实现建议】",
+        "18. 使用 Tailwind CSS 处理样式，提供具体的 class 建议",
+        "19. 使用 FontAwesome 增强视觉效果，推荐合适的图标",
+        "20. 确保设计贴近真实 iOS 设计规范",
+        "21. 使用真实 picsum.photos 图片而非占位符，提供具体的图片URL",
+        "【第六阶段：文档生成】",
+        "22. 检查docs/NiceEasyAI目录是否存在，如不存在则自动创建",
+        "23. 【强制中文命名】文档文件名必须使用中文命名，格式：UI复刻-页面中文名-页面英文名.md",
+        "24. 【强制中文标题】文档内所有标题、章节名称必须使用中文",
+        "25. 在docs/NiceEasyAI目录下创建复刻UI文档",
+        "26. 输出结构化内容，包含页面核心功能阐述和分层布局描述",
+        "27. 融入功能与视觉的关联分析，确保开发团队能理解交互背后的业务逻辑",
+        "28. 【严禁创建多余文档】🚫 严禁创建任何其他多余文档，只能创建一个UI复刻文档"
+      ],
+      "requiresInput": true,
+      "inputPrompt": "请上传微信小程序截图，我将为您分析UI结构和功能逻辑。（可上传多张，我会自动分析）",
+      "workflow": "ui_analysis_and_replication",
+      "constraints": {
+        "language": "中文强制要求",
+        "focus_area": "仅聚焦截图内纯前端自定义展示内容",
+        "filter_system_elements": "自动过滤系统状态栏和微信小程序标题栏",
+        "dual_goal": "功能理解 + 视觉还原",
+        "unit_standard": "尺寸以rpx为单位",
+        "unit_requirement": "必须使用rpx作为尺寸单位，严禁使用px、rem、em等其他单位",
+        "document_location": "必须在docs/NiceEasyAI目录下创建文档",
+        "multi_screenshot_support": "支持多张截图分析",
+        "css_framework": "必须使用 Tailwind CSS 处理样式",
+        "icon_library": "必须使用 FontAwesome 增强视觉效果",
+        "design_standards": "必须贴近真实 iOS 设计规范",
+        "image_source": "必须使用真实 picsum.photos 图片而非占位符",
+        "document_naming": "文档文件名必须使用中文命名",
+        "section_naming": "文档内所有标题章节必须使用中文",
+        "document_creation_restriction": "🚫 严禁创建多余文档，只能创建一个UI复刻文档",
+        "complex_task_thinking": "复杂任务使用MCP Sequential thinking工具深度思考",
+        "network_query": "支持联网查询获取最新信息"
+      },
+      "output_structure": {
+        "document_naming_pattern": "UI复刻-页面中文名-页面英文名.md",
+        "document_sections": [
+          "页面核心功能分析",
+          "页面命名规范（中文名与英文名）",
+          "页面分区布局解析",
+          "元素组详细描述",
+          "色彩与样式还原",
+          "交互逻辑标注",
+          "Tailwind CSS 实现方案",
+          "FontAwesome 图标建议",
+          "picsum.photos 图片资源",
+          "开发实现建议"
+        ],
+        "analysis_principles": [
+          "功能理解优先",
+          "视觉还原精确",
+          "逻辑关联性强",
+          "开发友好输出"
+        ],
+        "page_naming_requirements": {
+          "chinese_name": "页面的中文描述名称，如：商品详情页、用户登录页、订单列表页",
+          "english_name": "适用于代码文件名的英文名称，如：product-detail、user-login、order-list",
+          "naming_rules": [
+            "中文名：简洁明确，体现页面核心功能",
+            "英文名：小写字母，单词间用连字符分隔，符合文件命名规范",
+            "英文名避免使用特殊字符，确保跨平台兼容性"
+          ]
+        },
+        "picsum_usage_guide": {
+          "basic_usage": "https://picsum.photos/宽度/高度 - 获取随机图像",
+          "square_image": "https://picsum.photos/尺寸 - 获取方形图像",
+          "specific_image": "https://picsum.photos/id/图片ID/宽度/高度 - 获取特定图像",
+          "seeded_image": "https://picsum.photos/seed/种子值/宽度/高度 - 获取固定随机图像",
+          "grayscale": "在URL末尾添加?grayscale - 获取灰度图像",
+          "blur": "在URL末尾添加?blur或?blur=1-10 - 获取模糊图像",
+          "advanced_usage": "可组合多个选项，如: https://picsum.photos/id/870/200/300?grayscale&blur=2",
+          "prevent_cache": "添加?random=数字 防止缓存，获取多个不同图像",
+          "file_formats": "支持.jpg和.webp格式，如: https://picsum.photos/200/300.webp",
+          "examples": [
+            "头像图片: https://picsum.photos/100/100",
+            "商品图片: https://picsum.photos/300/200",
+            "轮播图: https://picsum.photos/750/400",
+            "背景图: https://picsum.photos/1200/800",
+            "缩略图: https://picsum.photos/150/150"
+          ]
+        }
+      }
+    },
     "add": {
       "description": "添加新的快捷操作到.QuickAction.json文件中",
       "commands": [
