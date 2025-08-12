@@ -149,18 +149,43 @@
     height: calc(100vh - 94px); /* 减去状态栏和标题栏的高度 */
 }
 
-/* 展开模式样式 */
-.mode-toggle {
+/* 控制按钮组 */
+.control-buttons {
     position: fixed;
     top: 20px;
     right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+/* 路径切换按钮 */
+.path-toggle-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: var(--transition-fast);
+    min-width: 60px;
+}
+
+.path-toggle-button:hover {
+    background-color: #28a745;
+    transform: translateY(-1px);
+}
+
+/* 展开模式按钮 */
+.mode-toggle {
     background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 20px;
     padding: 8px 16px;
     cursor: pointer;
-    z-index: 1000;
     font-size: 14px;
     font-weight: 600;
     transition: var(--transition-fast);
@@ -168,6 +193,7 @@
 
 .mode-toggle:hover {
     background-color: #0062cc;
+    transform: translateY(-1px);
 }
 
 /* 展开模式下手机容器高度自适应 */

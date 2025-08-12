@@ -191,4 +191,21 @@ class PageLoader {
             });
         }
     }
+
+    // 重新加载当前页面（用于路径切换）
+    async reloadCurrentPage() {
+        // 清除页面缓存
+        this.pageCache.clear();
+
+        // 获取当前容器
+        const container = document.getElementById('prototypeContainer');
+        if (!container) return;
+
+        // 清空容器
+        container.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><span>正在加载页面...</span></div>';
+
+        // 重新加载所有页面
+        this.currentPages = [];
+        await this.renderAllPages(container);
+    }
 }

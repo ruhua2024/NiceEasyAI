@@ -19,10 +19,17 @@ class MobilePrototypeApp {
             // 初始化模式切换
             this.initModeToggle();
 
+            // 初始化路径切换
+            this.initPathToggle();
+
             // 隐藏加载状态
             this.hideLoading();
 
             this.isInitialized = true;
+
+            // 将pageLoader暴露到全局，供路径切换使用
+            window.pageLoader = this.pageLoader;
+
             console.log('Mobile prototype app initialized successfully');
         } catch (error) {
             console.error('Failed to initialize app:', error);
@@ -44,6 +51,32 @@ class MobilePrototypeApp {
             } else {
                 body.classList.remove('expanded');
                 modeToggle.textContent = '展开模式';
+            }
+        });
+    }
+
+    initPathToggle() {
+        const pathToggle = document.getElementById('pathToggle');
+        if (!pathToggle) return;
+
+        // 设置初始状态
+        window.updatePathToggleButton();
+
+        // 添加点击事件
+        pathToggle.addEventListener('click', async () => {
+            // 切换路径
+            const newPath = window.pagesPath === 'user' ? 'examples' : 'user';
+
+            // 显示加载状态
+            this.showLoading();
+
+            try {
+                // 切换路径并重新加载页面
+                window.switchPagesPath(newPath);
+                console.log(`Switched to ${newPath} mode`);
+            } catch (error) {
+                console.error('Failed to switch path:', error);
+                this.showError('切换模式失败，请刷新页面重试');
             }
         });
     }
