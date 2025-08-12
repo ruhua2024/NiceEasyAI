@@ -781,8 +781,18 @@ cd mobile-prototype
 ```
 
 2. **启动本地服务器**
+
+**方法一：使用 VS Code Live Server（推荐）**
+```
+1. 在VS Code中打开 mobile-prototype 文件夹
+2. 右键点击 index.html 文件
+3. 选择 "Open with Live Server"
+4. 浏览器会自动打开项目
+```
+
+**方法二：使用命令行**
 ```bash
-# 使用Python（推荐）
+# 使用Python
 python -m http.server 8000
 
 # 或使用Node.js
@@ -794,6 +804,8 @@ php -S localhost:8000
 
 3. **打开浏览器访问**
 ```
+# Live Server 会自动打开浏览器
+# 命令行方式需要手动访问：
 http://localhost:8000
 ```
 
