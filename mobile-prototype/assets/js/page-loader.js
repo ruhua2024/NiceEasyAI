@@ -79,12 +79,24 @@ class PageLoader {
             });
         });
 
-        // 返回按钮事件
+        // 返回按钮事件（标准返回按钮）
         const backButton = phoneElement.querySelector('.back-button');
         if (backButton) {
             backButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetPage = backButton.getAttribute('data-back-to');
+                if (targetPage) {
+                    this.scrollToPage(targetPage);
+                }
+            });
+        }
+
+        // 浮动返回按钮事件（全屏页面使用）
+        const floatingBackButton = phoneElement.querySelector('.floating-back-button');
+        if (floatingBackButton) {
+            floatingBackButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = floatingBackButton.getAttribute('data-back-to');
                 if (targetPage) {
                     this.scrollToPage(targetPage);
                 }
@@ -121,9 +133,29 @@ class PageLoader {
         // 卡片点击事件
         const cards = phoneElement.querySelectorAll('.card');
         cards.forEach(card => {
-            card.addEventListener('click', () => {
-                console.log('卡片被点击');
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetPage = card.getAttribute('data-navigate-to');
+                if (targetPage) {
+                    this.scrollToPage(targetPage);
+                } else {
+                    console.log('卡片被点击');
+                }
             });
+
+            // 为有导航的卡片添加视觉效果
+            if (card.hasAttribute('data-navigate-to')) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('mousedown', () => {
+                    card.style.transform = 'scale(0.98)';
+                });
+                card.addEventListener('mouseup', () => {
+                    card.style.transform = 'scale(1)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            }
         });
     }
 

@@ -7,7 +7,7 @@
     overflow: hidden;
     position: relative;
     box-shadow: var(--shadow-heavy);
-    margin: 0 auto 30px auto; /* 确保水平居中 */
+    margin: 0 auto; /* 确保水平居中，上下间距由flexbox的row-gap控制 */
     transition: height var(--transition-slow);
     /* 确保尺寸稳定，不受外部影响 */
     flex-shrink: 0;
@@ -209,4 +209,20 @@
 .expanded .phone .content {
     flex: 1 !important;
     overflow-y: auto !important;
+}
+
+/* 展开模式下确保所有手机顶部对齐 */
+.expanded .prototype-container {
+    align-items: flex-start !important;
+    padding-top: 20px;
+}
+
+/* 展开模式下手机容器移除底部边距 */
+.expanded .phone {
+    margin-bottom: 0 !important;
+}
+
+/* 全屏页面的内容容器移除内边距 */
+.phone[data-page="full-screen"] .content {
+    padding: 0 !important;
 }

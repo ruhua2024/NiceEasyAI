@@ -150,7 +150,8 @@ const pageConfig = {
         file: 'pages/full-screen.html',
         isMainPage: false,         // 非一级页面
         hasHeader: false,          // 不显示标题栏（全屏效果）
-        hasBackButton: false
+        hasBackButton: false,      // 不显示标准返回按钮（使用浮动返回按钮）
+        customClass: 'full-screen-mode'  // 添加自定义CSS类
     }
     // 添加更多页面配置...
 };
@@ -865,16 +866,19 @@ python -m http.server 8000
 }
 ```
 
-**添加全屏页面（不显示任何导航）：**
+**添加全屏页面（使用浮动返回按钮）：**
 ```javascript
 'fullscreen-page': {
     title: '全屏页面',
     file: 'pages/fullscreen-page.html',
     isMainPage: false,         // 非一级页面
     hasHeader: false,          // 不显示标题栏（全屏效果）
-    hasBackButton: false
+    hasBackButton: false,      // 不显示标准返回按钮（使用浮动返回按钮）
+    customClass: 'full-screen-mode'  // 添加自定义CSS类
 }
 ```
+
+**注意：** 全屏页面虽然不显示标准的标题栏和返回按钮，但应该在页面内容中包含浮动返回按钮，确保用户能够退出全屏模式。
 
 **如果添加了新的一级页面，还需要更新导航栏配置：**
 ```javascript

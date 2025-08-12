@@ -56,19 +56,15 @@ body {
 
 /* 原型容器 */
 .prototype-container {
-    display: grid;
-    gap: var(--phone-gap-large, 30px); /* 默认使用大屏间距，可通过config.css覆盖 */
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--phone-gap-large, 30px); /* 水平间距，可通过config.css覆盖 */
+    row-gap: var(--phone-vertical-gap, 30px); /* 垂直间距，可通过config.css覆盖 */
     justify-content: center;
+    align-items: flex-start; /* 顶部对齐 */
     width: 100%;
     max-width: 1400px; /* 最大宽度限制 */
     margin: 0 auto; /* 确保容器本身居中 */
-
-    /* 响应式网格布局 - 使用auto-fit自动适应，手机保持固定尺寸 */
-    grid-template-columns: repeat(auto-fit, 390px);
-
-    /* 确保手机宽度固定，间距保持一致 */
-    justify-items: center;
-    align-items: start; /* 垂直对齐到顶部 */
 }
 
 /* 加载和错误状态 */
@@ -110,8 +106,8 @@ body {
 @media (max-width: 480px) {
     /* 小屏幕：1列布局 */
     .prototype-container {
-        grid-template-columns: 1fr;
-        gap: var(--phone-gap-small, 20px);
+        column-gap: var(--phone-gap-small, 20px);
+        row-gap: var(--phone-vertical-gap, 30px);
         padding: 0 10px;
     }
     
@@ -134,24 +130,24 @@ body {
 @media (min-width: 481px) and (max-width: 900px) {
     /* 中等屏幕：2列布局 */
     .prototype-container {
-        grid-template-columns: repeat(2, 390px);
-        gap: var(--phone-gap-medium, 25px);
+        column-gap: var(--phone-gap-medium, 25px);
+        row-gap: var(--phone-vertical-gap, 30px);
     }
 }
 
 @media (min-width: 901px) and (max-width: 1350px) {
     /* 大屏幕：3列布局 */
     .prototype-container {
-        grid-template-columns: repeat(3, 390px);
-        gap: var(--phone-gap-large, 30px);
+        column-gap: var(--phone-gap-large, 30px);
+        row-gap: var(--phone-vertical-gap, 30px);
     }
 }
 
 @media (min-width: 1351px) {
     /* 超大屏幕：最多3列布局（当前只有3个页面） */
     .prototype-container {
-        grid-template-columns: repeat(3, 390px);
-        gap: var(--phone-gap-xlarge, 35px);
+        column-gap: var(--phone-gap-xlarge, 35px);
+        row-gap: var(--phone-vertical-gap, 30px);
     }
 }
 

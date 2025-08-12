@@ -23,6 +23,14 @@ const pageConfig = {
         headerTitle: '设置',
         hasBackButton: true,       // 显示返回按钮
         backTo: 'profile'          // 返回到我的页面
+    },
+    'full-screen': {
+        title: '全屏页面',
+        file: 'pages/full-screen.html',
+        isMainPage: false,         // 非一级页面
+        hasHeader: false,          // 不显示标题栏（全屏效果）
+        hasBackButton: false,      // 不显示标准返回按钮（使用浮动返回按钮）
+        customClass: 'full-screen-mode'  // 添加自定义CSS类
     }
 };
 
