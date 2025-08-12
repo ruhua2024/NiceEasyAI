@@ -493,24 +493,14 @@ body {
 }
 
 @media (min-width: 1351px) {
-    /* 超大屏幕：最多4列布局 */
+    /* 超大屏幕：最多3列布局（当前只有3个页面） */
     .prototype-container {
-        grid-template-columns: repeat(4, 390px);
+        grid-template-columns: repeat(3, 390px);
         gap: 35px;
     }
 }
 
-/* 横屏适配 */
-@media (orientation: landscape) and (max-height: 600px) {
-    .phone {
-        transform: scale(0.8);
-        transform-origin: center;
-    }
 
-    .prototype-container {
-        gap: 20px;
-    }
-}
 ```
 
 ### 步骤6：创建JavaScript核心逻辑
@@ -937,19 +927,9 @@ const navBarConfig = {
 | ≤ 480px | 1列 | 20px | 手机竖屏 |
 | 481px - 900px | 2列 | 25px | 平板竖屏 |
 | 901px - 1350px | 3列 | 30px | 笔记本电脑 |
-| ≥ 1351px | 4列 | 35px | 大屏显示器 |
+| ≥ 1351px | 3列 | 35px | 大屏显示器 |
 
 ### 特殊适配
-
-**横屏模式适配：**
-```css
-@media (orientation: landscape) and (max-height: 600px) {
-    .phone {
-        transform: scale(0.8);  /* 缩小手机尺寸 */
-        transform-origin: center;
-    }
-}
-```
 
 **小屏幕优化：**
 ```css
@@ -962,12 +942,57 @@ const navBarConfig = {
 }
 ```
 
+### 📝 扩展说明
+
+当前框架包含3个页面（首页、我的、设置），因此最大布局设置为3列。如果你添加了更多页面，可以调整CSS中的最大列数：
+
+```css
+@media (min-width: 1351px) {
+    .prototype-container {
+        grid-template-columns: repeat(4, 390px); /* 改为4列或更多 */
+        gap: 35px;
+    }
+}
+```
+
 ### 核心设计原则
 
-1. **手机宽度固定**：始终保持390px宽度，确保原型的真实性
-2. **间距自适应**：根据屏幕大小调整手机间距
-3. **居中对齐**：无论显示几列，都保持居中对齐
-4. **最大宽度限制**：容器最大宽度1400px，避免过度拉伸
+1. **手机尺寸固定**：始终保持390px×844px尺寸，确保原型的真实性和稳定性
+2. **可配置缩放**：支持全局缩放比例调整，通过CSS transform实现，不影响布局计算
+3. **间距自适应**：根据屏幕大小调整手机间距，网格布局基于固定390px尺寸
+4. **居中对齐**：无论显示几列，都保持居中对齐
+5. **最大宽度限制**：容器最大宽度根据页面数量调整
+6. **尺寸稳定性**：移除横屏适配，避免因窗口变化导致的尺寸跳变
+
+### ⚙️ 全局配置
+
+框架支持通过CSS变量进行全局配置：
+
+```css
+/* config.css */
+:root {
+    /* 缩放比例配置 */
+    --global-scale: 0.8;  /* 80% 缩放 */
+
+    /* 间距配置 */
+    --phone-gap-small: 20px;    /* 小屏幕间距 */
+    --phone-gap-medium: 25px;   /* 中等屏幕间距 */
+    --phone-gap-large: 30px;    /* 大屏幕间距 */
+    --phone-gap-xlarge: 35px;   /* 超大屏幕间距 */
+}
+```
+
+**推荐缩放比例：**
+- `1.0` = 100% 原始大小（开发和测试）
+- `0.8` = 80% 缩小显示（演示推荐）
+- `0.6` = 60% 更小显示（大屏展示）
+- `1.2` = 120% 放大显示（细节检查）
+
+**间距配置说明：**
+- `small`: 小屏幕（≤480px）使用的间距
+- `medium`: 中等屏幕（481px-900px）使用的间距
+- `large`: 大屏幕（901px-1350px）使用的间距
+- `xlarge`: 超大屏幕（≥1351px）使用的间距
 
 ## 🎨 自定义底部导航栏
 
@@ -1276,8 +1301,8 @@ A: 修改网格布局的最大列数：
 ```css
 @media (min-width: 1600px) {
     .prototype-container {
-        grid-template-columns: repeat(4, 390px); /* 最多4列 */
-        max-width: 1600px; /* 限制容器最大宽度 */
+        grid-template-columns: repeat(3, 390px); /* 当前最多3列 */
+        max-width: 1200px; /* 限制容器最大宽度 */
     }
 }
 ```
@@ -1305,7 +1330,7 @@ A: 修改网格布局的最大列数：
 - **全屏支持**：支持创建无导航栏的全屏页面效果
 - **导航栏定制**：支持3-5个导航图标，可自定义名称和图标样式
 - **配置对应**：导航栏配置与一级页面自动对应，确保一致性
-- **响应式布局**：根据屏幕宽度自动调整显示列数（1-4列）
+- **响应式布局**：根据屏幕宽度自动调整显示列数（1-3列）
 - **固定尺寸**：手机宽度始终保持390px，确保原型真实性
 - **自适应间距**：不同屏幕尺寸下自动调整手机间距
 

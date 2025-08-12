@@ -32,7 +32,7 @@ class ComponentManager {
             header = await this.loadComponent('header');
             header = this.replaceTemplate(header, {
                 title: pageConfig.headerTitle || pageConfig.title,
-                hasBackButton: pageConfig.hasBackButton || false,
+                hasBackButton: pageConfig.hasBackButton === true,
                 backTo: pageConfig.backTo || ''
             });
         }
@@ -40,8 +40,7 @@ class ComponentManager {
         // 根据页面配置决定是否显示底部导航栏
         let navBar = '';
         if (pageConfig.isMainPage) {
-            navBar = await this.loadComponent('nav-bar');
-            navBar = this.buildNavBar(pageConfig.navTabId);
+            navBar = await this.buildNavBar(pageConfig.navTabId);
         }
 
         return this.replaceTemplate(phoneFrame, {
@@ -54,7 +53,7 @@ class ComponentManager {
     }
 
     // 构建底部导航栏，支持激活状态
-    buildNavBar(activeTabId) {
+    async buildNavBar(activeTabId) {
         if (!window.navBarConfig) {
             console.error('navBarConfig not found');
             return '';
@@ -71,26 +70,39 @@ class ComponentManager {
             };
         });
 
-        let navBarHtml = '<div class="nav-bar">';
-        navItems.forEach(item => {
-            const iconClass = item.isActive ? item.iconActive : item.icon;
-            const activeClass = item.isActive ? ' active' : '';
-            
-            navBarHtml += `
-                <div class="nav-item${activeClass}" data-page="${item.pageId}">
-                    <i class="${iconClass} nav-icon"></i>
-                    <span>${item.label}</span>
-                </div>
-            `;
+        const navBarTemplate = await this.loadComponent('nav-bar');
+        return this.replaceTemplate(navBarTemplate, {
+            navItems: navItems
         });
-        navBarHtml += '</div>';
-
-        return navBarHtml;
     }
 
     replaceTemplate(template, data) {
-        return template.replace(/\{\{(\w+)\}\}/g, (match, key) => {
+        let result = template;
+
+        // 处理数组循环 {{#arrayName}}content{{/arrayName}}
+        result = result.replace(/\{\{#(\w+)\}\}(.*?)\{\{\/\1\}\}/gs, (match, arrayName, content) => {
+            const arrayData = data[arrayName];
+            if (Array.isArray(arrayData)) {
+                return arrayData.map(item => {
+                    return this.replaceTemplate(content, item);
+                }).join('');
+            } else if (arrayData) {
+                return content;
+            } else {
+                return '';
+            }
+        });
+
+        // 处理反向条件语句 {{^condition}}content{{/condition}}
+        result = result.replace(/\{\{\^(\w+)\}\}(.*?)\{\{\/\1\}\}/gs, (match, condition, content) => {
+            return !data[condition] ? content : '';
+        });
+
+        // 处理简单变量替换 {{variable}}
+        result = result.replace(/\{\{(\w+)\}\}/g, (match, key) => {
             return data[key] !== undefined ? data[key] : match;
         });
+
+        return result;
     }
 }

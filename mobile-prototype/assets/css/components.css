@@ -7,8 +7,16 @@
     overflow: hidden;
     position: relative;
     box-shadow: var(--shadow-heavy);
-    margin-bottom: 30px;
+    margin: 0 auto 30px auto; /* 确保水平居中 */
     transition: height var(--transition-slow);
+    /* 确保尺寸稳定，不受外部影响 */
+    flex-shrink: 0;
+    min-width: var(--phone-width);
+    max-width: var(--phone-width);
+
+    /* 应用全局缩放比例 */
+    transform: scale(var(--global-scale));
+    transform-origin: center;
 }
 
 /* 屏幕容器 */

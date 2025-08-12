@@ -22,6 +22,9 @@
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
+
+    /* 全局缩放比例 - 可以修改这个值来调整所有手机的大小 */
+    --global-scale: 0.8;
 }
 
 /* 基础重置 */
@@ -54,16 +57,18 @@ body {
 /* 原型容器 */
 .prototype-container {
     display: grid;
-    gap: 30px;
+    gap: var(--phone-gap-large, 30px); /* 默认使用大屏间距，可通过config.css覆盖 */
     justify-content: center;
     width: 100%;
     max-width: 1400px; /* 最大宽度限制 */
-    
-    /* 响应式网格布局 */
-    grid-template-columns: repeat(auto-fit, minmax(390px, 390px));
-    
+    margin: 0 auto; /* 确保容器本身居中 */
+
+    /* 响应式网格布局 - 使用auto-fit自动适应，手机保持固定尺寸 */
+    grid-template-columns: repeat(auto-fit, 390px);
+
     /* 确保手机宽度固定，间距保持一致 */
     justify-items: center;
+    align-items: start; /* 垂直对齐到顶部 */
 }
 
 /* 加载和错误状态 */
@@ -106,7 +111,7 @@ body {
     /* 小屏幕：1列布局 */
     .prototype-container {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: var(--phone-gap-small, 20px);
         padding: 0 10px;
     }
     
@@ -130,7 +135,7 @@ body {
     /* 中等屏幕：2列布局 */
     .prototype-container {
         grid-template-columns: repeat(2, 390px);
-        gap: 25px;
+        gap: var(--phone-gap-medium, 25px);
     }
 }
 
@@ -138,26 +143,16 @@ body {
     /* 大屏幕：3列布局 */
     .prototype-container {
         grid-template-columns: repeat(3, 390px);
-        gap: 30px;
+        gap: var(--phone-gap-large, 30px);
     }
 }
 
 @media (min-width: 1351px) {
-    /* 超大屏幕：最多4列布局 */
+    /* 超大屏幕：最多3列布局（当前只有3个页面） */
     .prototype-container {
-        grid-template-columns: repeat(4, 390px);
-        gap: 35px;
+        grid-template-columns: repeat(3, 390px);
+        gap: var(--phone-gap-xlarge, 35px);
     }
 }
 
-/* 横屏适配 */
-@media (orientation: landscape) and (max-height: 600px) {
-    .phone {
-        transform: scale(0.8);
-        transform-origin: center;
-    }
-    
-    .prototype-container {
-        gap: 20px;
-    }
-}
+

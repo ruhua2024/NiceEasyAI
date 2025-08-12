@@ -30,13 +30,13 @@ const pageConfig = {
 const navBarConfig = {
     home: {
         label: '首页',
-        icon: 'far fa-home',
-        iconActive: 'fas fa-home'
+        icon: 'fas fa-house',        // FontAwesome 6.x 使用 fa-house 替代 fa-home
+        iconActive: 'fas fa-house'   // 激活时保持一致，通过CSS颜色区分
     },
     profile: {
         label: '我的',
-        icon: 'far fa-user',
-        iconActive: 'fas fa-user'
+        icon: 'far fa-user',         // 非激活：空心用户
+        iconActive: 'fas fa-user'    // 激活：实心用户
     }
 };
 
