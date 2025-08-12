@@ -196,16 +196,18 @@
     transform: translateY(-1px);
 }
 
-/* 展开模式下手机容器高度自适应 */
+/* 展开模式下手机容器高度策略 */
 .expanded .phone {
     height: auto;
-    min-height: var(--phone-height);
+    min-height: calc(100vh - 160px); /* 使用视口高度减去上下边距 */
+    max-height: none;
 }
 
 /* 展开模式下屏幕容器显示所有内容 */
 .expanded .screen {
     overflow: visible;
-    height: auto;
+    height: 100%;
+    min-height: calc(100vh - 160px);
 }
 
 /* 展开模式下内容区域显示所有内容，并为导航栏预留空间 */
