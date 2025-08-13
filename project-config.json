@@ -1,0 +1,36 @@
+{
+  "projectInfo": {
+    "name": "防鸽金",
+    "type": "社交",
+    "description": "通过小额押金机制解决朋友间邀约爽约问题的社交小程序，让邀约更靠谱",
+    "targetUsers": "18-35岁经常参与朋友聚会的年轻人群体",
+    "coreFeatures": ["邀约创建", "押金缴纳", "自动分配", "基础信用"]
+  },
+  "projectScale": {
+    "totalPages": 9,
+    "modules": [
+      {
+        "name": "邀约模块",
+        "pageCount": 4,
+        "description": "邀约的创建、查看和参与核心功能",
+        "pages": ["邀约首页", "创建邀约", "邀约详情", "我的邀约"]
+      },
+      {
+        "name": "押金模块",
+        "pageCount": 2,
+        "description": "押金缴纳和资金管理基础功能",
+        "pages": ["押金管理", "资金明细"]
+      },
+      {
+        "name": "用户模块",
+        "pageCount": 3,
+        "description": "个人信息和基础设置",
+        "pages": ["个人中心", "个人资料", "设置页面"]
+      }
+    ]
+  },
+  "pageHierarchy": {
+    "firstLevelPages": ["邀约首页", "押金管理", "个人中心"],
+    "nonFirstLevelPages": ["创建邀约", "邀约详情", "我的邀约", "资金明细", "个人资料", "设置页面"]
+  }
+}
