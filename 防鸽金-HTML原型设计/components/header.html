@@ -1,12 +1,21 @@
-<!-- 页面标题组件 - 设计限制：必须支持传入页面标题文字参数 -->
-<div class="page-title-container">
+<!-- 页面头部组件 - 包含返回按钮和页面标题 -->
+<div class="header-container">
+  <!-- 返回按钮 -->
+  <button class="back-btn" onclick="history.back()">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+  
+  <!-- 页面标题 -->
   <div class="page-title">
     <h1 id="title-text">页面标题</h1>
   </div>
+  
+  <!-- 右侧占位，保持标题居中 -->
+  <div class="header-right"></div>
 </div>
 
 <style>
-.page-title-container {
+.header-container {
   position: fixed;
   top: 44px;
   left: 0;
@@ -16,16 +25,46 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.back-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 60px; /* 左右留出返回按钮和其他按钮的空间 */
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #264653;
+  flex-shrink: 0;
+}
+
+.back-btn:hover {
+  background: rgba(38, 70, 83, 0.1);
+  transform: scale(1.05);
+}
+
+.back-btn:active {
+  transform: scale(0.95);
+  background: rgba(38, 70, 83, 0.2);
+}
+
+.back-btn i {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .page-title {
-  text-align: center;
   flex: 1;
+  text-align: center;
+  margin: 0 16px;
 }
 
 #title-text {
@@ -39,6 +78,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.header-right {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
 </style>
 
 <script>
@@ -49,18 +94,6 @@ function setPageTitle(title) {
     titleElement.textContent = title;
   }
 }
-
-// 页面加载时自动设置标题（从页面文件名获取）
-document.addEventListener('DOMContentLoaded', function() {
-  // 尝试从父页面获取标题信息
-  try {
-    const pageName = window.parent.document.title || '页面标题';
-    setPageTitle(pageName);
-  } catch (e) {
-    // 如果无法获取，保持默认标题
-    console.log('无法获取页面标题，使用默认标题');
-  }
-});
 
 // 导出设置标题的函数供外部调用
 window.setPageTitle = setPageTitle;

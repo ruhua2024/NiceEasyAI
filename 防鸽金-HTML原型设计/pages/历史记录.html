@@ -6,6 +6,7 @@
     <title>历史记录</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/common.js"></script>
     <style>
         :root {
             --primary-color: #264653;
@@ -240,12 +241,9 @@
 <body>
     <!-- 状态栏 -->
     <div id="status-bar"></div>
-    
-    <!-- 返回按钮 -->
-    <div id="back-button"></div>
-    
-    <!-- 页面标题 -->
-    <div id="page-title"></div>
+
+    <!-- 页面头部（返回按钮 + 标题） -->
+    <div id="header"></div>
     
     <!-- 主要内容 -->
     <div class="main-content">
@@ -435,25 +433,7 @@
     </div>
 
     <script>
-        // 加载组件
-        async function loadComponent(elementId, componentPath) {
-            try {
-                const response = await fetch(`../components/${componentPath}`);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-                
-                // 如果是页面标题组件，设置标题
-                if (elementId === 'page-title') {
-                    setTimeout(() => {
-                        if (window.setPageTitle) {
-                            window.setPageTitle('历史记录');
-                        }
-                    }, 100);
-                }
-            } catch (error) {
-                console.error(`加载组件失败: ${componentPath}`, error);
-            }
-        }
+
         
         // 切换筛选标签
         function switchTab(element, status) {
@@ -478,11 +458,9 @@
             console.log('切换到筛选:', status);
         }
         
-        // 页面加载完成后加载组件
+        // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', async function() {
-            await loadComponent('status-bar', 'status-bar.html');
-            await loadComponent('back-button', 'back-button.html');
-            await loadComponent('page-title', 'page-title.html');
+            await initializePage('历史记录');
         });
     </script>
 </body>
