@@ -32,7 +32,7 @@ async function loadComponent(elementId, componentPath) {
                             display: flex; align-items: center; justify-content: center;
                         ">←</button>
                         <div style="flex: 1; text-align: center; margin: 0 16px;">
-                            <h1 style="
+                            <h1 id="title-text" style="
                                 font-size: 18px; font-weight: 600; color: #264653; margin: 0;
                                 overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
                             ">${document.title || '页面标题'}</h1>
@@ -49,12 +49,41 @@ async function loadComponent(elementId, componentPath) {
 async function loadHeader(pageTitle) {
     try {
         await loadComponent('header', 'header.html');
-        // 等待组件加载完成后设置标题
-        setTimeout(() => {
+
+        // 使用更可靠的方式设置标题，包含重试机制
+        const setTitleWithRetry = (retryCount = 0) => {
+            const maxRetries = 5;
+            const retryDelay = 100;
+
             if (window.setPageTitle && pageTitle) {
                 window.setPageTitle(pageTitle);
+                console.log(`页面标题设置成功: ${pageTitle}`);
+                return;
             }
-        }, 100);
+
+            // 备用方案：直接操作DOM元素
+            const titleElement = document.getElementById('title-text');
+            if (titleElement && pageTitle) {
+                titleElement.textContent = pageTitle;
+                console.log(`页面标题通过DOM设置成功: ${pageTitle}`);
+                return;
+            }
+
+            // 如果还没成功且还有重试次数，继续重试
+            if (retryCount < maxRetries) {
+                setTimeout(() => {
+                    setTitleWithRetry(retryCount + 1);
+                }, retryDelay * (retryCount + 1)); // 递增延迟
+            } else {
+                console.warn(`页面标题设置失败，已重试${maxRetries}次: ${pageTitle}`);
+            }
+        };
+
+        // 初始延迟后开始设置标题
+        setTimeout(() => {
+            setTitleWithRetry();
+        }, 150);
+
     } catch (error) {
         console.error('加载header组件失败:', error);
     }
