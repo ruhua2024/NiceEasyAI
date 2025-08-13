@@ -889,7 +889,7 @@
       }
     },
     "hbase": {
-      "description": "HTML原型生成器，基于project-config.json配置生成高保真的HTML原型界面",
+      "description": "HTML原型生成器，基于project-config.json配置生成纯手机界面的高保真HTML原型，专注于真实预览体验",
       "commands": [
         "【强制要求】全程必须使用中文对话，禁止使用英文回复",
         "【强制要求】首先阅读并严格遵守.QuickAction.json中global_settings的所有配置要求",
@@ -924,19 +924,28 @@
         "    - components/back-button.html（返回按钮）",
         "    - components/page-title.html（页面标题区域）",
         "20. 为每个页面创建独立的HTML文件",
-        "21. 【强制组件复用约束】每个界面独立的HTML文件使用组件时，必须通过引入的方式，而不是重写一遍。所有组件应创建为独立的HTML文件，各页面通过JavaScript或iframe方式引入，确保组件的复用性和维护性",
+        "21. 【强制组件复用约束】每个界面独立的HTML文件使用组件时，必须通过引入的方式，而不是重写一遍。所有组件应创建为独立的HTML文件，各页面通过JavaScript fetch()方式引入，严禁使用iframe方式",
         "【第五阶段：主入口页面设计】",
         "22. 创建index.html作为主入口页面",
-        "23. 【强制约束】主入口仅包含：项目标题、副标题、模式切换按钮、页面平铺展示",
+        "23. 【强制约束】主入口仅包含：项目标题、副标题、模式切换按钮、纯手机界面平铺展示",
         "24. 【严禁内容】不得包含功能介绍、导航菜单、页面跳转链接、统计信息、版权信息等",
-        "25. 实现模式切换功能（正常模式/展开模式）",
-        "26. 实现响应式布局（宽屏3列、中等2列、窄屏1列）",
-        "27. 使用iframe方式嵌入所有页面，实现平铺展示",
+        "25. 【纯手机界面约束】严禁使用带标题的卡片容器，直接展示手机界面",
+        "26. 【容器禁用】严禁使用.page-card、.page-header等外层容器包装手机界面",
+        "27. 实现模式切换功能（正常模式/展开模式）",
+        "28. 实现响应式布局（宽屏3列、中等2列、窄屏1列）",
+        "29. 使用iframe方式嵌入所有页面，实现纯手机界面平铺展示",
+        "30. 【纯手机界面实现】使用单一.mobile-viewport容器，严禁双层嵌套和外层包装",
+        "31. 【布局结构】唯一的grid-container包含所有mobile-viewport，不是每个手机框都有独立的grid-container",
         "【第六阶段：真实感增强】",
-        "28. 界面尺寸模拟iPhone 13 Pro，添加圆角效果",
-        "29. 使用真实picsum.photos图片，提供具体URL",
-        "30. 添加iOS风格的系统状态栏和导航栏",
-        "31. 确保所有交互元素具有清晰的视觉反馈",
+        "32. 界面尺寸模拟iPhone 13 Pro，添加圆角效果",
+        "33. 使用真实picsum.photos图片，提供具体URL",
+        "34. 添加iOS风格的系统状态栏和导航栏",
+        "35. 确保所有交互元素具有清晰的视觉反馈",
+        "36. 【真实iOS状态栏】使用透明或半透明背景，根据下方内容自动调整文字颜色",
+        "37. 【隐藏滚动条】页面滚动条必须隐藏，使用-webkit-scrollbar:none和scrollbar-width:none",
+        "38. 【原生导航栏】使用半透明背景和backdrop-filter模糊效果，与内容自然融合",
+        "39. 【组件引入方式】严禁使用iframe引入组件，必须使用JavaScript fetch()方式",
+        "40. 【单一滚动区域】整个页面只能有一个滚动区域，状态栏和导航栏必须固定",
         "【第七阶段：页面属性规范实现】",
         "32. 一级页面：引入系统状态栏+底部导航栏，不引入返回按钮",
         "33. 非一级页面：引入系统状态栏+返回按钮，不引入底部导航栏",
@@ -955,7 +964,7 @@
         "40. 确保所有文件遵循组件复用约束，严禁重复代码"
       ],
       "requiresInput": true,
-      "inputPrompt": "请提供以下信息：\n\n## 1. 视觉统一设计方案路径（必填）\n💡 请提供视觉统一设计方案.md文件的相对路径，例如：docs/NiceEasyAI/视觉统一设计方案.md\n- **设计方案路径**：\n\n## 2. 项目配置文件内容（必填）\n💡 请提供project-config.json配置文件内容，我将基于此配置和视觉设计方案生成完整的HTML原型界面：",
+      "inputPrompt": "请提供以下信息：\n\n## 1. 视觉统一设计方案路径（必填）\n💡 请提供视觉统一设计方案.md文件的相对路径，例如：docs/NiceEasyAI/视觉统一设计方案.md\n- **设计方案路径**：\n\n## 2. 项目配置文件内容（必填）\n💡 请提供project-config.json配置文件内容，我将基于此配置和视觉设计方案生成纯手机界面的HTML原型，专注于真实预览体验：",
       "workflow": "html_prototype_generation",
       "constraints": {
         "language": "中文强制要求",
@@ -963,7 +972,18 @@
         "design_scheme_compliance": "必须严格按照视觉设计方案中的配色、字体、间距、组件规范进行原型设计",
         "config_file_required": "必须提供project-config.json配置文件",
         "ios_design_standards": "必须贴近真实iOS设计规范",
-        "component_reuse": "【强制组件复用约束】每个界面独立的HTML文件使用组件时，必须通过引入的方式，而不是重写一遍。所有组件应创建为独立的HTML文件，各页面通过JavaScript或iframe方式引入，确保组件的复用性和维护性",
+        "realistic_status_bar": "【真实状态栏约束】状态栏必须使用透明或半透明背景，根据内容自动调整文字颜色",
+        "hidden_scrollbars": "【隐藏滚动条约束】页面滚动条必须隐藏，仅在滚动时短暂显示",
+        "native_navigation": "【原生导航约束】导航栏必须使用半透明背景，与内容自然融合",
+        "iframe_prohibition": "【严禁iframe组件】iframe会产生独立滚动条，完全破坏真实手机体验",
+        "fetch_component_loading": "【强制fetch加载】组件必须通过JavaScript fetch()方式加载HTML内容",
+        "single_scroll_area": "【单一滚动区域】整个页面只能有一个滚动区域，状态栏和导航栏必须固定",
+        "component_reuse": "【强制组件复用约束】每个界面独立的HTML文件使用组件时，必须通过引入的方式，而不是重写一遍。所有组件应创建为独立的HTML文件，各页面通过JavaScript fetch()方式引入，确保组件的复用性和维护性",
+        "pure_mobile_interface": "【纯手机界面约束】严禁使用带标题的卡片容器，必须直接展示手机界面",
+        "container_prohibition": "【容器禁用】严禁使用.page-card、.page-header、.phone-frame、.phone-screen等多层装饰容器",
+        "single_container_requirement": "【单容器约束】只使用一个.mobile-viewport容器，直接设置iPhone尺寸和圆角",
+        "grid_container_clarification": "【重要澄清】整个页面只有一个grid-container，所有手机框都是它的子元素",
+        "clean_display_mode": "【简洁展示模式】专注于真实手机界面预览体验，去除所有非必要的装饰元素",
         "index_content_restriction": "主入口严禁包含多余内容元素",
         "responsive_layout": "必须实现3-2-1列响应式布局",
         "mode_switching": "必须实现正常模式/展开模式切换",
@@ -991,14 +1011,31 @@
             "folder_name": "【强制中文命名】项目名称-HTML原型设计",
             "location_requirement": "必须在项目根目录创建",
             "prohibited_files": "严禁创建README.md、说明文档、配置文档、跳转逻辑文件等多余文件"
+          },
+          "display_structure": {
+            "overall_layout": "唯一的grid-container包含所有手机框，实现响应式平铺展示",
+            "correct_structure": "grid-container > [mobile-viewport1, mobile-viewport2, mobile-viewport3, ...]",
+            "structure_example": "grid-container ← 唯一网格容器\n├── mobile-viewport (邀约首页)\n├── mobile-viewport (押金管理)\n├── mobile-viewport (个人中心)\n└── mobile-viewport (更多页面...)",
+            "important_clarification": "【重要】不是每个手机框都有独立的grid-container，而是所有手机框共享一个grid-container",
+            "single_container": "每个手机框使用单一mobile-viewport容器，设置iPhone尺寸和圆角",
+            "prohibited_wrappers": "严禁使用page-card、page-header、phone-frame、phone-screen等多层容器",
+            "clean_presentation": "专注于手机界面本身，无额外装饰元素和物理边框模拟"
           }
         },
         "component_files": [
-          "components/status-bar.html",
-          "components/bottom-nav.html", 
-          "components/back-button.html",
-          "components/page-title.html"
+          "components/status-bar.html - 【必须透明/半透明背景】",
+          "components/bottom-nav.html - 【必须毛玻璃效果】",
+          "components/back-button.html - 【必须原生iOS样式】",
+          "components/page-title.html - 【必须半透明导航栏】"
         ],
+        "component_style_requirements": {
+          "status_bar": "使用rgba()和backdrop-filter实现透明效果，position: fixed固定在顶部",
+          "navigation": "使用backdrop-filter: blur(20px)实现毛玻璃效果，position: fixed或sticky",
+          "scrollbars": "所有页面必须隐藏滚动条，使用::-webkit-scrollbar: none",
+          "transitions": "使用原生iOS动画曲线和时长",
+          "layout_structure": "状态栏固定 + 导航栏固定 + 主内容区域滚动",
+          "component_loading": "使用JavaScript fetch()加载组件HTML，严禁iframe"
+        },
         "page_generation": {
           "naming_convention": "功能模块-页面名称.html",
           "page_types": ["一级页面", "非一级页面"],
@@ -1009,20 +1046,26 @@
           "icon_library": "FontAwesome",
           "image_source": "picsum.photos真实图片",
           "device_simulation": "iPhone 13 Pro",
-          "responsive_breakpoints": "lg:3列, md:2列, sm:1列"
+          "responsive_breakpoints": "lg:3列, md:2列, sm:1列",
+          "scrollbar_hiding": "使用-webkit-scrollbar:none和scrollbar-width:none隐藏滚动条",
+          "status_bar_transparency": "使用rgba()或backdrop-filter实现透明/半透明效果",
+          "navigation_blur": "使用backdrop-filter: blur()实现毛玻璃效果"
         },
         "interaction_features": [
           "模式切换功能",
           "响应式布局",
           "组件复用系统",
-          "页面平铺展示",
-          "iOS风格交互"
+          "纯手机界面平铺展示",
+          "iOS风格交互",
+          "无装饰容器的简洁展示"
         ],
         "component_reuse_requirements": {
           "mandatory_constraint": "【强制组件复用约束】每个界面独立的HTML文件使用组件时，必须通过引入的方式，而不是重写一遍",
-          "implementation_method": "所有组件应创建为独立的HTML文件，各页面通过JavaScript或iframe方式引入",
-          "purpose": "确保组件的复用性和维护性",
-          "prohibited_actions": "严禁在页面中重写组件代码，必须使用引入方式"
+          "implementation_method": "【重要修正】组件必须通过JavaScript fetch()方式引入HTML内容，严禁使用iframe方式",
+          "iframe_prohibition": "【严禁iframe】iframe会产生独立滚动条，完全不符合真实手机界面",
+          "correct_method": "使用fetch()获取组件HTML内容，然后通过innerHTML插入到页面中",
+          "purpose": "确保组件的复用性和维护性，同时保持真实的手机界面体验",
+          "prohibited_actions": "严禁在页面中重写组件代码，严禁使用iframe引入组件"
         },
         "picsum_usage_guide": {
           "basic_usage": "https://picsum.photos/宽度/高度 - 获取随机图像",
@@ -1071,6 +1114,29 @@
             "technology_images": "https://picsum.photos/id/180/400/250 - 科技图片",
             "business_images": "https://picsum.photos/id/7/350/200 - 商务图片"
           },
+          "ios_realistic_css_guide": {
+            "status_bar_styles": {
+              "transparent_light": "background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); color: #000;",
+              "transparent_dark": "background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); color: #fff;",
+              "adaptive": "background: rgba(var(--bg-rgb), 0.95); backdrop-filter: blur(20px); color: var(--text-color);"
+            },
+            "scrollbar_hiding": {
+              "webkit": "::-webkit-scrollbar { display: none; }",
+              "firefox": "scrollbar-width: none;",
+              "combined": "overflow-y: auto; -ms-overflow-style: none; scrollbar-width: none;"
+            },
+            "navigation_blur": {
+              "standard": "background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px);",
+              "dark_mode": "background: rgba(28, 28, 30, 0.8); backdrop-filter: blur(20px);",
+              "colored": "background: rgba(var(--nav-rgb), 0.8); backdrop-filter: blur(20px);"
+            }
+          },
+          "component_loading_guide": {
+            "fetch_method": "async function loadComponent(url, targetId) { const response = await fetch(url); const html = await response.text(); document.getElementById(targetId).innerHTML = html; }",
+            "usage_example": "loadComponent('../components/status-bar.html', 'status-bar-container');",
+            "page_structure": "页面结构：<div id='status-bar-container'></div> <div id='nav-container'></div> <div class='content-area'>主内容</div>",
+            "prohibited": "严禁使用：<iframe src='../components/status-bar.html'></iframe>"
+          },
           "optimization_tips": {
             "loading_performance": "使用适当尺寸避免过大图片影响加载速度",
             "cache_strategy": "使用seed参数确保相同内容使用相同图片",
@@ -1112,6 +1178,9 @@
         "must_follow_ios_design_standards": true,
         "must_use_component_reuse": true,
         "must_enforce_component_reuse_constraint": true,
+        "must_use_pure_mobile_interface": true,
+        "must_prohibit_decorative_containers": true,
+        "must_enforce_clean_display_mode": true,
         "must_restrict_index_content": true,
         "must_implement_responsive_layout": true,
         "must_implement_mode_switching": true,
@@ -1121,6 +1190,14 @@
         "must_simulate_iphone": true,
         "must_distinguish_page_hierarchy": true,
         "must_set_scroll_properties": true,
+        "must_use_realistic_status_bar": true,
+        "must_hide_scrollbars": true,
+        "must_use_native_navigation": true,
+        "must_prohibit_iframe_components": true,
+        "must_use_fetch_for_components": true,
+        "must_have_single_scroll_area": true,
+        "must_use_single_grid_container": true,
+        "must_not_create_multiple_grid_containers": true,
         "must_use_mcp_tools_when_appropriate": true,
         "folder_must_be_properly_structured": true,
         "components_must_be_reusable": true,
