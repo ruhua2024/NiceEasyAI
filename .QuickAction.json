@@ -627,6 +627,11 @@
         "    - 根据业务逻辑自动识别主要模块",
         "    - 为每个模块分配合理的页面数量",
         "    - 生成模块功能描述和页面列表",
+        "19. 【页面层级结构分析】智能分析并分类页面层级：",
+        "    - 一级页面：应用主要入口页面，包含底部导航栏，用户可直接访问",
+        "    - 非一级页面：从一级页面进入的子页面，包含返回按钮，专注特定功能",
+        "    - 根据项目类型和业务逻辑合理分配一级页面数量（通常3-5个）",
+        "    - 为每个一级页面规划对应的非一级页面",
         "【第六阶段：配置展示与确认】",
         "19. 生成完整的project-config.json配置内容",
         "20. 向用户展示智能生成的配置，包括：",
@@ -674,12 +679,52 @@
                 "pages": ["智能生成的页面列表"]
               }
             ]
+          },
+          "pageHierarchy": {
+            "firstLevelPages": "一级页面列表（主要入口页面，通常包含底部导航栏）",
+            "nonFirstLevelPages": "非一级页面列表（子页面、详情页、功能页等，通常包含返回按钮）"
+          }
+        },
+        "page_classification_rules": {
+          "first_level_pages": {
+            "definition": "应用的主要入口页面，用户可以直接从底部导航栏访问",
+            "characteristics": [
+              "包含底部导航栏（nav-bar）",
+              "不包含返回按钮",
+              "通常是各个功能模块的主入口",
+              "用户可以在这些页面之间自由切换"
+            ],
+            "common_examples": [
+              "首页/主页",
+              "分类/发现页",
+              "购物车/工具页",
+              "个人中心/我的页面"
+            ]
+          },
+          "non_first_level_pages": {
+            "definition": "从一级页面进入的子页面，通常用于展示详细信息或执行特定功能",
+            "characteristics": [
+              "包含返回按钮或返回导航",
+              "不包含底部导航栏",
+              "通常从一级页面跳转而来",
+              "专注于特定功能或信息展示"
+            ],
+            "common_examples": [
+              "商品详情页",
+              "用户资料编辑页",
+              "设置页面",
+              "搜索结果页",
+              "订单详情页",
+              "支付页面",
+              "表单填写页"
+            ]
           }
         },
         "analysis_process": [
           "需求理解与项目分析",
           "智能信息生成与用户画像分析",
           "项目规模评估与模块划分",
+          "页面层级结构分析与分类",
           "配置展示与用户确认"
         ],
         "intelligence_features": [
@@ -687,7 +732,8 @@
           "智能用户群体分析",
           "核心功能自动提取",
           "项目规模智能评估",
-          "模块划分自动生成"
+          "模块划分自动生成",
+          "页面层级智能分类"
         ]
       },
       "validation_rules": {
@@ -696,6 +742,9 @@
         "must_follow_template_structure": true,
         "must_perform_intelligent_analysis": true,
         "must_generate_complete_information": true,
+        "must_analyze_page_hierarchy": true,
+        "must_classify_first_level_pages": true,
+        "must_classify_non_first_level_pages": true,
         "must_ask_user_opinion": true,
         "must_support_modifications": true,
         "must_provide_usage_guidance": true,
