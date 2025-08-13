@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活动签到 - 防鸽金</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="phone-screen">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="time">9:41</span>
+      </div>
+      <div class="status-right">
+        <i class="fas fa-signal" style="font-size: 12px;"></i>
+        <i class="fas fa-wifi" style="font-size: 12px;"></i>
+        <div style="display: flex; align-items: center; gap: 2px;">
+          <div style="width: 22px; height: 11px; border: 1px solid #000; border-radius: 2px; position: relative;">
+            <div style="width: 18px; height: 7px; background: #34C759; border-radius: 1px; position: absolute; top: 1px; left: 1px;"></div>
+          </div>
+          <div style="width: 2px; height: 4px; background: #000; border-radius: 1px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+      <a href="#" class="nav-back">
+        <i class="fas fa-chevron-left"></i> 返回
+      </a>
+      <div class="nav-title">活动签到</div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content no-tab">
+      <!-- 活动信息 -->
+      <div class="card text-center">
+        <div style="width: 80px; height: 80px; border-radius: 40px; background: #FFE5E5; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-utensils" style="color: #FF3B30; font-size: 32px;"></i>
+        </div>
+        <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">周末聚餐</h2>
+        <div style="color: #8E8E93; margin-bottom: 4px;">今天 18:00</div>
+        <div style="color: #8E8E93; margin-bottom: 16px;">海底捞王府井店</div>
+        
+        <!-- 倒计时 -->
+        <div style="background: #F8F9FA; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+          <div style="font-size: 12px; color: #8E8E93; margin-bottom: 4px;">距离活动开始还有</div>
+          <div style="font-size: 24px; font-weight: 700; color: #FF3B30;">02:15:30</div>
+        </div>
+      </div>
+
+      <!-- 签到状态 -->
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">签到状态</h3>
+        
+        <!-- 位置检测 -->
+        <div style="background: #E5F5FF; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <i class="fas fa-map-marker-alt" style="color: #007AFF;"></i>
+            <span style="font-weight: 600;">位置检测</span>
+            <span style="background: #34C759; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: auto;">
+              已到达
+            </span>
+          </div>
+          <div style="font-size: 14px; color: #8E8E93;">
+            当前位置：海底捞王府井店附近 (距离目标位置 50米)
+          </div>
+        </div>
+
+        <!-- 时间检测 -->
+        <div style="background: #FFF5E5; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <i class="fas fa-clock" style="color: #FF9500;"></i>
+            <span style="font-weight: 600;">时间检测</span>
+            <span style="background: #FF9500; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: auto;">
+              提前到达
+            </span>
+          </div>
+          <div style="font-size: 14px; color: #8E8E93;">
+            活动将在 2小时15分钟后开始，您可以提前签到
+          </div>
+        </div>
+
+        <!-- 参与者检测 -->
+        <div style="background: #E5F9E5; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <i class="fas fa-users" style="color: #34C759;"></i>
+            <span style="font-weight: 600;">参与者确认</span>
+            <span style="background: #34C759; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin-left: auto;">
+              3/5人已到
+            </span>
+          </div>
+          <div style="font-size: 14px; color: #8E8E93;">
+            已有3位朋友完成签到，还有2位朋友在路上
+          </div>
+        </div>
+      </div>
+
+      <!-- 已签到的朋友 -->
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">已签到朋友</h3>
+        
+        <div style="display: grid; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              张
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">张小明</div>
+              <div style="font-size: 12px; color: #8E8E93;">17:45 签到</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已签到
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              李
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">李小红</div>
+              <div style="font-size: 12px; color: #8E8E93;">17:50 签到</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已签到
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              王
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">王大力</div>
+              <div style="font-size: 12px; color: #8E8E93;">刚刚签到</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已签到
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 签到按钮 -->
+      <div style="position: fixed; bottom: 20px; left: 16px; right: 16px; z-index: 100;">
+        <button class="btn btn-success btn-full" style="padding: 16px; font-size: 18px; font-weight: 600;">
+          <i class="fas fa-check-circle"></i> 确认签到
+        </button>
+        <div style="text-align: center; margin-top: 8px; color: #8E8E93; font-size: 12px;">
+          签到成功后将获得 ¥20 防鸽金退还
+        </div>
+      </div>
+
+      <!-- 底部占位 -->
+      <div style="height: 100px;"></div>
+    </div>
+  </div>
+</body>
+</html>

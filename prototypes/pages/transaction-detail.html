@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>交易详情 - 防鸽金</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="phone-screen">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="time">9:41</span>
+      </div>
+      <div class="status-right">
+        <i class="fas fa-signal" style="font-size: 12px;"></i>
+        <i class="fas fa-wifi" style="font-size: 12px;"></i>
+        <div style="display: flex; align-items: center; gap: 2px;">
+          <div style="width: 22px; height: 11px; border: 1px solid #000; border-radius: 2px; position: relative;">
+            <div style="width: 18px; height: 7px; background: #34C759; border-radius: 1px; position: absolute; top: 1px; left: 1px;"></div>
+          </div>
+          <div style="width: 2px; height: 4px; background: #000; border-radius: 1px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+      <a href="#" class="nav-back">
+        <i class="fas fa-chevron-left"></i> 返回
+      </a>
+      <div class="nav-title">交易详情</div>
+      <a href="#" class="nav-action">
+        <i class="fas fa-share-alt"></i>
+      </a>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content no-tab">
+      <!-- 交易状态 -->
+      <div class="card text-center">
+        <div style="width: 80px; height: 80px; border-radius: 40px; background: #E5F9E5; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-check-circle" style="color: #34C759; font-size: 40px;"></i>
+        </div>
+        <h2 style="font-size: 24px; font-weight: 700; color: #34C759; margin-bottom: 8px;">+¥20.00</h2>
+        <div style="color: #34C759; font-weight: 600; margin-bottom: 4px;">交易成功</div>
+        <div style="color: #8E8E93; font-size: 14px;">防鸽金退还</div>
+      </div>
+
+      <!-- 交易信息 -->
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">交易信息</h3>
+        
+        <div style="display: grid; gap: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #8E8E93;">交易类型</span>
+            <span style="font-weight: 600;">防鸽金退还</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #8E8E93;">交易金额</span>
+            <span style="font-weight: 600; color: #34C759;">+¥20.00</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #8E8E93;">交易时间</span>
+            <span style="font-weight: 600;">2024-01-20 10:30:25</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #8E8E93;">交易单号</span>
+            <span style="font-weight: 600; font-family: monospace;">FGJ20240120103025001</span>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #8E8E93;">交易状态</span>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">
+              已完成
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 关联活动 -->
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">关联活动</h3>
+        
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #F8F9FA; border-radius: 8px;">
+          <div style="width: 50px; height: 50px; border-radius: 25px; background: #FFE5E5; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-utensils" style="color: #FF3B30; font-size: 20px;"></i>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-weight: 600; margin-bottom: 4px;">周末聚餐</div>
+            <div style="font-size: 14px; color: #8E8E93;">2024-01-20 18:00 · 海底捞王府井店</div>
+            <div style="font-size: 12px; color: #8E8E93; margin-top: 4px;">
+              <span style="background: #E5F9E5; color: #34C759; padding: 1px 6px; border-radius: 3px;">
+                已完成
+              </span>
+            </div>
+          </div>
+          <div>
+            <i class="fas fa-chevron-right" style="color: #C6C6C8;"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- 交易流程 -->
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">交易流程</h3>
+        
+        <div style="position: relative;">
+          <!-- 时间线 -->
+          <div style="position: absolute; left: 15px; top: 20px; bottom: 20px; width: 2px; background: #E5E5E5;"></div>
+          
+          <div style="display: grid; gap: 20px;">
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="width: 32px; height: 32px; border-radius: 16px; background: #34C759; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+                <i class="fas fa-check" style="color: white; font-size: 14px;"></i>
+              </div>
+              <div style="flex: 1; padding-top: 4px;">
+                <div style="font-weight: 600; margin-bottom: 2px;">交易完成</div>
+                <div style="font-size: 12px; color: #8E8E93;">2024-01-20 10:30:25</div>
+                <div style="font-size: 14px; color: #8E8E93; margin-top: 4px;">防鸽金已退还到您的钱包</div>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="width: 32px; height: 32px; border-radius: 16px; background: #34C759; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+                <i class="fas fa-check" style="color: white; font-size: 14px;"></i>
+              </div>
+              <div style="flex: 1; padding-top: 4px;">
+                <div style="font-weight: 600; margin-bottom: 2px;">活动签到</div>
+                <div style="font-size: 12px; color: #8E8E93;">2024-01-20 10:15:42</div>
+                <div style="font-size: 14px; color: #8E8E93; margin-top: 4px;">您已成功签到，满足退还条件</div>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="width: 32px; height: 32px; border-radius: 16px; background: #34C759; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+                <i class="fas fa-check" style="color: white; font-size: 14px;"></i>
+              </div>
+              <div style="flex: 1; padding-top: 4px;">
+                <div style="font-weight: 600; margin-bottom: 2px;">活动开始</div>
+                <div style="font-size: 12px; color: #8E8E93;">2024-01-20 18:00:00</div>
+                <div style="font-size: 14px; color: #8E8E93; margin-top: 4px;">活动正式开始，等待签到</div>
+              </div>
+            </div>
+            
+            <div style="display: flex; align-items: flex-start; gap: 12px;">
+              <div style="width: 32px; height: 32px; border-radius: 16px; background: #34C759; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+                <i class="fas fa-check" style="color: white; font-size: 14px;"></i>
+              </div>
+              <div style="flex: 1; padding-top: 4px;">
+                <div style="font-weight: 600; margin-bottom: 2px;">缴纳防鸽金</div>
+                <div style="font-size: 12px; color: #8E8E93;">2024-01-19 09:45:18</div>
+                <div style="font-size: 14px; color: #8E8E93; margin-top: 4px;">您已确认参与活动并缴纳防鸽金</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;">
+        <button class="btn btn-secondary">
+          <i class="fas fa-download"></i> 下载凭证
+        </button>
+        <button class="btn btn-primary">
+          <i class="fas fa-headset"></i> 联系客服
+        </button>
+      </div>
+
+      <!-- 温馨提示 -->
+      <div style="background: #F8F9FA; border-radius: 8px; padding: 12px; margin-top: 20px; border-left: 4px solid #007AFF;">
+        <div style="display: flex; align-items: flex-start; gap: 8px;">
+          <i class="fas fa-info-circle" style="color: #007AFF; margin-top: 2px;"></i>
+          <div>
+            <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">温馨提示</div>
+            <div style="font-size: 12px; color: #8E8E93; line-height: 1.4;">
+              如对此交易有疑问，请在30天内联系客服。交易记录将永久保存，您可随时查看。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

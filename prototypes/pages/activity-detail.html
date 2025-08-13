@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活动详情 - 防鸽金</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="phone-screen">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="time">9:41</span>
+      </div>
+      <div class="status-right">
+        <i class="fas fa-signal" style="font-size: 12px;"></i>
+        <i class="fas fa-wifi" style="font-size: 12px;"></i>
+        <div style="display: flex; align-items: center; gap: 2px;">
+          <div style="width: 22px; height: 11px; border: 1px solid #000; border-radius: 2px; position: relative;">
+            <div style="width: 18px; height: 7px; background: #34C759; border-radius: 1px; position: absolute; top: 1px; left: 1px;"></div>
+          </div>
+          <div style="width: 2px; height: 4px; background: #000; border-radius: 1px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="nav-bar">
+      <a href="#" class="nav-back">
+        <i class="fas fa-chevron-left"></i> 返回
+      </a>
+      <div class="nav-title">活动详情</div>
+      <a href="#" class="nav-action">
+        <i class="fas fa-ellipsis-h"></i>
+      </a>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content no-tab">
+      <!-- 活动头图 -->
+      <div style="margin: -16px -16px 16px -16px;">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=200&fit=crop" 
+             style="width: 100%; height: 200px; object-fit: cover;" alt="聚餐">
+      </div>
+
+      <!-- 活动基本信息 -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <h1 style="font-size: 24px; font-weight: 700; flex: 1;">周末聚餐</h1>
+          <span style="background: #FFE5E5; color: #FF3B30; padding: 4px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; white-space: nowrap; margin-left: 12px;">
+            待签到
+          </span>
+        </div>
+
+        <div style="color: #8E8E93; margin-bottom: 16px; line-height: 1.5;">
+          大家一起去海底捞吃火锅，聊聊天放松一下。记得提前到哦，不要迟到！
+        </div>
+
+        <!-- 活动信息 -->
+        <div style="display: grid; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-calendar-alt" style="color: #007AFF; width: 20px;"></i>
+            <span>明天 18:00</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-map-marker-alt" style="color: #007AFF; width: 20px;"></i>
+            <span>海底捞王府井店</span>
+            <a href="#" style="color: #007AFF; margin-left: auto; font-size: 14px;">导航</a>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-coins" style="color: #007AFF; width: 20px;"></i>
+            <span>防鸽金 ¥20</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <i class="fas fa-user" style="color: #007AFF; width: 20px;"></i>
+            <span>创建者：张小明</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 参与状态 -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="font-size: 18px; font-weight: 600;">参与情况</h3>
+          <span style="color: #8E8E93; font-size: 14px;">5/8人</span>
+        </div>
+
+        <!-- 进度条 -->
+        <div style="background: #F2F2F7; height: 8px; border-radius: 4px; margin-bottom: 16px; overflow: hidden;">
+          <div style="background: #007AFF; height: 100%; width: 62.5%; border-radius: 4px;"></div>
+        </div>
+
+        <!-- 参与者列表 -->
+        <div style="display: grid; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              张
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">张小明</div>
+              <div style="font-size: 12px; color: #8E8E93;">创建者</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已确认
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              李
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">李小红</div>
+              <div style="font-size: 12px; color: #8E8E93;">2分钟前确认</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已确认
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              王
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">王大力</div>
+              <div style="font-size: 12px; color: #8E8E93;">10分钟前确认</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已确认
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              赵
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">赵小美</div>
+              <div style="font-size: 12px; color: #8E8E93;">1小时前确认</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已确认
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
+              刘
+            </div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">刘小强</div>
+              <div style="font-size: 12px; color: #8E8E93;">刚刚确认</div>
+            </div>
+            <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+              已确认
+            </span>
+          </div>
+        </div>
+
+        <!-- 邀请更多人 -->
+        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #F2F2F7;">
+          <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #007AFF;">
+            <div style="width: 40px; height: 40px; border-radius: 20px; border: 2px dashed #007AFF; display: flex; align-items: center; justify-content: center;">
+              <i class="fas fa-plus"></i>
+            </div>
+            <span style="font-weight: 600;">邀请更多朋友</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 活动规则 -->
+      <div class="card">
+        <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">活动规则</h3>
+        <div style="background: #F8F9FA; border-radius: 8px; padding: 12px;">
+          <ul style="font-size: 14px; color: #8E8E93; line-height: 1.6; padding-left: 16px;">
+            <li>活动开始前需要缴纳¥20防鸽金</li>
+            <li>按时参与活动将获得防鸽金退还</li>
+            <li>活动开始前2小时内不可取消参与</li>
+            <li>爽约者的防鸽金将分配给其他参与者</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div style="position: fixed; bottom: 20px; left: 16px; right: 16px; z-index: 100;">
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary" style="flex: 1; padding: 16px;">
+            <i class="fas fa-share-alt"></i> 分享
+          </button>
+          <button class="btn btn-primary" style="flex: 2; padding: 16px;">
+            <i class="fas fa-check"></i> 确认参与 (¥20)
+          </button>
+        </div>
+      </div>
+
+      <!-- 底部占位 -->
+      <div style="height: 80px;"></div>
+    </div>
+  </div>
+</body>
+</html>

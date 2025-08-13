@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的活动 - 防鸽金</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="phone-screen">
+    <!-- 状态栏 -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="time">9:41</span>
+      </div>
+      <div class="status-right">
+        <i class="fas fa-signal" style="font-size: 12px;"></i>
+        <i class="fas fa-wifi" style="font-size: 12px;"></i>
+        <div style="display: flex; align-items: center; gap: 2px;">
+          <div style="width: 22px; height: 11px; border: 1px solid #000; border-radius: 2px; position: relative;">
+            <div style="width: 18px; height: 7px; background: #34C759; border-radius: 1px; position: absolute; top: 1px; left: 1px;"></div>
+          </div>
+          <div style="width: 2px; height: 4px; background: #000; border-radius: 1px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="content">
+      <!-- 页面标题 -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h1 style="font-size: 28px; font-weight: 700;">我的活动</h1>
+        <a href="#" class="btn btn-primary" style="padding: 8px 16px; font-size: 14px;">
+          <i class="fas fa-plus"></i> 创建
+        </a>
+      </div>
+
+      <!-- 筛选标签 -->
+      <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 4px;">
+        <span style="background: #007AFF; color: white; padding: 6px 12px; border-radius: 16px; font-size: 14px; white-space: nowrap;">
+          全部
+        </span>
+        <span style="background: #F2F2F7; color: #8E8E93; padding: 6px 12px; border-radius: 16px; font-size: 14px; white-space: nowrap;">
+          我创建的
+        </span>
+        <span style="background: #F2F2F7; color: #8E8E93; padding: 6px 12px; border-radius: 16px; font-size: 14px; white-space: nowrap;">
+          我参与的
+        </span>
+        <span style="background: #F2F2F7; color: #8E8E93; padding: 6px 12px; border-radius: 16px; font-size: 14px; white-space: nowrap;">
+          已完成
+        </span>
+      </div>
+
+      <!-- 活动列表 -->
+      <div class="card">
+        <div class="list-item" style="padding: 16px 0;">
+          <div class="list-icon" style="background: #FFE5E5; width: 50px; height: 50px; border-radius: 25px;">
+            <i class="fas fa-utensils" style="color: #FF3B30; font-size: 20px;"></i>
+          </div>
+          <div class="list-content">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+              <div class="list-title" style="font-size: 16px;">周末聚餐</div>
+              <span style="background: #FFE5E5; color: #FF3B30; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                待签到
+              </span>
+            </div>
+            <div class="list-subtitle" style="margin-bottom: 8px;">明天 18:00 · 海底捞王府井店</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-users"></i> 5/8人
+                </span>
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-coins"></i> ¥20
+                </span>
+              </div>
+              <div style="font-size: 12px; color: #8E8E93;">我创建的</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="list-item" style="padding: 16px 0;">
+          <div class="list-icon" style="background: #E5F5FF; width: 50px; height: 50px; border-radius: 25px;">
+            <i class="fas fa-film" style="color: #007AFF; font-size: 20px;"></i>
+          </div>
+          <div class="list-content">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+              <div class="list-title" style="font-size: 16px;">看电影</div>
+              <span style="background: #E5F5FF; color: #007AFF; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                已确认
+              </span>
+            </div>
+            <div class="list-subtitle" style="margin-bottom: 8px;">下周六 19:30 · 万达影城</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-users"></i> 4/4人
+                </span>
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-coins"></i> ¥15
+                </span>
+              </div>
+              <div style="font-size: 12px; color: #8E8E93;">我参与的</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="list-item" style="padding: 16px 0;">
+          <div class="list-icon" style="background: #E5F9E5; width: 50px; height: 50px; border-radius: 25px;">
+            <i class="fas fa-hiking" style="color: #34C759; font-size: 20px;"></i>
+          </div>
+          <div class="list-content">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+              <div class="list-title" style="font-size: 16px;">爬山活动</div>
+              <span style="background: #E5F9E5; color: #34C759; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                已完成
+              </span>
+            </div>
+            <div class="list-subtitle" style="margin-bottom: 8px;">上周日 08:00 · 香山公园</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-users"></i> 6/6人
+                </span>
+                <span style="font-size: 12px; color: #34C759;">
+                  <i class="fas fa-coins"></i> +¥10
+                </span>
+              </div>
+              <div style="font-size: 12px; color: #8E8E93;">我创建的</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="list-item" style="padding: 16px 0;">
+          <div class="list-icon" style="background: #FFF5E5; width: 50px; height: 50px; border-radius: 25px;">
+            <i class="fas fa-gamepad" style="color: #FF9500; font-size: 20px;"></i>
+          </div>
+          <div class="list-content">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px;">
+              <div class="list-title" style="font-size: 16px;">剧本杀</div>
+              <span style="background: #FFF5E5; color: #FF9500; padding: 2px 8px; border-radius: 4px; font-size: 12px;">
+                进行中
+              </span>
+            </div>
+            <div class="list-subtitle" style="margin-bottom: 8px;">今天 14:00 · 谜城剧本杀</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-users"></i> 6/6人
+                </span>
+                <span style="font-size: 12px; color: #8E8E93;">
+                  <i class="fas fa-coins"></i> ¥25
+                </span>
+              </div>
+              <div style="font-size: 12px; color: #8E8E93;">我参与的</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 空状态提示 -->
+      <div style="text-align: center; margin-top: 40px; color: #8E8E93;">
+        <i class="fas fa-calendar-plus" style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+        <div style="font-size: 16px; margin-bottom: 8px;">暂无更多活动</div>
+        <div style="font-size: 14px;">创建一个新活动，邀请朋友参与吧</div>
+      </div>
+    </div>
+
+    <!-- 底部导航栏 -->
+    <div class="tab-bar">
+      <a href="#" class="tab-item">
+        <i class="fas fa-home tab-icon"></i>
+        <span>首页</span>
+      </a>
+      <a href="#" class="tab-item active">
+        <i class="fas fa-calendar-alt tab-icon"></i>
+        <span>我的活动</span>
+      </a>
+      <a href="#" class="tab-item">
+        <i class="fas fa-wallet tab-icon"></i>
+        <span>钱包</span>
+      </a>
+      <a href="#" class="tab-item">
+        <i class="fas fa-user tab-icon"></i>
+        <span>我的</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
