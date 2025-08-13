@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>设置页面 - 防鸽金</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+    
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .main-content {
+      padding-top: 100px; /* 状态栏44px + 返回按钮/页面标题56px */
+      padding-bottom: 80px;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%);
+    }
+    
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 28px;
+      background: #ccc;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .toggle-switch.active {
+      background: #2A9D8F;
+    }
+    
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    
+    .toggle-switch.active::after {
+      transform: translateX(22px);
+    }
+  </style>
+</head>
+<body>
+  <!-- 状态栏容器 -->
+  <div id="status-bar-container"></div>
+  
+  <!-- 返回按钮容器 -->
+  <div id="back-button-container"></div>
+  
+  <!-- 页面标题容器 -->
+  <div id="page-title-container"></div>
+  
+  <!-- 主要内容区域 -->
+  <div class="main-content">
+    <!-- 通知设置 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4" style="color: #264653;">通知设置</h3>
+        
+        <div class="space-y-4">
+          <!-- 邀约通知 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-bell w-5 text-center" style="color: #2A9D8F;"></i>
+              <div>
+                <p style="color: #264653;">邀约通知</p>
+                <p class="text-xs" style="color: #666;">接收新邀约和邀约更新通知</p>
+              </div>
+            </div>
+            <div class="toggle-switch active" data-setting="invitation-notification"></div>
+          </div>
+          
+          <!-- 押金提醒 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-coins w-5 text-center" style="color: #2A9D8F;"></i>
+              <div>
+                <p style="color: #264653;">押金提醒</p>
+                <p class="text-xs" style="color: #666;">押金缴纳和退还提醒</p>
+              </div>
+            </div>
+            <div class="toggle-switch active" data-setting="deposit-reminder"></div>
+          </div>
+          
+          <!-- 活动提醒 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-calendar-check w-5 text-center" style="color: #2A9D8F;"></i>
+              <div>
+                <p style="color: #264653;">活动提醒</p>
+                <p class="text-xs" style="color: #666;">活动开始前30分钟提醒</p>
+              </div>
+            </div>
+            <div class="toggle-switch active" data-setting="activity-reminder"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 隐私设置 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4" style="color: #264653;">隐私设置</h3>
+        
+        <div class="space-y-4">
+          <!-- 个人资料可见性 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-user-shield w-5 text-center" style="color: #2A9D8F;"></i>
+              <div>
+                <p style="color: #264653;">个人资料可见性</p>
+                <p class="text-xs" style="color: #666;">允许其他用户查看我的资料</p>
+              </div>
+            </div>
+            <div class="toggle-switch active" data-setting="profile-visibility"></div>
+          </div>
+          
+          <!-- 信用记录可见性 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-star-half-alt w-5 text-center" style="color: #2A9D8F;"></i>
+              <div>
+                <p style="color: #264653;">信用记录可见性</p>
+                <p class="text-xs" style="color: #666;">允许其他用户查看我的信用记录</p>
+              </div>
+            </div>
+            <div class="toggle-switch" data-setting="credit-visibility"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 账户设置 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4" style="color: #264653;">账户设置</h3>
+        
+        <div class="space-y-4">
+          <!-- 修改密码 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-key w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">修改密码</span>
+            </div>
+            <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+          </div>
+          
+          <!-- 绑定手机 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-mobile-alt w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">绑定手机</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-sm" style="color: #2A9D8F;">已绑定</span>
+              <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+            </div>
+          </div>
+          
+          <!-- 实名认证 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-id-card w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">实名认证</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-sm" style="color: #2A9D8F;">已认证</span>
+              <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+            </div>
+          </div>
+          
+          <!-- 注销账户 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-user-times w-5 text-center" style="color: #E76F51;"></i>
+              <span style="color: #E76F51;">注销账户</span>
+            </div>
+            <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 其他设置 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4" style="color: #264653;">其他设置</h3>
+        
+        <div class="space-y-4">
+          <!-- 清除缓存 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-broom w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">清除缓存</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-sm" style="color: #666;">23.5MB</span>
+              <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+            </div>
+          </div>
+          
+          <!-- 关于我们 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-info-circle w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">关于我们</span>
+            </div>
+            <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+          </div>
+          
+          <!-- 用户协议 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-file-contract w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">用户协议</span>
+            </div>
+            <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+          </div>
+          
+          <!-- 隐私政策 -->
+          <div class="flex items-center justify-between py-3 border-b border-gray-100">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-shield-alt w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">隐私政策</span>
+            </div>
+            <i class="fas fa-chevron-right text-sm" style="color: #ccc;"></i>
+          </div>
+          
+          <!-- 版本信息 -->
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3">
+              <i class="fas fa-code-branch w-5 text-center" style="color: #2A9D8F;"></i>
+              <span style="color: #264653;">版本信息</span>
+            </div>
+            <span class="text-sm" style="color: #666;">v1.0.0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 退出登录按钮 -->
+    <div class="px-4">
+      <button class="w-full py-4 rounded-2xl text-lg font-semibold shadow-lg" 
+              style="background: #E76F51; color: white;">
+        退出登录
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // 加载组件
+    async function loadComponent(url, targetId) {
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
+        document.getElementById(targetId).innerHTML = html;
+        
+        // 如果是页面标题组件，立即设置标题
+        if (targetId === 'page-title-container') {
+          setTimeout(() => {
+            const titleElement = document.getElementById('main-page-title');
+            if (titleElement) {
+              titleElement.textContent = '设置页面';
+              console.log('标题已设置为：设置页面');
+            }
+            // 隐藏功能按钮
+            const buttonsContainer = document.querySelector('.absolute.right-4');
+            if (buttonsContainer) {
+              buttonsContainer.style.display = 'none';
+            }
+          }, 50);
+        }
+      } catch (error) {
+        console.error('加载组件失败:', error);
+      }
+    }
+    
+    // 页面加载完成后加载组件
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadComponent('../components/status-bar.html', 'status-bar-container');
+      await loadComponent('../components/back-button.html', 'back-button-container');
+      await loadComponent('../components/page-title.html', 'page-title-container');
+      
+      // 开关切换功能
+      const toggleSwitches = document.querySelectorAll('.toggle-switch');
+      toggleSwitches.forEach(toggle => {
+        toggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const setting = this.dataset.setting;
+          const isActive = this.classList.contains('active');
+          console.log(`${setting}: ${isActive ? '开启' : '关闭'}`);
+        });
+      });
+      
+      // 设置项点击事件
+      const settingItems = document.querySelectorAll('.fa-chevron-right').map(icon => icon.closest('.flex'));
+      settingItems.forEach(item => {
+        if (item) {
+          item.addEventListener('click', function() {
+            const text = this.querySelector('span').textContent;
+            console.log(`点击设置项: ${text}`);
+            
+            // 特殊处理
+            if (text === '注销账户') {
+              if (confirm('确定要注销账户吗？此操作不可恢复。')) {
+                console.log('用户确认注销账户');
+              }
+            } else if (text === '清除缓存') {
+              if (confirm('确定要清除缓存吗？')) {
+                console.log('清除缓存完成');
+                alert('缓存已清除！');
+              }
+            }
+          });
+        }
+      });
+      
+      // 退出登录按钮
+      const logoutBtn = document.querySelector('button:contains("退出登录")');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+          if (confirm('确定要退出登录吗？')) {
+            console.log('用户退出登录');
+            alert('已退出登录！');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

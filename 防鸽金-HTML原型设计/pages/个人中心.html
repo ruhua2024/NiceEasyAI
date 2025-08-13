@@ -97,14 +97,14 @@
         <div class="p-4 border-b border-gray-100">
           <h4 class="text-sm font-semibold text-gray-500 mb-3">邀约管理</h4>
           <div class="space-y-3">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between nav-item" data-page="我的邀约">
               <div class="flex items-center space-x-3">
                 <i class="fas fa-calendar-check text-lg" style="color: #2A9D8F;"></i>
                 <span class="font-medium" style="color: #264653;">我的邀约</span>
               </div>
               <i class="fas fa-chevron-right text-gray-400"></i>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between nav-item">
               <div class="flex items-center space-x-3">
                 <i class="fas fa-users text-lg" style="color: #E9C46A;"></i>
                 <span class="font-medium" style="color: #264653;">参与记录</span>
@@ -118,14 +118,21 @@
         <div class="p-4 border-b border-gray-100">
           <h4 class="text-sm font-semibold text-gray-500 mb-3">账户管理</h4>
           <div class="space-y-3">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between nav-item" data-page="个人资料">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-user-edit text-lg" style="color: #F4A261;"></i>
+                <span class="font-medium" style="color: #264653;">个人资料</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="flex items-center justify-between nav-item" data-page="资金明细">
               <div class="flex items-center space-x-3">
                 <i class="fas fa-wallet text-lg" style="color: #264653;"></i>
                 <span class="font-medium" style="color: #264653;">资金明细</span>
               </div>
               <i class="fas fa-chevron-right text-gray-400"></i>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between nav-item">
               <div class="flex items-center space-x-3">
                 <i class="fas fa-shield-alt text-lg" style="color: #2A9D8F;"></i>
                 <span class="font-medium" style="color: #264653;">安全设置</span>
@@ -139,7 +146,7 @@
         <div class="p-4">
           <h4 class="text-sm font-semibold text-gray-500 mb-3">其他</h4>
           <div class="space-y-3">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between nav-item" data-page="设置页面">
               <div class="flex items-center space-x-3">
                 <i class="fas fa-cog text-lg" style="color: #E76F51;"></i>
                 <span class="font-medium" style="color: #264653;">设置</span>
@@ -193,6 +200,21 @@
           window.setMainPageTitle('个人中心');
         }
       }, 100);
+
+      // 导航功能
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const pageName = this.dataset.page;
+          if (pageName) {
+            console.log(`导航到: ${pageName}`);
+            // 跳转到对应页面
+            window.location.href = `${pageName}.html`;
+          } else {
+            console.log('功能开发中...');
+          }
+        });
+      });
     });
   </script>
 </body>
