@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>押金管理</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #2A9D8F 0%, #264653 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            padding-top: 124px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+        }
+        
+        .balance-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 24px;
+            margin: 16px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+        
+        .transaction-item {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            margin: 8px 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: between;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin: 16px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .icon-deposit {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .icon-refund {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .icon-penalty {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--neutral-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 余额卡片 -->
+        <div class="balance-card">
+            <div class="text-center">
+                <p class="text-sm text-gray-600 mb-2">押金余额</p>
+                <h1 class="text-4xl font-bold mb-4" style="color: var(--primary-color)">¥128.50</h1>
+                <div class="flex justify-around text-center">
+                    <div>
+                        <p class="text-2xl font-bold" style="color: var(--secondary-color)">3</p>
+                        <p class="text-xs text-gray-600">进行中</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold" style="color: var(--accent-color)">12</p>
+                        <p class="text-xs text-gray-600">已完成</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold" style="color: var(--neutral-dark)">1</p>
+                        <p class="text-xs text-gray-600">违约次数</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 操作按钮 -->
+        <div class="action-buttons">
+            <button class="action-btn btn-primary">
+                <i class="fas fa-plus mb-2"></i>
+                <div>充值</div>
+            </button>
+            <button class="action-btn btn-secondary">
+                <i class="fas fa-minus mb-2"></i>
+                <div>提现</div>
+            </button>
+        </div>
+        
+        <!-- 交易记录标题 -->
+        <div class="px-4 py-2">
+            <h3 class="text-lg font-bold text-white">交易记录</h3>
+        </div>
+        
+        <!-- 交易记录列表 -->
+        <div class="transaction-list">
+            <!-- 押金支付 -->
+            <div class="transaction-item">
+                <div class="transaction-icon icon-deposit">
+                    <i class="fas fa-arrow-down"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">周末爬山活动</p>
+                    <p class="text-sm text-gray-500">押金支付 · 今天 14:30</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-red-500">-¥50.00</p>
+                    <p class="text-xs text-gray-500">冻结中</p>
+                </div>
+            </div>
+            
+            <!-- 押金退还 -->
+            <div class="transaction-item">
+                <div class="transaction-icon icon-refund">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">火锅聚餐</p>
+                    <p class="text-sm text-gray-500">押金退还 · 昨天 20:15</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold" style="color: var(--secondary-color)">+¥30.00</p>
+                    <p class="text-xs text-gray-500">已到账</p>
+                </div>
+            </div>
+            
+            <!-- 违约扣除 -->
+            <div class="transaction-item">
+                <div class="transaction-icon icon-penalty">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">KTV聚会</p>
+                    <p class="text-sm text-gray-500">违约扣除 · 3天前 19:00</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-red-500">-¥25.00</p>
+                    <p class="text-xs text-gray-500">已扣除</p>
+                </div>
+            </div>
+            
+            <!-- 充值记录 -->
+            <div class="transaction-item">
+                <div class="transaction-icon icon-refund">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">账户充值</p>
+                    <p class="text-sm text-gray-500">微信支付 · 5天前 10:20</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold" style="color: var(--secondary-color)">+¥100.00</p>
+                    <p class="text-xs text-gray-500">已到账</p>
+                </div>
+            </div>
+            
+            <!-- 押金支付 -->
+            <div class="transaction-item">
+                <div class="transaction-icon icon-deposit">
+                    <i class="fas fa-arrow-down"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">电影观看</p>
+                    <p class="text-sm text-gray-500">押金支付 · 1周前 16:45</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-red-500">-¥20.00</p>
+                    <p class="text-xs text-gray-500">冻结中</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div id="bottom-nav"></div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 页面加载完成后加载组件
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('bottom-nav', 'bottom-nav.html');
+        });
+    </script>
+</body>
+</html>

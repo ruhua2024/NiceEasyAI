@@ -1,0 +1,99 @@
+<!-- 底部导航栏组件 - 毛玻璃效果，仅一级页面使用 -->
+<div class="bottom-nav">
+  <div class="nav-content">
+    <div class="nav-item active" data-page="邀约首页">
+      <i class="fas fa-calendar-alt nav-icon"></i>
+      <span class="nav-label">邀约</span>
+    </div>
+    <div class="nav-item" data-page="押金管理">
+      <i class="fas fa-wallet nav-icon"></i>
+      <span class="nav-label">押金</span>
+    </div>
+    <div class="nav-item" data-page="个人中心">
+      <i class="fas fa-user nav-icon"></i>
+      <span class="nav-label">我的</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding: 8px 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+}
+
+.nav-item:hover {
+  transform: scale(1.05);
+}
+
+.nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  color: #999999;
+  transition: color 0.2s ease;
+}
+
+.nav-label {
+  font-size: 12px;
+  color: #999999;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-item.active .nav-icon,
+.nav-item.active .nav-label {
+  color: #264653;
+}
+
+.nav-item.active .nav-icon {
+  transform: scale(1.1);
+}
+</style>
+
+<script>
+// 导航切换逻辑
+document.addEventListener('DOMContentLoaded', function() {
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    item.addEventListener('click', function() {
+      // 移除所有active状态
+      navItems.forEach(nav => nav.classList.remove('active'));
+      // 添加当前active状态
+      this.classList.add('active');
+      
+      // 这里可以添加页面切换逻辑
+      const pageName = this.dataset.page;
+      console.log('切换到页面:', pageName);
+    });
+  });
+});
+</script>

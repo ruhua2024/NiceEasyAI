@@ -1,0 +1,67 @@
+<!-- 页面标题组件 - 设计限制：必须支持传入页面标题文字参数 -->
+<div class="page-title-container">
+  <div class="page-title">
+    <h1 id="title-text">页面标题</h1>
+  </div>
+</div>
+
+<style>
+.page-title-container {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 60px; /* 左右留出返回按钮和其他按钮的空间 */
+}
+
+.page-title {
+  text-align: center;
+  flex: 1;
+}
+
+#title-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #264653;
+  margin: 0;
+  line-height: 1.2;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+</style>
+
+<script>
+// 动态设置页面标题
+function setPageTitle(title) {
+  const titleElement = document.getElementById('title-text');
+  if (titleElement) {
+    titleElement.textContent = title;
+  }
+}
+
+// 页面加载时自动设置标题（从页面文件名获取）
+document.addEventListener('DOMContentLoaded', function() {
+  // 尝试从父页面获取标题信息
+  try {
+    const pageName = window.parent.document.title || '页面标题';
+    setPageTitle(pageName);
+  } catch (e) {
+    // 如果无法获取，保持默认标题
+    console.log('无法获取页面标题，使用默认标题');
+  }
+});
+
+// 导出设置标题的函数供外部调用
+window.setPageTitle = setPageTitle;
+</script>

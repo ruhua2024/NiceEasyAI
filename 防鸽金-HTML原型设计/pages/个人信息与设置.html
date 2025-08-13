@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息与设置</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #E9C46A 0%, #F4A261 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        
+        .main-content {
+            padding-top: 120px;
+            padding-bottom: 40px;
+            min-height: 100vh;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            padding: 20px 24px 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .profile-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: background 0.2s ease;
+        }
+        
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+        
+        .profile-item:hover {
+            background: rgba(38, 70, 83, 0.05);
+        }
+        
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 16px;
+        }
+        
+        .icon-avatar {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .icon-name {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .icon-phone {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--neutral-dark);
+        }
+        
+        .icon-email {
+            background: rgba(38, 70, 83, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .icon-notification {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .icon-privacy {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .icon-about {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--neutral-dark);
+        }
+        
+        .icon-logout {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+        
+        .profile-content {
+            flex: 1;
+        }
+        
+        .profile-label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .profile-value {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .profile-arrow {
+            color: #ccc;
+        }
+        
+        .avatar-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .current-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #ccc;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .switch.active {
+            background: var(--secondary-color);
+        }
+        
+        .switch-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .switch.active .switch-thumb {
+            transform: translateX(22px);
+        }
+        
+        .version-info {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .logout-btn {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0000;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(255, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 返回按钮 -->
+    <div id="back-button"></div>
+    
+    <!-- 页面标题 -->
+    <div id="page-title"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 个人信息 -->
+        <div class="section">
+            <div class="section-header">
+                <h3 class="section-title">个人信息</h3>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-avatar">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <div class="avatar-section">
+                    <div>
+                        <div class="profile-label">头像</div>
+                        <div class="profile-value">点击更换头像</div>
+                    </div>
+                    <img src="https://picsum.photos/60/60?random=100" alt="头像" class="current-avatar">
+                </div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-name">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">昵称</div>
+                    <div class="profile-value">张小明</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-phone">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">手机号</div>
+                    <div class="profile-value">138****8888</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-email">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">邮箱</div>
+                    <div class="profile-value">zhang***@example.com</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+        </div>
+        
+        <!-- 系统设置 -->
+        <div class="section">
+            <div class="section-header">
+                <h3 class="section-title">系统设置</h3>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-notification">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="switch-container">
+                    <div>
+                        <div class="profile-label">推送通知</div>
+                        <div class="profile-value">接收活动和押金相关通知</div>
+                    </div>
+                    <div class="switch active" onclick="toggleSwitch(this)">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-notification">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <div class="switch-container">
+                    <div>
+                        <div class="profile-label">声音提醒</div>
+                        <div class="profile-value">新消息声音提醒</div>
+                    </div>
+                    <div class="switch" onclick="toggleSwitch(this)">
+                        <div class="switch-thumb"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-privacy">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">隐私设置</div>
+                    <div class="profile-value">管理个人信息可见性</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-about">
+                    <i class="fas fa-key"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">修改密码</div>
+                    <div class="profile-value">更改登录密码</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+        </div>
+        
+        <!-- 其他设置 -->
+        <div class="section">
+            <div class="section-header">
+                <h3 class="section-title">其他</h3>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-about">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">用户协议</div>
+                    <div class="profile-value">查看服务条款</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-about">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">帮助中心</div>
+                    <div class="profile-value">常见问题和使用指南</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-icon icon-about">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">评价应用</div>
+                    <div class="profile-value">在应用商店给我们评分</div>
+                </div>
+                <i class="fas fa-chevron-right profile-arrow"></i>
+            </div>
+        </div>
+        
+        <!-- 退出登录 -->
+        <div class="section">
+            <div class="profile-item logout-btn">
+                <div class="profile-icon icon-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-label">退出登录</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 版本信息 -->
+        <div class="version-info">
+            防鸽金 v1.0.0
+        </div>
+    </div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                // 如果是页面标题组件，设置标题
+                if (elementId === 'page-title') {
+                    setTimeout(() => {
+                        if (window.setPageTitle) {
+                            window.setPageTitle('个人信息与设置');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 开关切换
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+        
+        // 页面加载完成后加载组件
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('back-button', 'back-button.html');
+            await loadComponent('page-title', 'page-title.html');
+        });
+    </script>
+</body>
+</html>

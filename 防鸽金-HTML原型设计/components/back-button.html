@@ -1,0 +1,53 @@
+<!-- 返回按钮组件 - 设计限制：只包含一个返回按钮，不得添加其他元素 -->
+<div class="back-button-container">
+  <button class="back-btn" onclick="history.back()">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+</div>
+
+<style>
+.back-button-container {
+  position: fixed;
+  top: 44px;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #264653;
+}
+
+.back-btn:hover {
+  background: rgba(38, 70, 83, 0.1);
+  transform: scale(1.05);
+}
+
+.back-btn:active {
+  transform: scale(0.95);
+  background: rgba(38, 70, 83, 0.2);
+}
+
+.back-btn i {
+  font-size: 18px;
+  font-weight: 600;
+}
+</style>

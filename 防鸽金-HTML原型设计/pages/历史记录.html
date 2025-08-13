@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史记录</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #264653 0%, #2A9D8F 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        
+        .main-content {
+            padding-top: 120px;
+            padding-bottom: 40px;
+            min-height: 100vh;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 16px;
+            padding: 8px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .filter-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #666;
+        }
+        
+        .filter-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .history-item {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            margin: 12px 16px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .history-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .history-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .history-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+        
+        .history-date {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        
+        .status-completed {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .status-cancelled {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--neutral-dark);
+        }
+        
+        .status-violated {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+        }
+        
+        .history-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+        
+        .detail-group {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .detail-item {
+            text-align: center;
+        }
+        
+        .detail-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+        
+        .detail-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .history-action {
+            padding: 8px 16px;
+            background: rgba(38, 70, 83, 0.1);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .history-action:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .organizer-info {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .organizer-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            margin-right: 8px;
+        }
+        
+        .organizer-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .organizer-role {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .stats-summary {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 16px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 返回按钮 -->
+    <div id="back-button"></div>
+    
+    <!-- 页面标题 -->
+    <div id="page-title"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 统计摘要 -->
+        <div class="stats-summary">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">15</div>
+                    <div class="stat-label">总参与</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">98%</div>
+                    <div class="stat-label">守约率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">发起活动</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 筛选标签 -->
+        <div class="filter-tabs">
+            <div class="filter-tab active" onclick="switchTab(this, 'all')">全部</div>
+            <div class="filter-tab" onclick="switchTab(this, 'completed')">已完成</div>
+            <div class="filter-tab" onclick="switchTab(this, 'cancelled')">已取消</div>
+            <div class="filter-tab" onclick="switchTab(this, 'violated')">违约</div>
+        </div>
+        
+        <!-- 历史记录列表 -->
+        <div class="history-list" id="historyList">
+            <!-- 已完成活动 -->
+            <div class="history-item" data-status="completed">
+                <div class="history-header">
+                    <div>
+                        <div class="history-title">火锅聚餐</div>
+                        <div class="history-date">2024年1月15日 18:30</div>
+                    </div>
+                    <span class="status-badge status-completed">已完成</span>
+                </div>
+                <div class="organizer-info">
+                    <img src="https://picsum.photos/32/32?random=2" alt="发起人" class="organizer-avatar">
+                    <div>
+                        <div class="organizer-name">李小红</div>
+                        <div class="organizer-role">发起人</div>
+                    </div>
+                </div>
+                <div class="history-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-value">¥30</div>
+                            <div class="detail-label">押金</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">6/6人</div>
+                            <div class="detail-label">参与</div>
+                        </div>
+                    </div>
+                    <button class="history-action">查看详情</button>
+                </div>
+            </div>
+            
+            <!-- 违约活动 -->
+            <div class="history-item" data-status="violated">
+                <div class="history-header">
+                    <div>
+                        <div class="history-title">KTV聚会</div>
+                        <div class="history-date">2024年1月10日 19:00</div>
+                    </div>
+                    <span class="status-badge status-violated">违约</span>
+                </div>
+                <div class="organizer-info">
+                    <img src="https://picsum.photos/32/32?random=6" alt="发起人" class="organizer-avatar">
+                    <div>
+                        <div class="organizer-name">陈小华</div>
+                        <div class="organizer-role">发起人</div>
+                    </div>
+                </div>
+                <div class="history-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-value">¥25</div>
+                            <div class="detail-label">扣除</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">4/5人</div>
+                            <div class="detail-label">参与</div>
+                        </div>
+                    </div>
+                    <button class="history-action">申诉</button>
+                </div>
+            </div>
+            
+            <!-- 已完成活动 -->
+            <div class="history-item" data-status="completed">
+                <div class="history-header">
+                    <div>
+                        <div class="history-title">周末看电影</div>
+                        <div class="history-date">2024年1月8日 14:30</div>
+                    </div>
+                    <span class="status-badge status-completed">已完成</span>
+                </div>
+                <div class="organizer-info">
+                    <img src="https://picsum.photos/32/32?random=100" alt="发起人" class="organizer-avatar">
+                    <div>
+                        <div class="organizer-name">张小明</div>
+                        <div class="organizer-role">我发起的</div>
+                    </div>
+                </div>
+                <div class="history-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-value">¥20</div>
+                            <div class="detail-label">押金</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">4/4人</div>
+                            <div class="detail-label">参与</div>
+                        </div>
+                    </div>
+                    <button class="history-action">查看详情</button>
+                </div>
+            </div>
+            
+            <!-- 已取消活动 -->
+            <div class="history-item" data-status="cancelled">
+                <div class="history-header">
+                    <div>
+                        <div class="history-title">户外烧烤</div>
+                        <div class="history-date">2024年1月5日 11:00</div>
+                    </div>
+                    <span class="status-badge status-cancelled">已取消</span>
+                </div>
+                <div class="organizer-info">
+                    <img src="https://picsum.photos/32/32?random=7" alt="发起人" class="organizer-avatar">
+                    <div>
+                        <div class="organizer-name">王大伟</div>
+                        <div class="organizer-role">发起人</div>
+                    </div>
+                </div>
+                <div class="history-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-value">¥40</div>
+                            <div class="detail-label">已退还</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">3/8人</div>
+                            <div class="detail-label">参与</div>
+                        </div>
+                    </div>
+                    <button class="history-action">查看详情</button>
+                </div>
+            </div>
+            
+            <!-- 已完成活动 -->
+            <div class="history-item" data-status="completed">
+                <div class="history-header">
+                    <div>
+                        <div class="history-title">咖啡厅聚会</div>
+                        <div class="history-date">2024年1月3日 15:00</div>
+                    </div>
+                    <span class="status-badge status-completed">已完成</span>
+                </div>
+                <div class="organizer-info">
+                    <img src="https://picsum.photos/32/32?random=8" alt="发起人" class="organizer-avatar">
+                    <div>
+                        <div class="organizer-name">赵小美</div>
+                        <div class="organizer-role">发起人</div>
+                    </div>
+                </div>
+                <div class="history-details">
+                    <div class="detail-group">
+                        <div class="detail-item">
+                            <div class="detail-value">¥15</div>
+                            <div class="detail-label">押金</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">5/5人</div>
+                            <div class="detail-label">参与</div>
+                        </div>
+                    </div>
+                    <button class="history-action">查看详情</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                // 如果是页面标题组件，设置标题
+                if (elementId === 'page-title') {
+                    setTimeout(() => {
+                        if (window.setPageTitle) {
+                            window.setPageTitle('历史记录');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 切换筛选标签
+        function switchTab(element, status) {
+            // 移除所有active状态
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 添加当前active状态
+            element.classList.add('active');
+            
+            // 筛选历史记录
+            const historyItems = document.querySelectorAll('.history-item');
+            historyItems.forEach(item => {
+                if (status === 'all' || item.dataset.status === status) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            console.log('切换到筛选:', status);
+        }
+        
+        // 页面加载完成后加载组件
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('back-button', 'back-button.html');
+            await loadComponent('page-title', 'page-title.html');
+        });
+    </script>
+</body>
+</html>

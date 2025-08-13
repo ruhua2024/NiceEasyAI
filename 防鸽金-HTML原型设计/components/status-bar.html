@@ -1,0 +1,66 @@
+<!-- 系统状态栏组件 - 透明/半透明背景，根据内容自动调整文字颜色 -->
+<div class="status-bar">
+  <div class="status-content">
+    <div class="status-left">
+      <span class="time">9:41</span>
+    </div>
+    <div class="status-right">
+      <i class="fas fa-signal status-icon"></i>
+      <i class="fas fa-wifi status-icon"></i>
+      <div class="battery">
+        <i class="fas fa-battery-three-quarters status-icon"></i>
+        <span class="battery-percentage">87%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.status-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.status-left .time {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-icon {
+  font-size: 12px;
+}
+
+.battery {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.battery-percentage {
+  font-size: 12px;
+}
+</style>

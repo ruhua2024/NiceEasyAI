@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邀约详情</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #2A9D8F 0%, #264653 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        
+        .main-content {
+            padding-top: 120px;
+            padding-bottom: 120px;
+            min-height: 100vh;
+        }
+        
+        .detail-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin: 16px;
+            padding: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .activity-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 16px;
+        }
+        
+        .activity-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .activity-status {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+        }
+        
+        .info-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 16px;
+        }
+        
+        .icon-time {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .icon-location {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--neutral-dark);
+        }
+        
+        .icon-organizer {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .participant-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .participant-item {
+            text-align: center;
+        }
+        
+        .participant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            margin: 0 auto 8px;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .participant-name {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .empty-slot {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            margin: 0 auto 8px;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .action-buttons {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .btn-join {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-join:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(42, 157, 143, 0.3);
+        }
+        
+        .description-text {
+            line-height: 1.6;
+            color: #666;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 返回按钮 -->
+    <div id="back-button"></div>
+    
+    <!-- 页面标题 -->
+    <div id="page-title"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 活动头部 -->
+        <div class="detail-section">
+            <div class="activity-header">
+                <img src="https://picsum.photos/300/200?random=10" alt="活动图片" class="activity-image">
+                <h1 class="activity-title">周末爬山活动</h1>
+                <span class="activity-status">进行中</span>
+            </div>
+            
+            <!-- 关键信息 -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-value">¥50</div>
+                    <div class="info-label">押金金额</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">5/8人</div>
+                    <div class="info-label">参与人数</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">明天</div>
+                    <div class="info-label">活动时间</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-value">2小时</div>
+                    <div class="info-label">剩余时间</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动详情 -->
+        <div class="detail-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">活动详情</h3>
+            
+            <div class="detail-item">
+                <div class="detail-icon icon-time">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">活动时间</p>
+                    <p class="text-sm text-gray-600">明天 09:00 - 17:00</p>
+                </div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-icon icon-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">活动地点</p>
+                    <p class="text-sm text-gray-600">香山公园南门集合</p>
+                </div>
+            </div>
+            
+            <div class="detail-item">
+                <div class="detail-icon icon-organizer">
+                    <i class="fas fa-user-crown"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">活动发起人</p>
+                    <p class="text-sm text-gray-600">张小明 · 信用优秀</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动描述 -->
+        <div class="detail-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">活动描述</h3>
+            <p class="description-text">
+                周末一起去香山爬山，呼吸新鲜空气，锻炼身体。路线适合初级爬山者，预计用时4-5小时。
+                请大家准备好运动鞋、水和简单的食物。集合时间是早上9点，香山公园南门。
+                <br><br>
+                注意事项：
+                <br>• 请穿着舒适的运动服装
+                <br>• 自备充足的饮用水
+                <br>• 如遇恶劣天气将延期举行
+                <br>• 请准时到达集合地点
+            </p>
+        </div>
+        
+        <!-- 参与者列表 -->
+        <div class="detail-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">参与者 (5/8)</h3>
+            
+            <div class="participant-list">
+                <div class="participant-item">
+                    <img src="https://picsum.photos/50/50?random=1" alt="张小明" class="participant-avatar">
+                    <div class="participant-name">张小明</div>
+                </div>
+                <div class="participant-item">
+                    <img src="https://picsum.photos/50/50?random=2" alt="李小红" class="participant-avatar">
+                    <div class="participant-name">李小红</div>
+                </div>
+                <div class="participant-item">
+                    <img src="https://picsum.photos/50/50?random=3" alt="王大伟" class="participant-avatar">
+                    <div class="participant-name">王大伟</div>
+                </div>
+                <div class="participant-item">
+                    <img src="https://picsum.photos/50/50?random=4" alt="赵小美" class="participant-avatar">
+                    <div class="participant-name">赵小美</div>
+                </div>
+                <div class="participant-item">
+                    <img src="https://picsum.photos/50/50?random=5" alt="刘小强" class="participant-avatar">
+                    <div class="participant-name">刘小强</div>
+                </div>
+                <div class="participant-item">
+                    <div class="empty-slot">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="participant-name">空位</div>
+                </div>
+                <div class="participant-item">
+                    <div class="empty-slot">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="participant-name">空位</div>
+                </div>
+                <div class="participant-item">
+                    <div class="empty-slot">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="participant-name">空位</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部操作按钮 -->
+    <div class="action-buttons">
+        <button class="btn-join">
+            <i class="fas fa-hand-holding-usd mr-2"></i>
+            支付押金加入 (¥50)
+        </button>
+    </div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                // 如果是页面标题组件，设置标题
+                if (elementId === 'page-title') {
+                    setTimeout(() => {
+                        if (window.setPageTitle) {
+                            window.setPageTitle('邀约详情');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 页面加载完成后加载组件
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('back-button', 'back-button.html');
+            await loadComponent('page-title', 'page-title.html');
+        });
+    </script>
+</body>
+</html>

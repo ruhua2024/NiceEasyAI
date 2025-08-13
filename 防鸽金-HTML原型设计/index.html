@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防鸽金 - HTML原型设计</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+            --base-height: 812px;
+        }
+        
+        body {
+            background-color: #EDEDED;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .mobile-viewport {
+            width: 375px;
+            height: var(--base-height);
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-viewport iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 40px;
+        }
+        
+        .page-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #264653;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .expanded .mobile-viewport.expandable {
+            height: auto;
+            min-height: var(--base-height);
+            transition: all 0.3s ease;
+        }
+
+        .expanded .mobile-viewport.expandable iframe {
+            height: auto;
+            min-height: var(--base-height);
+        }
+        
+        .mode-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .mode-btn {
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid #000;
+        }
+        
+        .mode-btn.active {
+            background: #000;
+            color: white;
+            border-color: transparent;
+        }
+        
+        .mode-btn:not(.active) {
+            background: transparent;
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <!-- 标题区域 -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-black mb-4">防鸽金</h1>
+            <p class="text-xl text-black mb-6">朋友间邀约出行、聚会时，通过小额押金约束减少爽约行为的社交工具小程序</p>
+
+            <!-- 使用提醒 -->
+            <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg mb-6 text-sm">
+                <strong>💡 使用提醒：</strong>建议使用 Live Server 等本地服务器环境运行，以确保智能展开模式正常工作
+            </div>
+            
+            <!-- 模式切换按钮 -->
+            <div class="mode-buttons justify-center">
+                <button class="mode-btn active" id="normalModeBtn">正常模式</button>
+                <button class="mode-btn" id="expandedModeBtn">展开模式</button>
+            </div>
+        </div>
+        
+        <!-- 手机界面展示区域 -->
+        <div class="grid-container" id="phoneGrid">
+            <!-- 页面将通过JavaScript动态添加 -->
+        </div>
+    </div>
+
+    <script>
+        const BASE_HEIGHT = 812;
+        let isExpanded = false;
+        
+        // 模式切换功能
+        const normalModeBtn = document.getElementById('normalModeBtn');
+        const expandedModeBtn = document.getElementById('expandedModeBtn');
+        const body = document.body;
+        
+        normalModeBtn.addEventListener('click', () => {
+            isExpanded = false;
+            body.classList.remove('expanded');
+            normalModeBtn.classList.add('active');
+            expandedModeBtn.classList.remove('active');
+            console.log('🔄 切换到正常模式 - 所有页面高度重置为812px');
+
+            // 重置所有页面高度
+            const allViewports = document.querySelectorAll('.mobile-viewport');
+            allViewports.forEach(viewport => {
+                const iframe = viewport.querySelector('iframe');
+                viewport.style.height = BASE_HEIGHT + 'px';
+                iframe.style.height = '100%';
+                // 恢复iframe内容的滚动设置
+                try {
+                    iframe.contentDocument.body.style.overflow = '';
+                } catch (e) {
+                    // 跨域限制，忽略
+                }
+            });
+        });
+
+        expandedModeBtn.addEventListener('click', () => {
+            isExpanded = true;
+            body.classList.add('expanded');
+            expandedModeBtn.classList.add('active');
+            normalModeBtn.classList.remove('active');
+            console.log('🔄 切换到展开模式 - 可展开页面将显示完整内容');
+
+            // 显示当前可展开页面统计
+            const expandablePages = document.querySelectorAll('.mobile-viewport.expandable');
+            console.log(`📊 当前共有 ${expandablePages.length} 个可展开页面`);
+
+            // 调试：检查每个可展开页面的状态并动态调整高度
+            expandablePages.forEach((viewport, index) => {
+                const pageName = viewport.querySelector('.page-label').textContent;
+                const iframe = viewport.querySelector('iframe');
+
+                try {
+                    const contentHeight = iframe.contentDocument.body.scrollHeight;
+                    // 设置viewport高度为内容高度
+                    viewport.style.height = contentHeight + 'px';
+                    // 设置iframe高度为100%以填充viewport
+                    iframe.style.height = '100%';
+                    // 确保iframe内容不会产生滚动条
+                    iframe.contentDocument.body.style.overflow = 'hidden';
+                    console.log(`🔍 ${pageName}: 展开高度设置为${contentHeight}px，滚动条已隐藏`);
+                } catch (e) {
+                    console.log(`⚠️ ${pageName}: 无法获取内容高度，保持默认展开`);
+                }
+            });
+        });
+        
+        // 创建手机界面容器
+        function createMobileViewport(pageName, pageFile) {
+            const viewport = document.createElement('div');
+            viewport.className = 'mobile-viewport';
+            viewport.innerHTML = `
+                <iframe src="pages/${pageFile}" title="${pageName}"></iframe>
+                <div class="page-label">${pageName}</div>
+            `;
+            
+            // 监听iframe加载完成，检测内容高度
+            const iframe = viewport.querySelector('iframe');
+            iframe.addEventListener('load', () => {
+                try {
+                    const contentHeight = iframe.contentDocument.body.scrollHeight;
+                    console.log(`📏 ${pageName} 内容高度: ${contentHeight}px (基准: ${BASE_HEIGHT}px)`);
+
+                    if (contentHeight > BASE_HEIGHT) {
+                        viewport.classList.add('expandable');
+                        console.log(`✅ ${pageName} 标记为可展开页面 (超出${contentHeight - BASE_HEIGHT}px)`);
+                    } else {
+                        console.log(`📱 ${pageName} 保持正常高度 (未超出基准)`);
+                    }
+                } catch (e) {
+                    // 跨域限制，使用预设值
+                    console.log(`⚠️ ${pageName} 无法获取内容高度，使用预设判断 (跨域限制)`);
+                    // 根据页面类型预设可展开页面
+                    if (['创建邀约', '个人信息与设置', '历史记录'].includes(pageName)) {
+                        viewport.classList.add('expandable');
+                        console.log(`✅ ${pageName} 预设为可展开页面 (基于页面类型)`);
+                    } else {
+                        console.log(`📱 ${pageName} 预设为正常高度页面`);
+                    }
+                }
+            });
+            
+            return viewport;
+        }
+        
+        // 添加页面到网格
+        function addPagesToGrid(pages) {
+            const grid = document.getElementById('phoneGrid');
+            pages.forEach(page => {
+                const viewport = createMobileViewport(page.name, page.file);
+                grid.appendChild(viewport);
+            });
+        }
+        
+        // 页面配置（将分批添加）
+        const allPages = [];
+
+        // 第一批：一级页面
+        const firstLevelPages = [
+            { name: '邀约首页', file: '邀约首页.html' },
+            { name: '押金管理', file: '押金管理.html' },
+            { name: '个人中心', file: '个人中心.html' }
+        ];
+
+        // 第二批：非一级页面（第一批）
+        const secondBatchPages = [
+            { name: '创建邀约', file: '创建邀约.html' },
+            { name: '邀约详情', file: '邀约详情.html' }
+        ];
+
+        // 第三批：非一级页面（第二批）
+        const thirdBatchPages = [
+            { name: '个人信息与设置', file: '个人信息与设置.html' },
+            { name: '历史记录', file: '历史记录.html' }
+        ];
+
+        // 页面加载完成后添加第一批页面
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 防鸽金HTML原型开始加载...');
+            console.log(`📊 项目配置: 总计${firstLevelPages.length + secondBatchPages.length + thirdBatchPages.length}个页面`);
+            console.log(`📱 基准高度设置: ${BASE_HEIGHT}px`);
+
+            addPagesToGrid(firstLevelPages);
+            console.log(`✅ 第一批页面（一级页面）已加载完成 - ${firstLevelPages.length}个页面`);
+
+            // 延迟添加第二批页面
+            setTimeout(() => {
+                addPagesToGrid(secondBatchPages);
+                console.log(`✅ 第二批页面已加载完成 - ${secondBatchPages.length}个页面`);
+            }, 1000);
+
+            // 延迟添加第三批页面
+            setTimeout(() => {
+                addPagesToGrid(thirdBatchPages);
+                console.log(`✅ 第三批页面已加载完成 - ${thirdBatchPages.length}个页面`);
+                console.log('🎉 所有页面创建完成，请查看完整的index.html预览');
+                console.log('💡 提示: 使用展开模式查看内容较多的页面完整效果');
+            }, 2000);
+        });
+
+        // 导出函数供分批使用
+        window.addPagesToGrid = addPagesToGrid;
+        window.createMobileViewport = createMobileViewport;
+    </script>
+</body>
+</html>

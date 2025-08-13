@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #E9C46A 0%, #F4A261 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            padding-top: 124px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+        }
+        
+        .profile-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 24px;
+            margin: 16px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        
+        .menu-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: background 0.2s ease;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item:hover {
+            background: rgba(38, 70, 83, 0.05);
+        }
+        
+        .menu-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 18px;
+        }
+        
+        .icon-info {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .icon-history {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .icon-help {
+            background: rgba(231, 111, 81, 0.2);
+            color: var(--neutral-dark);
+        }
+        
+        .icon-about {
+            background: rgba(38, 70, 83, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+        }
+        
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+        
+        .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 个人信息头部 -->
+        <div class="profile-header">
+            <div class="avatar-container">
+                <img src="https://picsum.photos/80/80?random=100" alt="头像" class="w-20 h-20 rounded-full">
+                <div class="edit-avatar">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+            <h2 class="text-xl font-bold text-gray-800 mb-2">张小明</h2>
+            <p class="text-sm text-gray-600 mb-4">防鸽金用户 · 信用良好</p>
+            
+            <!-- 统计数据 -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <p class="text-lg font-bold" style="color: var(--secondary-color)">15</p>
+                    <p class="text-xs text-gray-600">参与活动</p>
+                </div>
+                <div class="stat-item">
+                    <p class="text-lg font-bold" style="color: var(--accent-color)">98%</p>
+                    <p class="text-xs text-gray-600">守约率</p>
+                </div>
+                <div class="stat-item">
+                    <p class="text-lg font-bold" style="color: var(--primary-color)">5</p>
+                    <p class="text-xs text-gray-600">发起活动</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 功能菜单 -->
+        <div class="menu-section">
+            <div class="menu-item">
+                <div class="menu-icon icon-info">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">个人信息与设置</p>
+                    <p class="text-sm text-gray-500">编辑个人资料和系统设置</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon icon-history">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">历史记录</p>
+                    <p class="text-sm text-gray-500">查看参与过的所有活动</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- 其他功能 -->
+        <div class="menu-section">
+            <div class="menu-item">
+                <div class="menu-icon icon-help">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">帮助与反馈</p>
+                    <p class="text-sm text-gray-500">常见问题和意见反馈</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-icon icon-about">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-gray-800">关于防鸽金</p>
+                    <p class="text-sm text-gray-500">版本信息和用户协议</p>
+                </div>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+        </div>
+        
+        <!-- 信用等级卡片 -->
+        <div class="menu-section">
+            <div class="p-6 text-center">
+                <div class="flex items-center justify-center mb-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-crown text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-lg font-bold text-gray-800">黄金用户</p>
+                        <p class="text-sm text-gray-600">信用等级优秀</p>
+                    </div>
+                </div>
+                <div class="bg-gray-200 rounded-full h-2 mb-2">
+                    <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 h-2 rounded-full" style="width: 85%"></div>
+                </div>
+                <p class="text-xs text-gray-600">距离钻石用户还需参与5次活动</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div id="bottom-nav"></div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 页面加载完成后加载组件
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('bottom-nav', 'bottom-nav.html');
+        });
+    </script>
+</body>
+</html>

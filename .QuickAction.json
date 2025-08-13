@@ -984,7 +984,11 @@
         "36. 添加iOS风格的系统状态栏和导航栏",
         "37. 确保所有交互元素具有清晰的视觉反馈",
         "38. 【真实iOS状态栏】使用透明或半透明背景，根据下方内容自动调整文字颜色",
-        "39. 【隐藏滚动条】页面滚动条必须隐藏，使用-webkit-scrollbar:none和scrollbar-width:none",
+        "39. 【隐藏滚动条】页面滚动条必须完全隐藏，使用完整的滚动条隐藏方案：",
+        "39.1 【Body级别设置】body { overflow: hidden; scrollbar-width: none; -ms-overflow-style: none; }",
+        "39.2 【容器级别设置】.main-content { height: 100vh; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }",
+        "39.3 【Webkit隐藏】body::-webkit-scrollbar, .main-content::-webkit-scrollbar { display: none; }",
+        "39.4 【双层保护】确保body和主容器都设置滚动条隐藏，避免任何滚动条显示",
         "40. 【原生导航栏】使用半透明背景和backdrop-filter模糊效果，与内容自然融合",
         "41. 【组件引入方式】严禁使用iframe引入组件，必须使用JavaScript fetch()方式",
         "42. 【单一滚动区域】整个页面只能有一个滚动区域，状态栏和导航栏必须固定",
@@ -1026,7 +1030,7 @@
         "config_file_required": "必须提供project-config.json配置文件",
         "ios_design_standards": "必须贴近真实iOS设计规范",
         "realistic_status_bar": "【真实状态栏约束】状态栏必须使用透明或半透明背景，根据内容自动调整文字颜色",
-        "hidden_scrollbars": "【隐藏滚动条约束】页面滚动条必须隐藏，仅在滚动时短暂显示",
+        "hidden_scrollbars": "【隐藏滚动条约束】页面滚动条必须完全隐藏，使用body级别overflow:hidden和容器级别overflow-y:auto的双层保护方案",
         "native_navigation": "【原生导航约束】导航栏必须使用半透明背景，与内容自然融合",
         "iframe_prohibition": "【严禁iframe组件】iframe会产生独立滚动条，完全破坏真实手机体验",
         "fetch_component_loading": "【强制fetch加载】组件必须通过JavaScript fetch()方式加载HTML内容",
@@ -1123,7 +1127,7 @@
         "component_style_requirements": {
           "status_bar": "使用rgba()和backdrop-filter实现透明效果，position: fixed固定在顶部",
           "navigation": "使用backdrop-filter: blur(20px)实现毛玻璃效果，position: fixed或sticky",
-          "scrollbars": "所有页面必须隐藏滚动条，使用::-webkit-scrollbar: none",
+          "scrollbars": "所有页面必须完全隐藏滚动条，使用双层保护：body{overflow:hidden}+容器{overflow-y:auto;::-webkit-scrollbar:none}",
           "transitions": "使用原生iOS动画曲线和时长",
           "layout_structure": "状态栏固定 + 导航栏固定 + 主内容区域滚动",
           "component_loading": "使用JavaScript fetch()加载组件HTML，严禁iframe"
@@ -1157,7 +1161,7 @@
           "image_source": "picsum.photos真实图片",
           "device_simulation": "iPhone 13 Pro",
           "responsive_breakpoints": "lg:3列, md:2列, sm:1列",
-          "scrollbar_hiding": "使用-webkit-scrollbar:none和scrollbar-width:none隐藏滚动条",
+          "scrollbar_hiding": "使用完整的双层滚动条隐藏方案：body级别overflow:hidden，容器级别overflow-y:auto配合-webkit-scrollbar:none和scrollbar-width:none",
           "status_bar_transparency": "使用rgba()或backdrop-filter实现透明/半透明效果",
           "navigation_blur": "使用backdrop-filter: blur()实现毛玻璃效果"
         },
@@ -1294,7 +1298,10 @@
             "scrollbar_hiding": {
               "webkit": "::-webkit-scrollbar { display: none; }",
               "firefox": "scrollbar-width: none;",
-              "combined": "overflow-y: auto; -ms-overflow-style: none; scrollbar-width: none;"
+              "combined": "overflow-y: auto; -ms-overflow-style: none; scrollbar-width: none;",
+              "body_level": "body { overflow: hidden; scrollbar-width: none; -ms-overflow-style: none; }",
+              "container_level": ".main-content { height: 100vh; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }",
+              "complete_solution": "body级别设置overflow: hidden，容器级别设置overflow-y: auto并隐藏滚动条样式"
             },
             "navigation_blur": {
               "standard": "background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px);",

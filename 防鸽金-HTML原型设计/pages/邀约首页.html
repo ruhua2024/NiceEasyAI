@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邀约首页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #F4A261 0%, #E9C46A 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .main-content {
+            padding-top: 124px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+        }
+        
+        .invite-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .invite-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .create-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(38, 70, 83, 0.3);
+            z-index: 100;
+        }
+        
+        .search-bar {
+            margin: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        .status-completed {
+            background: rgba(233, 196, 106, 0.2);
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 搜索栏 -->
+        <div class="search-bar">
+            <i class="fas fa-search text-gray-500"></i>
+            <input type="text" placeholder="搜索邀约活动..." class="flex-1 bg-transparent outline-none text-gray-700">
+            <i class="fas fa-filter text-gray-500"></i>
+        </div>
+        
+        <!-- 邀约列表 -->
+        <div class="invite-list">
+            <!-- 邀约卡片1 -->
+            <div class="invite-card">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">周末爬山活动</h3>
+                        <p class="text-sm text-gray-600">香山公园 · 明天 09:00</p>
+                    </div>
+                    <span class="status-badge status-active">进行中</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <img src="https://picsum.photos/40/40?random=1" alt="发起人" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="text-sm font-medium text-gray-800">张小明</p>
+                        <p class="text-xs text-gray-500">发起人</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">押金</p>
+                            <p class="text-sm font-bold text-red-500">¥50</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">参与人数</p>
+                            <p class="text-sm font-bold" style="color: var(--secondary-color)">5/8人</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full text-sm font-medium">
+                        加入
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 邀约卡片2 -->
+            <div class="invite-card">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">火锅聚餐</h3>
+                        <p class="text-sm text-gray-600">海底捞 · 今晚 18:30</p>
+                    </div>
+                    <span class="status-badge status-completed">已完成</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <img src="https://picsum.photos/40/40?random=2" alt="发起人" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="text-sm font-medium text-gray-800">李小红</p>
+                        <p class="text-xs text-gray-500">发起人</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">押金</p>
+                            <p class="text-sm font-bold text-red-500">¥30</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">参与人数</p>
+                            <p class="text-sm font-bold" style="color: var(--secondary-color)">6/6人</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-gray-300 text-gray-600 rounded-full text-sm font-medium" disabled>
+                        已结束
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 邀约卡片3 -->
+            <div class="invite-card">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">电影观看</h3>
+                        <p class="text-sm text-gray-600">万达影城 · 后天 19:00</p>
+                    </div>
+                    <span class="status-badge status-active">进行中</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <img src="https://picsum.photos/40/40?random=3" alt="发起人" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="text-sm font-medium text-gray-800">王大伟</p>
+                        <p class="text-xs text-gray-500">发起人</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">押金</p>
+                            <p class="text-sm font-bold text-red-500">¥20</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xs text-gray-500">参与人数</p>
+                            <p class="text-sm font-bold" style="color: var(--secondary-color)">3/4人</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full text-sm font-medium">
+                        加入
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 创建邀约按钮 -->
+    <div class="create-btn">
+        <i class="fas fa-plus text-white text-xl"></i>
+    </div>
+    
+    <!-- 底部导航栏 -->
+    <div id="bottom-nav"></div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 页面加载完成后加载组件
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('bottom-nav', 'bottom-nav.html');
+        });
+    </script>
+</body>
+</html>

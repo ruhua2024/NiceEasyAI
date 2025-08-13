@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建邀约</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #F4A261 0%, #E9C46A 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        
+        .main-content {
+            padding-top: 120px;
+            padding-bottom: 40px;
+            min-height: 100vh;
+        }
+        
+        .form-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin: 16px;
+            padding: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #E5E5E5;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+            background: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .datetime-input {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .datetime-input input {
+            flex: 1;
+        }
+        
+        .deposit-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .deposit-option {
+            padding: 16px;
+            border: 2px solid #E5E5E5;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+        }
+        
+        .deposit-option.selected {
+            border-color: var(--secondary-color);
+            background: rgba(42, 157, 143, 0.1);
+        }
+        
+        .deposit-amount {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .deposit-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .participant-counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 8px;
+        }
+        
+        .counter-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--secondary-color);
+            background: white;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .counter-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .counter-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 32px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(38, 70, 83, 0.3);
+        }
+        
+        .image-upload {
+            border: 2px dashed #E5E5E5;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .image-upload:hover {
+            border-color: var(--secondary-color);
+            background: rgba(42, 157, 143, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 32px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 状态栏 -->
+    <div id="status-bar"></div>
+    
+    <!-- 返回按钮 -->
+    <div id="back-button"></div>
+    
+    <!-- 页面标题 -->
+    <div id="page-title"></div>
+    
+    <!-- 主要内容 -->
+    <div class="main-content">
+        <!-- 基本信息 -->
+        <div class="form-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">基本信息</h3>
+            
+            <div class="form-group">
+                <label class="form-label">活动名称</label>
+                <input type="text" class="form-input" placeholder="请输入活动名称，如：周末爬山">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">活动描述</label>
+                <textarea class="form-input form-textarea" placeholder="详细描述活动内容、注意事项等..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">活动地点</label>
+                <input type="text" class="form-input" placeholder="请输入具体地址">
+            </div>
+        </div>
+        
+        <!-- 时间设置 -->
+        <div class="form-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">时间设置</h3>
+            
+            <div class="form-group">
+                <label class="form-label">活动时间</label>
+                <div class="datetime-input">
+                    <input type="date" class="form-input">
+                    <input type="time" class="form-input">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">报名截止时间</label>
+                <div class="datetime-input">
+                    <input type="date" class="form-input">
+                    <input type="time" class="form-input">
+                </div>
+            </div>
+        </div>
+        
+        <!-- 押金设置 -->
+        <div class="form-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">押金设置</h3>
+            
+            <div class="form-group">
+                <label class="form-label">押金金额</label>
+                <div class="deposit-selector">
+                    <div class="deposit-option selected">
+                        <div class="deposit-amount">¥20</div>
+                        <div class="deposit-label">轻度约束</div>
+                    </div>
+                    <div class="deposit-option">
+                        <div class="deposit-amount">¥50</div>
+                        <div class="deposit-label">中度约束</div>
+                    </div>
+                    <div class="deposit-option">
+                        <div class="deposit-amount">¥100</div>
+                        <div class="deposit-label">强度约束</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">参与人数</label>
+                <div class="participant-counter">
+                    <button class="counter-btn" onclick="changeCount(-1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="counter-value" id="participantCount">6</div>
+                    <button class="counter-btn" onclick="changeCount(1)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动图片 -->
+        <div class="form-section">
+            <h3 class="text-lg font-bold mb-4" style="color: var(--primary-color)">活动图片</h3>
+            
+            <div class="image-upload">
+                <div class="upload-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <p class="text-gray-600">点击上传活动图片</p>
+                <p class="text-sm text-gray-500">支持JPG、PNG格式，最大5MB</p>
+            </div>
+        </div>
+        
+        <!-- 提交按钮 -->
+        <div class="form-section">
+            <button class="submit-btn">
+                <i class="fas fa-check mr-2"></i>
+                创建邀约
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 加载组件
+        async function loadComponent(elementId, componentPath) {
+            try {
+                const response = await fetch(`../components/${componentPath}`);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+                
+                // 如果是页面标题组件，设置标题
+                if (elementId === 'page-title') {
+                    setTimeout(() => {
+                        if (window.setPageTitle) {
+                            window.setPageTitle('创建邀约');
+                        }
+                    }, 100);
+                }
+            } catch (error) {
+                console.error(`加载组件失败: ${componentPath}`, error);
+            }
+        }
+        
+        // 参与人数控制
+        function changeCount(delta) {
+            const countElement = document.getElementById('participantCount');
+            let count = parseInt(countElement.textContent);
+            count = Math.max(2, Math.min(20, count + delta));
+            countElement.textContent = count;
+        }
+        
+        // 押金选择
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadComponent('status-bar', 'status-bar.html');
+            await loadComponent('back-button', 'back-button.html');
+            await loadComponent('page-title', 'page-title.html');
+            
+            // 押金选择逻辑
+            const depositOptions = document.querySelectorAll('.deposit-option');
+            depositOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    depositOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
