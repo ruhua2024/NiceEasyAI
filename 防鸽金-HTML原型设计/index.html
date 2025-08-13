@@ -47,6 +47,12 @@
             height: 100%;
             border: none;
             border-radius: 40px;
+            overflow: hidden;
+        }
+
+        /* 正常模式下强制隐藏滚动条 */
+        body:not(.expanded) .mobile-viewport iframe {
+            overflow: hidden !important;
         }
         
         .page-label {
@@ -156,11 +162,13 @@
                 const iframe = viewport.querySelector('iframe');
                 viewport.style.height = BASE_HEIGHT + 'px';
                 iframe.style.height = '100%';
-                // 恢复iframe内容的滚动设置
+                // 在正常模式下强制隐藏滚动条
                 try {
-                    iframe.contentDocument.body.style.overflow = '';
+                    iframe.contentDocument.body.style.overflow = 'hidden';
+                    iframe.contentDocument.documentElement.style.overflow = 'hidden';
                 } catch (e) {
                     // 跨域限制，忽略
+                    console.log('⚠️ 无法设置iframe滚动条样式（跨域限制）');
                 }
             });
         });
@@ -217,6 +225,13 @@
                         console.log(`✅ ${pageName} 标记为可展开页面 (超出${contentHeight - BASE_HEIGHT}px)`);
                     } else {
                         console.log(`📱 ${pageName} 保持正常高度 (未超出基准)`);
+                    }
+
+                    // 如果当前是正常模式，主动隐藏滚动条
+                    if (!isExpanded) {
+                        iframe.contentDocument.body.style.overflow = 'hidden';
+                        iframe.contentDocument.documentElement.style.overflow = 'hidden';
+                        console.log(`🔒 ${pageName} 正常模式下滚动条已隐藏`);
                     }
                 } catch (e) {
                     // 跨域限制，使用预设值
