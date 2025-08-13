@@ -1,0 +1,67 @@
+<!-- 页面标题区域组件 -->
+<div class="page-title-area fixed top-11 left-0 right-0 z-40 h-14 flex items-center justify-center px-4"
+     style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+  
+  <!-- 页面标题 -->
+  <h1 id="main-page-title" class="text-lg font-semibold" style="color: #264653;">页面标题</h1>
+  
+  <!-- 右侧功能按钮（可选） -->
+  <div class="absolute right-4 flex items-center space-x-3">
+    <!-- 搜索按钮 -->
+    <button class="search-btn w-8 h-8 flex items-center justify-center rounded-full" 
+            style="background: rgba(38, 70, 83, 0.1);">
+      <i class="fas fa-search text-sm" style="color: #264653;"></i>
+    </button>
+    
+    <!-- 更多按钮 -->
+    <button class="more-btn w-8 h-8 flex items-center justify-center rounded-full"
+            style="background: rgba(38, 70, 83, 0.1);">
+      <i class="fas fa-ellipsis-h text-sm" style="color: #264653;"></i>
+    </button>
+  </div>
+</div>
+
+<script>
+// 设置主页面标题
+function setMainPageTitle(title) {
+  const titleElement = document.getElementById('main-page-title');
+  if (titleElement) {
+    titleElement.textContent = title;
+  }
+}
+
+// 显示/隐藏功能按钮
+function toggleActionButtons(show = true) {
+  const buttonsContainer = document.querySelector('.absolute.right-4');
+  if (buttonsContainer) {
+    buttonsContainer.style.display = show ? 'flex' : 'none';
+  }
+}
+
+// 搜索按钮点击事件
+document.addEventListener('DOMContentLoaded', function() {
+  const searchBtn = document.querySelector('.search-btn');
+  const moreBtn = document.querySelector('.more-btn');
+  
+  if (searchBtn) {
+    searchBtn.addEventListener('click', function() {
+      console.log('搜索功能');
+      // 这里可以添加搜索功能
+    });
+  }
+  
+  if (moreBtn) {
+    moreBtn.addEventListener('click', function() {
+      console.log('更多功能');
+      // 这里可以添加更多功能菜单
+    });
+  }
+});
+
+// 导出函数供页面使用
+window.setMainPageTitle = setMainPageTitle;
+window.toggleActionButtons = toggleActionButtons;
+
+// 组件加载完成后立即可用
+console.log('页面标题组件已加载');
+</script>

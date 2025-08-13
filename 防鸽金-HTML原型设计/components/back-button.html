@@ -1,0 +1,41 @@
+<!-- 返回按钮组件 -->
+<div class="back-button fixed top-11 left-0 right-0 z-40 h-14 flex items-center px-4"
+     style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.1);">
+  
+  <!-- 返回按钮 -->
+  <button class="back-btn flex items-center space-x-2 cursor-pointer" onclick="goBack()">
+    <i class="fas fa-chevron-left text-lg" style="color: #264653;"></i>
+    <span class="text-base font-medium" style="color: #264653;">返回</span>
+  </button>
+  
+  <!-- 页面标题 -->
+  <div class="flex-1 text-center">
+    <h1 id="page-title" class="text-lg font-semibold" style="color: #264653;">页面标题</h1>
+  </div>
+  
+  <!-- 右侧占位 -->
+  <div class="w-16"></div>
+</div>
+
+<script>
+// 返回功能
+function goBack() {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    // 如果没有历史记录，可以跳转到首页
+    console.log('返回首页');
+  }
+}
+
+// 设置页面标题
+function setPageTitle(title) {
+  const titleElement = document.getElementById('page-title');
+  if (titleElement) {
+    titleElement.textContent = title;
+  }
+}
+
+// 导出函数供页面使用
+window.setPageTitle = setPageTitle;
+</script>

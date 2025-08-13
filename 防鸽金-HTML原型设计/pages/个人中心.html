@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人中心 - 防鸽金</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+    
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    body {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .main-content {
+      padding-top: 44px; /* 仅状态栏44px */
+      padding-bottom: 80px;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #E9C46A 0%, #F4A261 100%);
+    }
+  </style>
+</head>
+<body>
+  <!-- 状态栏容器 -->
+  <div id="status-bar-container"></div>
+
+  <!-- 主要内容区域 -->
+  <div class="main-content">
+    <!-- 用户信息卡片 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl p-6 shadow-lg">
+        <div class="flex items-center space-x-4 mb-4">
+          <img src="https://picsum.photos/80/80?random=user" alt="用户头像" class="w-20 h-20 rounded-full object-cover">
+          <div class="flex-1">
+            <h2 class="text-xl font-bold mb-1" style="color: #264653;">张小明</h2>
+            <p class="text-sm text-gray-600 mb-2">ID: 123456789</p>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs px-2 py-1 rounded-full text-white" style="background: #2A9D8F;">活跃用户</span>
+              <span class="text-xs px-2 py-1 rounded-full" style="background: rgba(233, 196, 106, 0.2); color: #E9C46A;">Lv.3</span>
+            </div>
+          </div>
+          <i class="fas fa-chevron-right text-gray-400"></i>
+        </div>
+        
+        <!-- 信用分 -->
+        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-sm text-gray-600">信用分</div>
+              <div class="text-2xl font-bold" style="color: #2A9D8F;">850</div>
+            </div>
+            <div class="text-right">
+              <div class="text-sm text-gray-600">信用等级</div>
+              <div class="text-lg font-semibold" style="color: #264653;">优秀</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 统计数据 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl p-4 shadow-lg">
+        <h3 class="text-lg font-semibold mb-4" style="color: #264653;">我的数据</h3>
+        <div class="grid grid-cols-3 gap-4 text-center">
+          <div>
+            <div class="text-2xl font-bold mb-1" style="color: #2A9D8F;">28</div>
+            <div class="text-sm text-gray-600">参与邀约</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold mb-1" style="color: #E9C46A;">25</div>
+            <div class="text-sm text-gray-600">按时到达</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold mb-1" style="color: #E76F51;">3</div>
+            <div class="text-sm text-gray-600">爽约次数</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 功能菜单 -->
+    <div class="px-4 mb-6">
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <!-- 邀约相关 -->
+        <div class="p-4 border-b border-gray-100">
+          <h4 class="text-sm font-semibold text-gray-500 mb-3">邀约管理</h4>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-calendar-check text-lg" style="color: #2A9D8F;"></i>
+                <span class="font-medium" style="color: #264653;">我的邀约</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-users text-lg" style="color: #E9C46A;"></i>
+                <span class="font-medium" style="color: #264653;">参与记录</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 账户相关 -->
+        <div class="p-4 border-b border-gray-100">
+          <h4 class="text-sm font-semibold text-gray-500 mb-3">账户管理</h4>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-wallet text-lg" style="color: #264653;"></i>
+                <span class="font-medium" style="color: #264653;">资金明细</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-shield-alt text-lg" style="color: #2A9D8F;"></i>
+                <span class="font-medium" style="color: #264653;">安全设置</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 其他功能 -->
+        <div class="p-4">
+          <h4 class="text-sm font-semibold text-gray-500 mb-3">其他</h4>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-cog text-lg" style="color: #E76F51;"></i>
+                <span class="font-medium" style="color: #264653;">设置</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-question-circle text-lg" style="color: #E9C46A;"></i>
+                <span class="font-medium" style="color: #264653;">帮助与反馈</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="fas fa-info-circle text-lg" style="color: #2A9D8F;"></i>
+                <span class="font-medium" style="color: #264653;">关于防鸽金</span>
+              </div>
+              <i class="fas fa-chevron-right text-gray-400"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部导航容器 -->
+  <div id="bottom-nav-container"></div>
+  
+  <script>
+    // 加载组件
+    async function loadComponent(url, targetId) {
+      try {
+        const response = await fetch(url);
+        const html = await response.text();
+        document.getElementById(targetId).innerHTML = html;
+      } catch (error) {
+        console.error('加载组件失败:', error);
+      }
+    }
+    
+    // 页面加载完成后加载组件
+    document.addEventListener('DOMContentLoaded', function() {
+      loadComponent('../components/status-bar.html', 'status-bar-container');
+      loadComponent('../components/page-title.html', 'page-title-container');
+      loadComponent('../components/bottom-nav.html', 'bottom-nav-container');
+      
+      // 设置页面标题
+      setTimeout(() => {
+        if (window.setMainPageTitle) {
+          window.setMainPageTitle('个人中心');
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防鸽金 - HTML原型设计</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      background: #EDEDED;
+      min-height: 100vh;
+    }
+    
+    .mobile-viewport {
+      width: 375px;
+      height: 812px;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      background: #000;
+      position: relative;
+    }
+    
+    .mobile-viewport iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 40px;
+    }
+    
+    .grid-container {
+      display: grid;
+      gap: 2rem;
+      padding: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
+      justify-items: center;
+      justify-content: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* 响应式布局 */
+    @media (min-width: 1200px) {
+      .grid-container {
+        grid-template-columns: repeat(3, 375px);
+        justify-content: center;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 375px);
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        justify-content: center;
+      }
+
+      .mobile-viewport {
+        width: 100%;
+        max-width: 375px;
+        margin: 0 auto;
+      }
+    }
+    
+    /* 展开模式样式 */
+    .expanded .mobile-viewport {
+      height: auto;
+      min-height: 812px;
+      transition: all 0.3s ease;
+    }
+
+    .expanded .mobile-viewport.expandable {
+      height: auto;
+      min-height: 812px;
+    }
+
+    .expanded .mobile-viewport.expandable iframe {
+      height: auto;
+      min-height: 812px;
+    }
+
+    /* 正常模式过渡效果 */
+    .mobile-viewport {
+      transition: all 0.3s ease;
+    }
+    
+    .page-label {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #264653;
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部标题区域 -->
+  <div class="text-center py-8">
+    <h1 class="text-4xl font-bold text-black mb-2">防鸽金</h1>
+    <p class="text-xl text-black">HTML原型设计</p>
+    
+    <!-- 模式切换按钮 -->
+    <div class="mt-6 flex justify-center space-x-4">
+      <button id="normal-mode" class="px-6 py-3 rounded-full text-white font-semibold transition-all duration-300 border-2"
+              style="background: rgba(38, 70, 83, 0.8); border-color: transparent;">
+        正常模式
+      </button>
+      <button id="expanded-mode" class="px-6 py-3 rounded-full font-semibold transition-all duration-300 border-2"
+              style="background: transparent; color: black; border-color: black;">
+        展开模式
+      </button>
+    </div>
+  </div>
+  
+  <!-- 手机界面展示区域 -->
+  <div id="grid-container" class="grid-container">
+    <!-- 邀约首页 -->
+    <div class="mobile-viewport">
+      <iframe src="pages/邀约首页.html" title="邀约首页"></iframe>
+      <div class="page-label">邀约首页</div>
+    </div>
+    
+    <!-- 押金管理 -->
+    <div class="mobile-viewport">
+      <iframe src="pages/押金管理.html" title="押金管理"></iframe>
+      <div class="page-label">押金管理</div>
+    </div>
+    
+    <!-- 个人中心 -->
+    <div class="mobile-viewport">
+      <iframe src="pages/个人中心.html" title="个人中心"></iframe>
+      <div class="page-label">个人中心</div>
+    </div>
+    
+    <!-- 创建邀约 -->
+    <div class="mobile-viewport">
+      <iframe src="pages/创建邀约.html" title="创建邀约"></iframe>
+      <div class="page-label">创建邀约</div>
+    </div>
+    
+    <!-- 邀约详情 -->
+    <div class="mobile-viewport">
+      <iframe src="pages/邀约详情.html" title="邀约详情"></iframe>
+      <div class="page-label">邀约详情</div>
+    </div>
+    
+    <!-- 资金明细 -->
+    <div class="mobile-viewport">
+      <iframe src="pages/资金明细.html" title="资金明细"></iframe>
+      <div class="page-label">资金明细</div>
+    </div>
+  </div>
+  
+  <script>
+    // 模式切换功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const normalModeBtn = document.getElementById('normal-mode');
+      const expandedModeBtn = document.getElementById('expanded-mode');
+      const gridContainer = document.getElementById('grid-container');
+      const mobileViewports = document.querySelectorAll('.mobile-viewport');
+
+      // 计算所有页面的内容高度并智能标记可展开页面
+      mobileViewports.forEach(viewport => {
+        const label = viewport.querySelector('.page-label').textContent;
+        const iframe = viewport.querySelector('iframe');
+
+        // 监听iframe加载完成
+        iframe.addEventListener('load', function() {
+          try {
+            // 尝试获取iframe内容高度
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const contentHeight = iframeDoc.body.scrollHeight;
+
+            // 存储计算出的高度
+            viewport.dataset.contentHeight = Math.max(contentHeight, 812);
+            console.log(`${label} 内容高度: ${contentHeight}px`);
+
+            // 智能标记：内容高度超过812px的页面标记为可展开
+            if (contentHeight > 812) {
+              viewport.classList.add('expandable');
+              console.log(`${label} 标记为可展开页面`);
+            } else {
+              console.log(`${label} 内容适中，无需展开`);
+            }
+
+          } catch (e) {
+            // 如果无法访问iframe内容（跨域），使用预设高度判断
+            console.log(`${label} 无法获取内容高度，使用预设值判断`);
+            const presetHeight = getPresetHeight(label);
+            viewport.dataset.contentHeight = presetHeight;
+
+            // 根据预设高度判断是否需要展开
+            if (presetHeight > 812) {
+              viewport.classList.add('expandable');
+              console.log(`${label} 根据预设高度标记为可展开页面`);
+            }
+          }
+        });
+      });
+
+      // 预设高度（当无法动态获取时使用）
+      function getPresetHeight(pageName) {
+        // 基于页面内容复杂度的预估高度
+        const presetHeights = {
+          '邀约首页': 800,      // 内容适中，无需展开
+          '押金管理': 850,      // 内容适中，无需展开
+          '个人中心': 900,      // 内容较多，但可能不需要展开
+          '创建邀约': 1400,     // 表单较多，需要展开
+          '邀约详情': 1200,     // 参与者列表较长，需要展开
+          '资金明细': 1300      // 交易记录列表较长，需要展开
+        };
+        return presetHeights[pageName] || 812;
+      }
+
+      // 应用展开高度
+      function applyExpandedHeights() {
+        mobileViewports.forEach(viewport => {
+          if (viewport.classList.contains('expandable') && viewport.dataset.contentHeight) {
+            const height = viewport.dataset.contentHeight + 'px';
+            viewport.style.height = height;
+            viewport.querySelector('iframe').style.height = height;
+          }
+        });
+      }
+
+      // 重置为正常高度
+      function resetToNormalHeights() {
+        mobileViewports.forEach(viewport => {
+          viewport.style.height = '812px';
+          viewport.querySelector('iframe').style.height = '812px';
+        });
+      }
+
+      // 正常模式
+      normalModeBtn.addEventListener('click', function() {
+        console.log('切换到正常模式');
+        gridContainer.classList.remove('expanded');
+        resetToNormalHeights();
+
+        // 更新按钮样式
+        normalModeBtn.style.background = 'rgba(38, 70, 83, 0.8)';
+        normalModeBtn.style.color = 'white';
+        normalModeBtn.style.borderColor = 'transparent';
+        expandedModeBtn.style.background = 'transparent';
+        expandedModeBtn.style.color = 'black';
+        expandedModeBtn.style.borderColor = 'black';
+      });
+
+      // 展开模式
+      expandedModeBtn.addEventListener('click', function() {
+        console.log('切换到展开模式');
+        gridContainer.classList.add('expanded');
+        applyExpandedHeights();
+
+        // 更新按钮样式
+        expandedModeBtn.style.background = 'rgba(38, 70, 83, 0.8)';
+        expandedModeBtn.style.color = 'white';
+        expandedModeBtn.style.borderColor = 'transparent';
+        normalModeBtn.style.background = 'transparent';
+        normalModeBtn.style.color = 'black';
+        normalModeBtn.style.borderColor = 'black';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -906,7 +906,7 @@
         "6. 根据项目配置规划HTML文件夹结构",
         "7. 设计组件系统架构（系统状态栏、底部导航栏、返回按钮、页面标题区域）",
         "8. 规划页面层级关系（一级页面vs非一级页面）",
-        "9. 确定页面滚动属性和展开模式策略",
+        "9. 确定页面滚动属性和展开模式策略，【智能展开逻辑】展开模式必须基于内容高度动态判断，超过812px的页面自动标记为.expandable，展开后并设改高度为内容高度",
         "10. 设计响应式布局方案（3-2-1列自适应）",
         "【第三阶段：高保真UI设计】",
         "11. 作为UI设计师，设计贴近真实iOS设计规范的界面",
@@ -947,13 +947,14 @@
         "39. 【组件引入方式】严禁使用iframe引入组件，必须使用JavaScript fetch()方式",
         "40. 【单一滚动区域】整个页面只能有一个滚动区域，状态栏和导航栏必须固定",
         "【第七阶段：页面属性规范实现】",
-        "32. 一级页面：引入系统状态栏+底部导航栏，不引入返回按钮",
-        "33. 非一级页面：引入系统状态栏+返回按钮，不引入底部导航栏",
+        "32. 一级页面：引入系统状态栏+底部导航栏，不引入返回按钮和页面标题组件",
+        "33. 非一级页面：引入系统状态栏+返回按钮组件(back-button.html)+页面标题组件(page-title.html)，不引入底部导航栏",
+        "34. 【返回按钮规则】返回按钮只提供返回功能，页面标题组件显示页面名称（HTML文件名去掉.html后缀）",
         "34. 根据内容长度设置页面滚动属性",
         "35. 实现展开模式下的特殊处理逻辑",
         "【第八阶段：文件输出与优化】",
         "36. 【强制位置】在项目根目录创建HTML原型文件夹",
-        "37. 【强制中文命名】文件夹命名格式：项目名称-HTML原型设计",
+        "37. 【强制中文命名】文件夹命名格式：项目名称-HTML原型设计，单独的HTML也必须中文命名。除了index主入口，除了组件",
         "38. 生成完整的HTML文件夹结构，包含所有组件和页面文件",
         "39. 【严禁多余内容】🚫 严禁创建任何多余文件，包括但不限于：",
         "    - 不得创建README.md、说明文档、介绍文档等额外文档",
@@ -985,8 +986,28 @@
         "grid_container_clarification": "【重要澄清】整个页面只有一个grid-container，所有手机框都是它的子元素",
         "clean_display_mode": "【简洁展示模式】专注于真实手机界面预览体验，去除所有非必要的装饰元素",
         "index_content_restriction": "主入口严禁包含多余内容元素",
+        "index_background_color": "【强制背景色】主入口页面背景色必须使用#EDEDED浅灰色，提供简洁的展示环境",
+        "index_title_color": "【强制文字色】标题和副标题必须使用纯黑色(#000000)，确保在浅灰背景上的可读性",
+        "index_layout_centering": "【强制居中布局】手机界面必须在页面中完美居中显示，使用justify-content: center和margin: 0 auto",
+        "index_max_width_limit": "【布局约束】设置最大宽度(如1400px)避免超宽屏幕过度拉伸，保持合理的展示比例",
+        "index_layout_structure": "【标准布局结构】头部标题区域(标题+副标题+模式切换按钮) + 手机界面展示区域(grid布局)",
+        "index_grid_layout": "【网格布局约束】使用CSS Grid布局，grid-template-columns: repeat(auto-fit, minmax(375px, 1fr))",
+        "index_responsive_breakpoints": "【响应式断点】宽屏(≥1200px)3列，中屏(768-1199px)2列，窄屏(<768px)1列",
+        "index_spacing_system": "【间距系统】网格间距2rem，容器内边距2rem，移动端1rem",
+        "index_mobile_viewport_size": "【手机框尺寸】固定375px×812px，圆角40px，阴影效果模拟真实设备",
+        "index_page_labels": "【页面标签约束】每个手机框底部必须有页面标签，使用.page-label类，白色半透明背景",
+        "index_iframe_embedding": "【iframe嵌入约束】每个手机框内使用iframe嵌入对应页面，无边框，完全填充",
+        "index_title_section": "【标题区域约束】包含主标题(text-4xl font-bold)、副标题(text-xl)、模式切换按钮组",
+        "index_button_group": "【按钮组约束】两个圆角按钮，间距space-x-4，包含点击状态切换逻辑",
+        "back_button_rules": "【返回按钮规则】返回按钮仅提供返回功能，不承担页面标题显示职责",
+        "page_title_rules": "【页面标题规则】非一级页面必须使用page-title.html组件显示页面名称（HTML文件名去掉.html后缀）",
+        "component_usage_distinction": "【组件使用区分】一级页面=状态栏+底部导航；非一级页面=状态栏+返回按钮+页面标题",
         "responsive_layout": "必须实现3-2-1列响应式布局",
         "mode_switching": "必须实现正常模式/展开模式切换",
+        "mode_button_styles": "【按钮样式约束】选中状态：深色背景+白色文字+透明边框；未选中状态：透明背景+黑色文字+黑色边框",
+        "mode_switching_logic": "【智能展开逻辑】展开模式必须基于内容高度动态判断，超过812px的页面自动标记为.expandable",
+        "content_height_detection": "【内容高度检测】必须动态检测iframe内容的scrollHeight，无法获取时使用合理预设值",
+        "expandable_threshold": "【展开阈值】以812px作为标准阈值，超过此高度的页面在展开模式下显示完整内容",
         "real_images": "必须使用真实picsum.photos图片",
         "css_framework": "必须使用Tailwind CSS",
         "icon_library": "必须使用FontAwesome",
@@ -997,7 +1018,10 @@
         "output_location": "必须在项目根目录创建HTML原型文件夹",
         "folder_naming": "【强制中文命名】文件夹命名格式：项目名称-HTML原型设计",
         "no_extra_files": "🚫 严禁创建多余文件，只能创建必要的HTML文件、组件文件和基础资源文件",
-        "no_navigation_logic": "严禁创建页面跳转逻辑文件或导航配置文件"
+        "no_navigation_logic": "严禁创建页面跳转逻辑文件或导航配置文件",
+        "transition_animations": "【过渡动画要求】所有模式切换和高度变化必须包含平滑过渡动画(transition: all 0.3s ease)",
+        "console_debugging": "【调试信息要求】必须在控制台输出每个页面的内容高度检测结果和.expandable标记状态",
+        "cross_origin_compatibility": "【跨域兼容】当无法获取iframe内容高度时，必须提供基于页面复杂度的合理预设值"
       },
       "output_structure": {
         "folder_structure": {
@@ -1023,10 +1047,10 @@
           }
         },
         "component_files": [
-          "components/status-bar.html - 【必须透明/半透明背景】",
-          "components/bottom-nav.html - 【必须毛玻璃效果】",
-          "components/back-button.html - 【必须原生iOS样式】",
-          "components/page-title.html - 【必须半透明导航栏】"
+          "components/status-bar.html - 【必须透明/半透明背景】所有页面都需要",
+          "components/bottom-nav.html - 【必须毛玻璃效果】仅一级页面使用",
+          "components/back-button.html - 【必须原生iOS样式】仅非一级页面使用，纯返回功能",
+          "components/page-title.html - 【必须半透明导航栏】仅非一级页面使用，显示页面名称"
         ],
         "component_style_requirements": {
           "status_bar": "使用rgba()和backdrop-filter实现透明效果，position: fixed固定在顶部",
@@ -1057,7 +1081,10 @@
           "组件复用系统",
           "纯手机界面平铺展示",
           "iOS风格交互",
-          "无装饰容器的简洁展示"
+          "无装饰容器的简洁展示",
+          "智能内容高度检测",
+          "动态.expandable标记",
+          "平滑模式切换动画"
         ],
         "component_reuse_requirements": {
           "mandatory_constraint": "【强制组件复用约束】每个界面独立的HTML文件使用组件时，必须通过引入的方式，而不是重写一遍",
@@ -1066,6 +1093,36 @@
           "correct_method": "使用fetch()获取组件HTML内容，然后通过innerHTML插入到页面中",
           "purpose": "确保组件的复用性和维护性，同时保持真实的手机界面体验",
           "prohibited_actions": "严禁在页面中重写组件代码，严禁使用iframe引入组件"
+        },
+        "mode_switching_implementation": {
+          "button_style_logic": "选中状态使用深色背景(rgba(38, 70, 83, 0.8))，未选中状态使用透明背景+黑色边框",
+          "height_detection_method": "监听iframe的load事件，获取contentDocument.body.scrollHeight",
+          "expandable_marking_rule": "内容高度 > 812px 自动添加.expandable类",
+          "preset_height_strategy": "跨域时使用基于页面复杂度的预设高度：简单页面800-900px，复杂页面1200-1400px",
+          "transition_requirements": "所有高度变化使用transition: all 0.3s ease过渡动画",
+          "console_output_format": "输出格式：'页面名称 内容高度: XXXpx' 和 '页面名称 标记为可展开页面'"
+        },
+        "layout_centering_implementation": {
+          "grid_container_centering": "使用justify-content: center + margin: 0 auto实现网格容器居中",
+          "max_width_constraint": "设置max-width: 1400px避免超宽屏幕过度拉伸",
+          "responsive_centering": "在所有响应式断点都确保居中显示",
+          "mobile_viewport_centering": "移动端使用margin: 0 auto确保单个手机框居中"
+        },
+        "index_html_structure_template": {
+          "html_structure": "<!DOCTYPE html> + <head>配置 + <body>内容",
+          "head_requirements": "包含Tailwind CSS CDN、FontAwesome CDN、viewport meta标签",
+          "body_layout": "头部标题区域 + 手机界面展示区域(grid-container)",
+          "title_section_structure": "text-center py-8容器 + h1标题 + p副标题 + 按钮组div",
+          "grid_container_structure": "id='grid-container' + grid布局类 + 多个mobile-viewport子元素",
+          "mobile_viewport_structure": "mobile-viewport容器 + iframe + page-label标签",
+          "script_section": "DOMContentLoaded事件监听 + 按钮点击事件 + 高度检测逻辑"
+        },
+        "css_style_template": {
+          "body_styles": "font-family设置 + background: #EDEDED + min-height: 100vh",
+          "mobile_viewport_styles": "width: 375px + height: 812px + border-radius: 40px + box-shadow",
+          "grid_container_styles": "display: grid + gap: 2rem + padding: 2rem + justify-content: center",
+          "responsive_media_queries": "@media断点 + grid-template-columns调整",
+          "page_label_styles": "position: absolute + bottom: -40px + 居中定位 + 半透明背景"
         },
         "picsum_usage_guide": {
           "basic_usage": "https://picsum.photos/宽度/高度 - 获取随机图像",
@@ -1206,7 +1263,22 @@
         "must_create_in_root_directory": true,
         "must_use_chinese_folder_naming": true,
         "must_not_create_extra_files": true,
-        "must_not_create_navigation_logic": true
+        "must_not_create_navigation_logic": true,
+        "must_use_correct_background_color": true,
+        "must_use_black_text_for_titles": true,
+        "must_implement_perfect_centering": true,
+        "must_implement_smart_expandable_detection": true,
+        "must_provide_console_debugging_output": true,
+        "must_implement_smooth_transitions": true,
+        "must_handle_cross_origin_compatibility": true,
+        "must_use_812px_as_height_threshold": true,
+        "must_implement_dynamic_height_detection": true,
+        "must_follow_standard_index_layout": true,
+        "must_include_page_labels": true,
+        "must_use_proper_grid_structure": true,
+        "must_implement_responsive_breakpoints": true,
+        "must_distinguish_page_level_components": true,
+        "must_use_correct_page_titles": true
       }
     },
     "add": {

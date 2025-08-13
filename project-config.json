@@ -7,13 +7,13 @@
     "coreFeatures": ["邀约创建", "押金缴纳", "自动分配", "基础信用"]
   },
   "projectScale": {
-    "totalPages": 6,
+    "totalPages": 9,
     "modules": [
       {
         "name": "邀约模块",
-        "pageCount": 3,
+        "pageCount": 4,
         "description": "邀约的创建、查看和参与核心功能",
-        "pages": ["邀约首页", "创建邀约", "邀约详情"]
+        "pages": ["邀约首页", "创建邀约", "邀约详情", "我的邀约"]
       },
       {
         "name": "押金模块",
@@ -23,14 +23,14 @@
       },
       {
         "name": "用户模块",
-        "pageCount": 1,
-        "description": "个人信息",
-        "pages": ["个人中心"]
+        "pageCount": 3,
+        "description": "个人信息和基础设置",
+        "pages": ["个人中心", "个人资料", "设置页面"]
       }
     ]
   },
   "pageHierarchy": {
     "firstLevelPages": ["邀约首页", "押金管理", "个人中心"],
-    "nonFirstLevelPages": ["创建邀约", "邀约详情", "资金明细"]
+    "nonFirstLevelPages": ["创建邀约", "邀约详情", "我的邀约", "资金明细", "个人资料", "设置页面"]
   }
 }
