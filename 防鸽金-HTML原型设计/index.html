@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防鸽金 - HTML原型设计</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* 基于大地暖色色彩体系 */
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --bg-primary: #FFFFFF;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: #000;
+            padding: 8px;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .grid-container {
+            display: grid;
+            gap: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+        }
+        
+        /* 响应式布局 */
+        @media (min-width: 1200px) {
+            .grid-container { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .grid-container { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 767px) {
+            .grid-container { grid-template-columns: 1fr; }
+        }
+        
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(38, 70, 83, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .mode-toggle:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .page-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .page-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .expanded-mode .phone-frame {
+            width: 100%;
+            height: 600px;
+            border-radius: 20px;
+        }
+        
+        .expanded-mode .phone-screen {
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-orange-100 to-teal-100">
+        <!-- 模式切换按钮 -->
+        <button class="mode-toggle" onclick="toggleMode()">
+            <i class="fas fa-expand-arrows-alt mr-2"></i>
+            <span id="mode-text">展开模式</span>
+        </button>
+        
+        <!-- 主标题区域 -->
+        <div class="text-center py-12">
+            <h1 class="text-5xl font-bold mb-4" style="color: var(--primary-color);">
+                防鸽金
+            </h1>
+            <p class="text-xl" style="color: var(--text-secondary);">
+                通过小额押金机制解决朋友间邀约爽约问题的社交小程序
+            </p>
+        </div>
+        
+        <!-- 页面展示网格 -->
+        <div class="grid-container" id="grid-container">
+            <!-- 一级页面 -->
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-home mr-2"></i>邀约首页
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/邀约首页.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-wallet mr-2"></i>押金管理
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/押金管理.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-user mr-2"></i>个人中心
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/个人中心.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 非一级页面 -->
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-plus mr-2"></i>创建邀约
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/创建邀约.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-info-circle mr-2"></i>邀约详情
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/邀约详情.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-list mr-2"></i>我的邀约
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/我的邀约.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-chart-line mr-2"></i>资金明细
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/资金明细.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-edit mr-2"></i>个人资料
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/个人资料.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="page-card">
+                <div class="page-header">
+                    <i class="fas fa-cog mr-2"></i>设置页面
+                </div>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="pages/设置页面.html" width="100%" height="100%" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleMode() {
+            const container = document.getElementById('grid-container');
+            const modeText = document.getElementById('mode-text');
+            
+            if (container.classList.contains('expanded-mode')) {
+                container.classList.remove('expanded-mode');
+                modeText.textContent = '展开模式';
+            } else {
+                container.classList.add('expanded-mode');
+                modeText.textContent = '正常模式';
+            }
+        }
+    </script>
+</body>
+</html>

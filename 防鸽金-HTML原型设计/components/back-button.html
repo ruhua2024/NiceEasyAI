@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+        
+        .back-header {
+            height: 60px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            border-bottom: 1px solid #E5E5E5;
+            position: relative;
+            z-index: 50;
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-right: 16px;
+        }
+        
+        .back-button:hover {
+            background: rgba(38, 70, 83, 0.1);
+            transform: translateX(-2px);
+        }
+        
+        .back-button:active {
+            transform: translateX(-1px) scale(0.98);
+        }
+        
+        .back-icon {
+            font-size: 18px;
+            margin-right: 8px;
+        }
+        
+        .back-text {
+            font-weight: 500;
+        }
+        
+        .page-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .header-action {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .action-button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 16px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background: rgba(38, 70, 83, 0.1);
+        }
+        
+        .action-button.primary {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            font-weight: 500;
+        }
+        
+        .action-button.primary:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="back-header">
+        <button class="back-button" onclick="goBack()">
+            <i class="fas fa-chevron-left back-icon"></i>
+            <span class="back-text">返回</span>
+        </button>
+        
+        <div class="page-title" id="page-title">
+            页面标题
+        </div>
+        
+        <div class="header-action" id="header-action">
+            <!-- 动态添加的操作按钮 -->
+        </div>
+    </div>
+    
+    <script>
+        function goBack() {
+            // 发送返回消息给父页面
+            if (window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'goBack'
+                }, '*');
+            } else {
+                // 如果不在iframe中，使用浏览器返回
+                window.history.back();
+            }
+        }
+        
+        // 设置页面标题
+        function setPageTitle(title) {
+            document.getElementById('page-title').textContent = title;
+        }
+        
+        // 添加头部操作按钮
+        function addHeaderAction(text, type = 'default', onclick = null) {
+            const actionContainer = document.getElementById('header-action');
+            const button = document.createElement('button');
+            button.className = `action-button ${type}`;
+            button.textContent = text;
+            
+            if (onclick) {
+                button.onclick = onclick;
+            }
+            
+            actionContainer.appendChild(button);
+        }
+        
+        // 清空头部操作按钮
+        function clearHeaderActions() {
+            document.getElementById('header-action').innerHTML = '';
+        }
+        
+        // 监听来自父页面的消息
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'setTitle') {
+                setPageTitle(event.data.title);
+            } else if (event.data.type === 'addAction') {
+                addHeaderAction(event.data.text, event.data.buttonType, event.data.onclick);
+            } else if (event.data.type === 'clearActions') {
+                clearHeaderActions();
+            }
+        });
+        
+        // 暴露函数给父页面使用
+        window.backButtonAPI = {
+            setPageTitle,
+            addHeaderAction,
+            clearHeaderActions
+        };
+    </script>
+</body>
+</html>

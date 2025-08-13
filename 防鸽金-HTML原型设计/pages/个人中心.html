@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: #F8F9FA;
+            overflow-x: hidden;
+        }
+        
+        .page-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+        
+        .profile-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -25%;
+            width: 180px;
+            height: 180px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-container {
+            position: relative;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .avatar-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .profile-id {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        
+        .profile-level {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .credit-score {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .score-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .score-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+        
+        .score-level {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .stats-section {
+            padding: 20px 16px;
+            background: white;
+            margin: -15px 16px 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 16px 8px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--neutral-light) 0%, var(--accent-color) 100%);
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .menu-section {
+            padding: 0 16px 20px;
+        }
+        
+        .menu-group {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            border-bottom: 1px solid #F5F5F5;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item:hover {
+            background: #F8F9FA;
+        }
+        
+        .menu-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .menu-icon.primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+        
+        .menu-icon.accent {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--neutral-light) 100%);
+        }
+        
+        .menu-icon.neutral {
+            background: linear-gradient(135deg, var(--neutral-dark) 0%, var(--neutral-light) 100%);
+        }
+        
+        .menu-content {
+            flex: 1;
+        }
+        
+        .menu-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .menu-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .menu-arrow {
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+        
+        .menu-badge {
+            background: var(--neutral-dark);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        
+        .version-info {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- 系统状态栏 -->
+        <iframe src="../components/status-bar.html" width="100%" height="44" frameborder="0"></iframe>
+        
+        <!-- 主要内容区域 -->
+        <div class="content-area">
+            <!-- 个人资料区域 -->
+            <div class="profile-section">
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <img src="https://picsum.photos/id/1027/160/160" alt="头像" class="profile-avatar">
+                        <div class="avatar-badge">
+                            <i class="fas fa-crown" style="font-size: 12px; color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-name">张三</div>
+                        <div class="profile-id">ID: 1234567</div>
+                        <div class="profile-level">黄金会员</div>
+                    </div>
+                </div>
+                
+                <div class="credit-score">
+                    <div class="score-number">95</div>
+                    <div class="score-label">信用分数</div>
+                    <div class="score-level">优秀</div>
+                </div>
+            </div>
+            
+            <!-- 统计数据 -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">参与邀约</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">成功完成</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">创建邀约</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 菜单区域 -->
+            <div class="menu-section">
+                <!-- 账户管理 -->
+                <div class="menu-group">
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon primary">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">个人资料</div>
+                            <div class="menu-desc">编辑个人信息和头像</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon accent">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">我的邀约</div>
+                            <div class="menu-desc">查看创建和参与的邀约</div>
+                        </div>
+                        <span class="menu-badge">3</span>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon neutral">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">资金明细</div>
+                            <div class="menu-desc">押金流水和收支记录</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                </div>
+                
+                <!-- 功能设置 -->
+                <div class="menu-group">
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon primary">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">消息通知</div>
+                            <div class="menu-desc">邀约提醒和系统通知</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon accent">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">隐私设置</div>
+                            <div class="menu-desc">个人信息和隐私保护</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon neutral">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">设置</div>
+                            <div class="menu-desc">应用设置和偏好</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                </div>
+                
+                <!-- 帮助支持 -->
+                <div class="menu-group">
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon primary">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">帮助中心</div>
+                            <div class="menu-desc">常见问题和使用指南</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon accent">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">客服支持</div>
+                            <div class="menu-desc">在线客服和意见反馈</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                    <a href="#" class="menu-item">
+                        <div class="menu-icon neutral">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-title">关于我们</div>
+                            <div class="menu-desc">应用信息和用户协议</div>
+                        </div>
+                        <i class="fas fa-chevron-right menu-arrow"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 版本信息 -->
+            <div class="version-info">
+                防鸽金 v1.0.0
+            </div>
+        </div>
+        
+        <!-- 底部导航栏 -->
+        <iframe src="../components/bottom-nav.html" width="100%" height="80" frameborder="0"></iframe>
+    </div>
+</body>
+</html>

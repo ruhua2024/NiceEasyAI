@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #264653;
+            --secondary-color: #2A9D8F;
+            --accent-color: #E9C46A;
+            --neutral-light: #F4A261;
+            --neutral-dark: #E76F51;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif;
+            background: #F8F9FA;
+            overflow-x: hidden;
+        }
+        
+        .page-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 16px 100px;
+        }
+        
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E5E5E5;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #F8F9FA;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .datetime-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .location-input {
+            position: relative;
+        }
+        
+        .location-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .deposit-section {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--neutral-light) 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .deposit-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .deposit-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+        
+        .deposit-amounts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .amount-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .amount-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .amount-btn.selected {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+        
+        .custom-amount {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .custom-amount::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .participants-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .participant-limit {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .limit-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .limit-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .limit-btn {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .limit-number {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .privacy-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .privacy-option {
+            background: #F8F9FA;
+            border: 2px solid #E5E5E5;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .privacy-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(38, 70, 83, 0.1);
+        }
+        
+        .privacy-icon {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .privacy-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .privacy-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .submit-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 16px;
+            border-top: 1px solid #E5E5E5;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(38, 70, 83, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .image-upload {
+            border: 2px dashed #E5E5E5;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #F8F9FA;
+        }
+        
+        .image-upload:hover {
+            border-color: var(--primary-color);
+            background: rgba(38, 70, 83, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 32px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+        }
+        
+        .upload-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .uploaded-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- 系统状态栏 -->
+        <iframe src="../components/status-bar.html" width="100%" height="44" frameborder="0"></iframe>
+        
+        <!-- 返回按钮 -->
+        <iframe src="../components/back-button.html" width="100%" height="60" frameborder="0" id="back-header"></iframe>
+        
+        <!-- 主要内容区域 -->
+        <div class="content-area">
+            <!-- 基本信息 -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    基本信息
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">邀约标题</label>
+                    <input type="text" class="form-input" placeholder="给你的邀约起个有趣的标题">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">活动描述</label>
+                    <textarea class="form-input form-textarea" placeholder="详细描述活动内容、注意事项等"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">活动图片</label>
+                    <div class="image-upload" onclick="uploadImage()">
+                        <i class="fas fa-camera upload-icon"></i>
+                        <div class="upload-text">点击上传活动图片</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 时间地点 -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    时间地点
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">活动时间</label>
+                    <div class="datetime-group">
+                        <input type="date" class="form-input">
+                        <input type="time" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">活动地点</label>
+                    <div class="location-input">
+                        <input type="text" class="form-input" placeholder="输入地点或点击定位">
+                        <button class="location-btn">
+                            <i class="fas fa-location-arrow"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 押金设置 -->
+            <div class="deposit-section">
+                <div class="deposit-title">押金设置</div>
+                <div class="deposit-desc">设置合适的押金金额，提高参与者的承诺度</div>
+                <div class="deposit-amounts">
+                    <button class="amount-btn">¥10</button>
+                    <button class="amount-btn selected">¥20</button>
+                    <button class="amount-btn">¥30</button>
+                    <button class="amount-btn">¥50</button>
+                    <button class="amount-btn">¥100</button>
+                    <button class="amount-btn">自定义</button>
+                </div>
+                <input type="number" class="custom-amount" placeholder="自定义金额" style="display: none;">
+            </div>
+            
+            <!-- 参与设置 -->
+            <div class="participants-section">
+                <div class="section-title">
+                    <i class="fas fa-users"></i>
+                    参与设置
+                </div>
+                
+                <div class="participant-limit">
+                    <span class="limit-label">参与人数限制</span>
+                    <div class="limit-controls">
+                        <button class="limit-btn" onclick="changeLimit(-1)">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="limit-number" id="participant-limit">6</span>
+                        <button class="limit-btn" onclick="changeLimit(1)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">邀约可见性</label>
+                    <div class="privacy-options">
+                        <div class="privacy-option selected">
+                            <i class="fas fa-globe privacy-icon"></i>
+                            <div class="privacy-title">公开邀约</div>
+                            <div class="privacy-desc">所有人都可以看到</div>
+                        </div>
+                        <div class="privacy-option">
+                            <i class="fas fa-lock privacy-icon"></i>
+                            <div class="privacy-title">私密邀约</div>
+                            <div class="privacy-desc">仅邀请的人可见</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 提交按钮 -->
+        <div class="submit-section">
+            <button class="submit-btn">
+                <i class="fas fa-paper-plane mr-2"></i>
+                发布邀约
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // 设置页面标题
+        window.addEventListener('load', function() {
+            const backFrame = document.getElementById('back-header');
+            backFrame.onload = function() {
+                backFrame.contentWindow.postMessage({
+                    type: 'setTitle',
+                    title: '创建邀约'
+                }, '*');
+            };
+        });
+        
+        // 押金金额选择
+        document.querySelectorAll('.amount-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                const customInput = document.querySelector('.custom-amount');
+                if (this.textContent === '自定义') {
+                    customInput.style.display = 'block';
+                    customInput.focus();
+                } else {
+                    customInput.style.display = 'none';
+                }
+            });
+        });
+        
+        // 隐私选项选择
+        document.querySelectorAll('.privacy-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.privacy-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // 参与人数控制
+        function changeLimit(delta) {
+            const limitElement = document.getElementById('participant-limit');
+            let currentLimit = parseInt(limitElement.textContent);
+            currentLimit = Math.max(2, Math.min(20, currentLimit + delta));
+            limitElement.textContent = currentLimit;
+        }
+        
+        // 图片上传
+        function uploadImage() {
+            // 模拟图片上传
+            const uploadArea = document.querySelector('.image-upload');
+            uploadArea.innerHTML = `
+                <img src="https://picsum.photos/id/1015/400/240" alt="活动图片" class="uploaded-image">
+                <div class="upload-text" style="margin-top: 8px;">点击更换图片</div>
+            `;
+        }
+        
+        // 表单验证
+        function validateForm() {
+            const title = document.querySelector('input[placeholder="给你的邀约起个有趣的标题"]').value;
+            const description = document.querySelector('textarea').value;
+            const date = document.querySelector('input[type="date"]').value;
+            const time = document.querySelector('input[type="time"]').value;
+            const location = document.querySelector('input[placeholder="输入地点或点击定位"]').value;
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            if (title && description && date && time && location) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+        
+        // 监听表单输入
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', validateForm);
+        });
+        
+        // 初始验证
+        validateForm();
+    </script>
+</body>
+</html>
