@@ -76,6 +76,7 @@ git submodule update --init --recursive
      - 输入码：`pbase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的pbase快捷操作`
      - 输入码：`uibase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的uibase快捷操作`
      - 输入码：`copyui` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的copyui快捷操作`
+     - 输入码：`cutpage` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的cutpage快捷操作`
      - 输入码：`spec` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作`
      - 输入码：`db` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的db快捷操作`
      - 输入码：`yd` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作`
@@ -85,7 +86,7 @@ git submodule update --init --recursive
   2. 添加与上述相同的快捷短语替换规则
 
 
-设置完成后，只需在输入框中敲入对应的快捷码（如`pbase`、`uibase`、`copyui`、`spec`、`db`、`yd`），系统会自动替换为完整命令，大幅提升操作效率！
+设置完成后，只需在输入框中敲入对应的快捷码（如`pbase`、`uibase`、`copyui`、`cutpage`、`spec`、`db`、`yd`），系统会自动替换为完整命令，大幅提升操作效率！
 
 
 ## 🛠️ 快捷操作详解
@@ -156,6 +157,27 @@ git submodule update --init --recursive
 2. 技术方案设计与Mermaid图表
 3. 实现步骤分解与任务列表
 4. 自动导入任务系统开始实施
+
+### cutpage - 原型图智能分析器
+
+**功能描述**：深度分析设计师原型图，智能拆解页面元素，提炼业务实体，分析交互逻辑
+
+**使用场景**：
+- 原型图元素拆解分析
+- 业务实体识别与建模
+- 交互逻辑梳理与流程分析
+- 产品需求理解与技术转化
+
+**核心功能**：
+1. 智能区分静态内容与动态数据元素
+2. 系统性提炼业务实体及关联关系
+3. 深度分析页面间交互逻辑和业务流程
+4. 生成Mermaid图表展示页面跳转和数据流向
+
+**生成文档**：
+1. 《页面元素拆解表.md》- 页面元素详细分析
+2. 《业务实体清单.md》- 业务实体和关联关系
+3. 《原型图交互逻辑.md》- 交互逻辑和业务流程分析
 
 ### db - 数据库设计器
 
