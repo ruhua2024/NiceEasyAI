@@ -145,12 +145,13 @@
         "    - 元素分类：将元素按功能分类（基础组件、功能元素、交互元素）",
         "    - 元素描述：简要说明每个元素的作用和用途",
         "【第七阶段：配置展示与确认】",
-        "25. 生成完整的project-config.json配置内容，包含页面元素分析结果",
+        "25. 生成完整的project-config.json配置内容，包含页面元素分析结果和完整的页面信息表格（pageTable）",
         "26. 向用户展示智能生成的配置，包括：",
         "    - 项目基本信息分析结果",
         "    - 目标用户群体分析",
         "    - 核心功能提取结果",
         "    - 项目规模评估和模块划分",
+        "    - 完整的页面信息表格（pageTable）",
         "    - 页面元素与组件详细配置",
         "27. 询问用户：'这个配置怎么样？'",
         "28. 支持用户提出修改意见，进行配置调整",
@@ -196,6 +197,17 @@
           "pageHierarchy": {
             "firstLevelPages": "一级页面列表（主要入口页面，通常包含底部导航栏）",
             "nonFirstLevelPages": "非一级页面列表（子页面、详情页、功能页等，通常包含返回按钮）"
+          },
+          "pageTable": {
+            "description": "完整的页面信息表格，包含所有页面的详细信息",
+            "pages": [
+              {
+                "序号": "页面序号（数字）",
+                "页面名称": "具体的页面名称",
+                "页面类型": "一级页面/非一级页面",
+                "页面描述": "页面的主要功能和用途说明"
+              }
+            ]
           },
           "pageElements": {
             "页面名称1": {
@@ -278,6 +290,9 @@
         "must_generate_element_configurations": true,
         "must_categorize_ui_components": true,
         "must_include_page_elements_in_config": true,
+        "must_generate_page_table": true,
+        "must_include_page_sequence_numbers": true,
+        "must_include_page_descriptions": true,
         "must_ask_user_opinion": true,
         "must_support_modifications": true,
         "must_provide_usage_guidance": true,
@@ -946,6 +961,7 @@
         "   - 页面序号（如：页面1、页面2）",
         "   - 页面名称（如：首页、商品详情页、个人中心等）",
         "   - 页面类型（一级页面/非一级页面）",
+        "   - 页面描述（简要说明页面的主要功能和用途）",
         "3. 确认用户发送完毕所有原型图后，再进行下一步",
         "4. 【复杂任务思考】如果原型图数量较多或复杂度较高，使用MCP Sequential thinking工具进行深度思考分析",
         "5. 【联网查询】如果需要了解特定行业的业务实体标准或最佳实践，进行联网查询获取参考信息",
@@ -1010,7 +1026,7 @@
         "25. 向用户确认分析完成并提供文档位置信息"
       ],
       "requiresInput": true,
-      "inputPrompt": "请按以下步骤提供信息：\n\n## 📋 第一步：原型图信息\n请告诉我：\n1. 您总共有多少张设计师原型图？\n2. 然后逐张发送，每张图片请标注：\n   - 页面序号（如：页面1、页面2）\n   - 页面名称（如：首页、商品详情页、个人中心等）\n   - 页面类型（一级页面/非一级页面）\n\n## 📋 第二步：项目配置\n请提供project-config.json文件的完整内容\n\n💡 我将深度分析原型图中的页面元素，智能区分静态内容与动态数据，系统性提炼业务实体及其复杂关联关系，生成专业的分析文档。",
+      "inputPrompt": "请按以下步骤提供信息：\n\n## 📋 第一步：原型图信息\n请告诉我：\n1. 您总共有多少张设计师原型图？\n2. 然后逐张发送，每张图片请标注：\n   - 页面序号（如：页面1、页面2）\n   - 页面名称（如：首页、商品详情页、个人中心等）\n   - 页面类型（一级页面/非一级页面）\n   - 页面描述（简要说明页面的主要功能和用途）\n\n## 📋 第二步：项目配置\n请提供project-config.json文件的完整内容\n\n💡 我将深度分析原型图中的页面元素，智能区分静态内容与动态数据，系统性提炼业务实体及其复杂关联关系，生成专业的分析文档。",
       "workflow": "intelligent_page_element_analysis_and_business_entity_extraction",
       "constraints": {
         "language": "中文强制要求",
