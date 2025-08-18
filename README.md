@@ -94,6 +94,13 @@ git submodule update --init --recursive
 
 ## 🛠️ 快捷操作详解
 
+### 💡 使用建议
+1. **新项目**: pbase → uibase → hbase → cutpage → dbbase
+2. **数据库设计**: pbase → db 或 pbase → cutpage → dbbase
+3. **UI复刻**: uibase + copyui
+4. **需求分析**: spec
+5. **Git操作**: yd
+
 ### pbase - 项目配置文件生成器
 
 **功能描述**：智能分析用户需求并生成标准的 project-config.json 文件，支持MVP思想和页面元素智能分析
