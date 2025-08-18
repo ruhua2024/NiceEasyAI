@@ -41,28 +41,28 @@ git submodule update --init --recursive
 **🔥 引入成功后，您可以直接在 AI 对话中发给AI：**
 
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的pbase快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行pbase快捷操作
 ```
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的uibase快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行uibase快捷操作
 ```
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的copyui快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行copyui快捷操作
 ```
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行spec快捷操作
 ```
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的db快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行db快捷操作
 ```
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行yd快捷操作
 ```
 
 **🔥 如果需要新增自定义的快捷操作，直接发给AI：**
 
 ```bash
-查看NiceEasyAI/.QuickAction.json，执行里面的add快捷操作
+阅读NiceEasyAI/.QuickAction.index.md，执行add快捷操作
 ```
 
 
@@ -73,16 +73,16 @@ git submodule update --init --recursive
 - **Mac用户**：
   1. 打开「系统设置」→ 进入「键盘」设置 → 找到「自定义短语」选项
   2. 新增以下短语规则：
-     - 输入码：`pbase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的pbase快捷操作`
-     - 输入码：`uibase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的uibase快捷操作`
-     - 输入码：`copyui` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的copyui快捷操作`
-     - 输入码：`cutpage` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的cutpage快捷操作`
-     - 输入码：`hbase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的hbase快捷操作`
-     - 输入码：`spec` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作`
-     - 输入码：`dbbase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的dbbase快捷操作`
-     - 输入码：`db` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的db快捷操作`
-     - 输入码：`add` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的add快捷操作`
-     - 输入码：`yd` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作`
+     - 输入码：`pbase` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行pbase快捷操作`
+     - 输入码：`uibase` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行uibase快捷操作`
+     - 输入码：`copyui` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行copyui快捷操作`
+     - 输入码：`cutpage` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行cutpage快捷操作`
+     - 输入码：`hbase` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行hbase快捷操作`
+     - 输入码：`spec` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行spec快捷操作`
+     - 输入码：`dbbase` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行dbbase快捷操作`
+     - 输入码：`db` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行db快捷操作`
+     - 输入码：`add` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行add快捷操作`
+     - 输入码：`yd` → 替换为：`阅读NiceEasyAI/.QuickAction.index.md，执行yd快捷操作`
 
 - **Windows用户**：
   1. 打开「设置」→ 进入「时间和语言」→ 选择「输入」→ 点击「高级键盘设置」→ 找到「自定义短语」选项
