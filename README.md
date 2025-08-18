@@ -99,7 +99,7 @@ git submodule update --init --recursive
 
 ```bash
 # 在 NiceEasyAI 项目根目录中运行
-bash scripts/install.sh
+bash .scripts/install.sh
 ```
 
 ### 使用方法
@@ -334,7 +334,7 @@ bash scripts/install.sh
 
 ```bash
 # 在项目根目录运行
-python scripts/update_quickaction_index.py
+python .scripts/update_quickaction_index.py
 ```
 
 **功能特性**：
