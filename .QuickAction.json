@@ -64,7 +64,9 @@
         "git status",
         "git diff --cached",
         "查看更改后，自动总结创建一个中文提交信息，需要符合Conventional Commits规范",
-        "git push"
+        "git push",
+        "推送完成后，打印推送结果",
+        "推送结果包含：推送地址、提交信息、提交ID、推送时间、推送人"
       ],
       "requiresInput": false,
       "autoCommitMessage": true
