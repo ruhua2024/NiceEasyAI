@@ -214,8 +214,7 @@
                 "元素描述": "页面元素的整体描述"
               }
             ]
-          },
-
+          }
         },
         "page_classification_rules": {
           "first_level_pages": {
