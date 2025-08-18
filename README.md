@@ -398,6 +398,7 @@ git pull origin main
 cd ..
 git add NiceEasyAI
 git commit -m "更新NiceEasyAI到最新版本"
+git push
 ```
 
 ---
