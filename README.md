@@ -77,8 +77,11 @@ git submodule update --init --recursive
      - 输入码：`uibase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的uibase快捷操作`
      - 输入码：`copyui` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的copyui快捷操作`
      - 输入码：`cutpage` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的cutpage快捷操作`
+     - 输入码：`hbase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的hbase快捷操作`
      - 输入码：`spec` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的spec快捷操作`
+     - 输入码：`dbbase` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的dbbase快捷操作`
      - 输入码：`db` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的db快捷操作`
+     - 输入码：`add` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的add快捷操作`
      - 输入码：`yd` → 替换为：`查看NiceEasyAI/.QuickAction.json，执行里面的yd快捷操作`
 
 - **Windows用户**：
@@ -86,14 +89,14 @@ git submodule update --init --recursive
   2. 添加与上述相同的快捷短语替换规则
 
 
-设置完成后，只需在输入框中敲入对应的快捷码（如`pbase`、`uibase`、`copyui`、`cutpage`、`spec`、`db`、`yd`），系统会自动替换为完整命令，大幅提升操作效率！
+设置完成后，只需在输入框中敲入对应的快捷码（如`pbase`、`uibase`、`copyui`、`cutpage`、`hbase`、`spec`、`dbbase`、`db`、`add`、`yd`），系统会自动替换为完整命令，大幅提升操作效率！
 
 
 ## 🛠️ 快捷操作详解
 
 ### pbase - 项目配置文件生成器
 
-**功能描述**：智能分析用户需求并生成标准的 project-config.json 文件
+**功能描述**：智能分析用户需求并生成标准的 project-config.json 文件，支持MVP思想和页面元素智能分析
 
 **使用场景**：
 - 新项目初始化配置
@@ -107,6 +110,9 @@ git submodule update --init --recursive
 3. 核心功能自动提取
 4. 项目规模智能评估
 5. 模块划分自动生成
+6. 页面层级智能分类
+7. 页面元素智能分析
+8. UI组件自动推断
 
 ### uibase - 视觉设计系统生成器
 
@@ -125,9 +131,27 @@ git submodule update --init --recursive
 4. 基础数值与间距规范
 5. 字体与排版规范
 
+### hbase - HTML原型生成器
+
+**功能描述**：基于防鸽金HTML原型设计模版进行开发，生成纯手机界面的高保真HTML原型，专注于真实预览体验
+
+**使用场景**：
+- 基于模版快速开发HTML原型
+- 真实iOS设计规范模拟
+- 智能展开模式实现
+- 响应式布局展示
+
+**核心特性**：
+1. 基于成熟模版开发，非从零开始
+2. 智能展开模式（正常模式/展开模式切换）
+3. 响应式布局（3-2-1列自适应）
+4. 真实iOS状态栏和导航栏模拟
+5. 组件复用系统
+6. 智能分批创建策略
+
 ### copyui - UI截图智能复刻
 
-**功能描述**：分析截图并按照视觉设计方案生成标准化的UI复刻文档
+**功能描述**：微信小程序UI设计支持，分析截图还原页面视觉与布局结构，理解页面核心功能与用户使用场景
 
 **使用场景**：
 - 微信小程序UI复刻
@@ -141,10 +165,11 @@ git submodule update --init --recursive
 3. 标准配色系统映射
 4. 组件化设计建议
 5. Tailwind CSS实现方案
+6. 项目配置文件支持
 
 ### spec - 标准需求+技术文档生成
 
-**功能描述**：智能需求分析和解决方案文档生成，包含完整的技术方案设计流程
+**功能描述**：智能需求分析和解决方案文档生成，包含完整的技术方案设计流程，支持云开发集成
 
 **使用场景**：
 - 新项目需求分析
@@ -157,6 +182,7 @@ git submodule update --init --recursive
 2. 技术方案设计与Mermaid图表
 3. 实现步骤分解与任务列表
 4. 自动导入任务系统开始实施
+5. 云开发操作工具说明（如项目使用）
 
 ### cutpage - 原型图智能分析器
 
@@ -178,6 +204,26 @@ git submodule update --init --recursive
 1. 《页面元素拆解表.md》- 页面元素详细分析
 2. 《业务实体清单.md》- 业务实体和关联关系
 3. 《原型图交互逻辑.md》- 交互逻辑和业务流程分析
+
+### dbbase - 数据库设计文档生成器
+
+**功能描述**：基于cutpage生成的分析文档，结合用户技术栈选择，生成完整的数据库设计和交互文档体系
+
+**使用场景**：
+- 基于分析文档生成数据库设计
+- 微信云开发技术栈集成
+- 完整技术架构设计
+- 交互说明文档生成
+
+**生成内容**：
+1. 业务流程图.md - 可视化用户操作全链路
+2. 系统架构图.md - 完整的技术架构设计
+3. 数据字典.md - 数据库表结构和字段定义
+4. 交互说明文档.md - 页面操作流程和异常处理
+
+**技术栈支持**：
+- 前端：原生微信小程序或uniapp跨端框架
+- 后端：微信云开发（云函数+文档数据库+云存储）
 
 ### db - 数据库设计器
 
@@ -218,6 +264,21 @@ git submodule update --init --recursive
 2. 生成符合 Conventional Commits 规范的中文提交信息
 3. 执行暂存、提交、推送操作
 4. 提供操作结果反馈
+
+### add - 快捷操作添加器
+
+**功能描述**：添加新的快捷操作到.QuickAction.json文件中
+
+**使用场景**：
+- 扩展快捷操作功能
+- 自定义工作流程
+- 团队协作标准化
+
+**功能特性**：
+1. 智能冲突检查
+2. 配置格式验证
+3. 自动更新配置文件
+4. 用户确认机制
 
 
 ## ⚠️ 注意事项
