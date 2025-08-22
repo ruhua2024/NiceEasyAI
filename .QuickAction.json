@@ -2017,6 +2017,25 @@
         "auto_update": "自动更新.QuickAction.json文件",
         "success_feedback": "必须提供添加成功的确认反馈"
       }
+    },
+    "json": {
+      "description": "将用户输入的文字整理成标准JSON格式，便于复制给AI理解",
+      "commands": [
+        "分析用户输入的文字内容",
+        "识别文本中的关键信息、结构和逻辑",
+        "将整理后的信息组织成标准的JSON格式",
+        "确保JSON结构清晰、易于AI理解和处理",
+        "提供可直接复制的JSON输出"
+      ],
+      "requiresInput": true,
+      "inputPrompt": "请输入需要整理成JSON格式的文字内容：",
+      "workflow": "text_to_json_formatter",
+      "constraints": {
+        "format_validation": "必须验证JSON格式正确性",
+        "content_analysis": "必须深度分析文本内容结构",
+        "clarity_requirement": "必须确保输出JSON清晰易懂",
+        "copy_friendly": "必须提供便于复制的格式"
+      }
     }
   }
 }
